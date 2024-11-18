@@ -23,6 +23,7 @@ class Brand(models.Model):
 
 
 class Item(models.Model):
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     name = models.TextField()
     description = models.TextField()
 
