@@ -20,7 +20,7 @@ def index():
 # Admin Route
 @app.route('/admin/', methods=['POST', 'GET'])
 def admin():
-  return render_template('admin.html')
+  return render_template('admin/brand.html')
 
 # API
 
