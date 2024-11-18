@@ -16,9 +16,15 @@ class User(models.Model):
     status = models.TextField()
 
 
+class Brand(models.Model):
+    name = models.TextField()
+    description = models.TextField()
+    cover = models.FileField(storage=FileSystemStorage(location='../media/brand-cover/'))
+
+
 class Item(models.Model):
-  name = models.TextField()
-  description = models.TextField()
+    name = models.TextField()
+    description = models.TextField()
 
 
 class ItemStock(models.Model):
