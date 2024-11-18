@@ -12,15 +12,17 @@ from datetime import datetime as dt
 app = Flask(__name__)
 app.secret_key = "BAD_SECRET_KEY"
 
-
+# Index Route
 @app.route('/', methods=['POST', 'GET'])
 def index():
   return render_template('index.html')
 
-
+# Admin Route
 @app.route('/admin/', methods=['POST', 'GET'])
 def admin():
   return render_template('admin.html')
+
+# API
 
 
 if __name__ == '__main__':
