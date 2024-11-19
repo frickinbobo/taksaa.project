@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        #container {
-            width: 200px;
-            height: 200px;
-        }
-        #kotak {
-            width: 100px;
-            height: 100px;
-            background-color: red;
-        }
+      #container {
+        width: 200px;
+        height: 200px;
+      }
+      #kotak {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
     </style>
-</head>
-<body>
-    <script src="{{ url_for('static', filename='node_modules/gsap/dist/gsap.min.js')}}"></script>
+  </head>
+  <body>
+    <script src="{{ url_for('static', filename='js/gsap/minified/gsap.min.js')}}"></script>
     <div id="container">
-        <div id="kotak"></div>
+      <div id="kotak"></div>
     </div>
     <script>
-        gsap.to("#kotak", {
-            xPercent: 200,
-            duration: 2,
-        })
+      gsap.to("#kotak", {
+        xPercent: 200,
+        duration: 2,
+      });
     </script>
-</body>
+  </body>
 </html>
