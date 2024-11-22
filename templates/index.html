@@ -5,28 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      #container {
-        width: 200px;
-        height: 200px;
-      }
-      #kotak {
-        width: 100px;
-        height: 100px;
-        background-color: red;
-      }
-    </style>
   </head>
   <body>
     <script src="{{ url_for('static', filename='js/gsap/minified/gsap.min.js') }}"></script>
-    <div id="container">
-      <div id="kotak"></div>
-    </div>
-    <script>
-      gsap.to("#kotak", {
-        xPercent: 200,
-        duration: 2,
-      });
-    </script>
+    <!-- Navigation bar -->
+    <nav class="bg-black h-20 flex items-center justify-between px-10">
+      <!-- <div class="container py-3 flex items-center justify-between"> -->
+        <!-- Logo -->
+        <div class="text-2xl font-bold text-white">
+          Logo
+        </div>
+        <!-- Right Side Links -->
+        <div class="flex space-x-12">
+          <a href="#" class="text-white font-medium">HOME</a>
+          <a href="#" class="text-white font-medium">BAND</a>
+        </div>
+      <!-- </div> -->
+    </nav>
+    <!-- End Navigation bar -->
+    <!-- Hero Section -->
+    <section>
+      <!-- Top Hero Section -->
+      <div class="w-full bg-black flex justify-center">
+        <img src="https://content.instructables.com/FIA/L2W8/K81UNKWP/FIAL2W8K81UNKWP.png?auto=webp&frame=1&width=320&md=MjAyMC0wMy0yMyAwODoyMDozNC4w" width="220px" alt="">
+      </div>
+      <!-- Middle Hero Section -> Using backgrond Image -->
+      <div class="w-full h-96 bg-black" style="background-image: url('https://www.robin-noorda.com/uploads/1/6/8/3/16830688/3347022_orig.jpg'); background-size: cover;">
+      </div>
+      <!-- Bottom Hero Section -->
+       <div class="w-full bg-black">
+        <div class="flex justify-center">
+          <h2 class="text-white text-2xl mt-5">"In darkness, we find light"</h2>
+        </div>
+        <div class="flex justify-center">
+          <h2 class="text-white text-md mt-5 text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, at! Nihil, nemo nobis. Itaque natus eaque dolores. Iure, voluptates? Modi reiciendis laborum totam inventore facilis. Hic vitae explicabo molestias laborum?</h2>
+        </div>
+       </div>
+    </section>
+    <!-- End Hero Section -->
+     
+    
   </body>
-</html>
+  </html>
+  
+  <!-- <div class="">
+    <img src="https://www.nme.com/wp-content/uploads/2016/09/2012BlckMetal1.borknagar181012.jpg" alt="">
+    <h2 class="text-lg text-black">In darkness, we find light</h2>
+    <h2 class="text-lg text-black">In darkness, we find light</h2>
+  </div> -->
