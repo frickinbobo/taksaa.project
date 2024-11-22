@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Taksaa.project {% block title %}{% endblock %}</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css"
+      href="{{ url_for('static', filename='css/daisyui/css/full.min.css') }}"
       rel="stylesheet"
       type="text/css"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ url_for('static', filename='js/tailwind/tailwind.js') }}"></script>
   </head>
   <body>
     <div class="navbar bg-primary">
@@ -40,7 +40,7 @@
             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li><a>Dashboard</a></li>
-            <li><a>Brands</a></li>
+            <li><a>Bands</a></li>
             <li><a>Items</a></li>
             <li><a>Orders</a></li>
           </ul>
@@ -58,7 +58,7 @@
           >
             <div class="w-10 rounded-full">
               <img
-                alt="Tailwind CSS Navbar component"
+                alt="Profile"
                 src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
               />
             </div>
@@ -67,7 +67,7 @@
             tabindex="0"
             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-            <li><a>Logout</a></li>
+            <li><a href="/logout/">Logout</a></li>
           </ul>
         </div>
       </div>

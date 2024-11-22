@@ -2,7 +2,6 @@ import sys
 
 try:
   from django.db import models
-  from django.core.files.storage import FileSystemStorage
 except Exception:
   print('Exception: Django Not Found, please install it with "pip install django".')
   sys.exit()
@@ -16,14 +15,16 @@ class User(models.Model):
     status = models.TextField()
 
 
-class Brand(models.Model):
+class Band(models.Model):
     name = models.TextField()
     description = models.TextField()
-    cover = models.FileField(storage=FileSystemStorage(location='../media/brand-cover/'))
+    cover = models.TextField()
+    spotify = models.TextField()
+    instagram = models.TextField()
 
 
 class Item(models.Model):
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    band = models.ForeignKey(Band, on_delete=models.CASCADE)
     name = models.TextField()
     description = models.TextField()
 
@@ -37,7 +38,7 @@ class ItemStock(models.Model):
 
 class ItemImage(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    image = models.FileField(storage=FileSystemStorage(location='../media/item-images/'))
+    image = models.TextField()
 
 
 class Order(models.Model):
@@ -45,7 +46,7 @@ class Order(models.Model):
     customer_phone = models.TextField()
     customer_email = models.EmailField()
     customer_address = models.TextField()
-    customer_receipt = models.FileField(storage=FileSystemStorage(location='../media/customer-receipt/'))
+    customer_receipt = models.TextField()
     status = models.TextField()
 
 
