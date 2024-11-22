@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taksaa.project | Login</title>
+    <link
+      href="{{ url_for('static', filename='css/daisyui/css/full.min.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="{{ url_for('static', filename='js/tailwind/tailwind.js') }}"></script>
+  </head>
+  <body>
+    <div
+      class="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8"
+    >
+      {% if response %}
+      <div
+        role="alert"
+        class="alert alert-{{ response.type }} mx-auto max-w-sm mb-4"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 shrink-0 stroke-current"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span>{{ response.message }}</span>
+      </div>
+      {% endif %}
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img
+          class="mx-auto h-10 w-auto"
+          src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+          alt="Your Company"
+        />
+        <h2 class="mt-4 text-center text-2xl/9 font-bold tracking-tight">
+          Sign in to your account
+        </h2>
+      </div>
+
+      <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form action="#" method="POST">
+          <label class="form-control w-full">
+            <div class="label">
+              <span class="label-text">Username</span>
+            </div>
+            <input
+              type="text"
+              class="input input-bordered w-full"
+              name="username"
+              placeholder="Your username"
+              autofocus
+            />
+          </label>
+          <label class="form-control w-full">
+            <div class="label">
+              <span class="label-text">Password</span>
+            </div>
+            <input
+              type="password"
+              class="input input-bordered w-full"
+              name="password"
+              placeholder="Your password"
+            />
+          </label>
+
+          <button type="submit" class="btn btn-primary w-full mt-4">
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
