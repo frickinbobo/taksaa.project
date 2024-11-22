@@ -83,7 +83,7 @@ def send_media(path):
 
 @app.get('/test/')
 def test():
-  band = Band.objects.filter(name='test').update(instagram='https://www.instagram.com/')
+  user = User.objects.create(name='test', username='admin', password=generate_password_hash('admin'), role='test', status='test')
   # band.commit()
 
 if __name__ == '__main__':
