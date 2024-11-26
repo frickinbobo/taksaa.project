@@ -136,7 +136,7 @@
         <tbody>
           {% for band in bands %}
           <tr>
-            <th>{{ loop.index }}</th>
+            <th class="min-w-12 lg:min-w-full lg:w-12">{{ loop.index }}</th>
             <!-- <td><img src="/{{ band.cover }}" class="max-w-sm rounded-lg shadow-2xl"/></td> -->
             <td width="2">
               <button
@@ -192,14 +192,16 @@
                 </svg>
               </a> -->
             </td>
-            <td>{{ band.name }}</td>
-            <td class="min-w-60">
-              <div class="w-full h-20 overflow-y-auto">
+            <td class="min-w-44 lg:min-w-full lg:w-44">{{ band.name }}</td>
+            <td width="6">
+              <div
+                class="w-60 lg:w-full max-h-20 overflow-y-scroll overflow-x-hidden"
+              >
                 {{ band.description }}
               </div>
             </td>
             <!-- <td>{{ band.spotify }}{{ band.instagram }}</td> -->
-            <td class="min-w-44">
+            <td class="min-w-36 lg:min-w-full lg:w-36">
               <div class="join gap-4">
                 <a
                   href="{{ band.instagram }}"
