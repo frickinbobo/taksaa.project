@@ -11,7 +11,8 @@
     />
     <script src="{{ url_for('static', filename='js/tailwind/tailwind.js') }}"></script>
   </head>
-  <body>
+  <body id="container">
+    {% block upcontainer %} {% endblock %}
     <div class="navbar bg-primary">
       <div class="navbar-start">
         <div class="dropdown">

@@ -29,11 +29,12 @@ class Item(models.Model):
     description = models.TextField()
 
 
-class ItemStock(models.Model):
+class ItemSize(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     price = models.IntegerField()
     size = models.TextField()
     stock = models.IntegerField()
+    use_stock = models.TextField()
 
 
 class ItemImage(models.Model):
@@ -52,5 +53,5 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    item_stock = models.ForeignKey(ItemStock, on_delete=models.CASCADE)
+    item_size = models.ForeignKey(ItemSize, on_delete=models.CASCADE)
     quantity = models.IntegerField()

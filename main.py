@@ -54,15 +54,37 @@ def band():
     return redirect('/login/')
 
   if request.method == 'POST':
-    name = request.form['name']
-    description = request.form['description']
-    spotify = request.form['spotify']
-    instagram = request.form['instagram']
-    cover = request.files['cover']
-    cover.filename = secure_filename(uuid.uuid4().hex + '.' + cover.filename.split('.')[-1])
-    real_path = os.path.join(app.config['UPLOAD_FOLDER']+'band-cover/', cover.filename)
-    cover.save(real_path)
-    band = Band.objects.create(name=name, description=description, spotify=spotify, instagram=instagram, cover=real_path)
+    if request.form['button-form'] == 'add':
+      name = request.form['name']
+      description = request.form['description']
+      spotify = request.form['spotify']
+      instagram = request.form['instagram']
+      cover = request.files['cover']
+      cover.filename = secure_filename(uuid.uuid4().hex + '.' + cover.filename.split('.')[-1])
+      real_path = os.path.join(app.config['UPLOAD_FOLDER']+'band-cover/', cover.filename)
+      cover.save(real_path)
+      band = Band.objects.create(name=name, description=description, spotify=spotify, instagram=instagram, cover=real_path)
+    elif request.form['button-form'] == 'edit':
+      band = Band.objects.filter(pk=request.form['id']).first()
+      id = request.form['id']
+      name = request.form['name']
+      description = request.form['description']
+      spotify = request.form['spotify']
+      instagram = request.form['instagram']
+      cover = request.files['cover']
+      if cover.filename:
+        os.remove(band.cover)
+      # if not band.cover == cover and not cover == "":
+        cover.filename = secure_filename(uuid.uuid4().hex + '.' + cover.filename.split('.')[-1])
+        real_path = os.path.join(app.config['UPLOAD_FOLDER']+'band-cover/', cover.filename)
+        cover.save(real_path)
+        edited = Band.objects.filter(pk=id).update(name=name, description=description, spotify=spotify, instagram=instagram, cover=real_path)
+      else:
+        edited = Band.objects.filter(pk=id).update(name=name, description=description, spotify=spotify, instagram=instagram)
+    if request.form['button-form'] == 'delete':
+      band = Band.objects.filter(pk=request.form['id'])
+      os.remove(band.first().cover)
+      band.delete()
 
   bands = Band.objects.all()
   return render_template('admin/band.html', bands=bands)
