@@ -1,21 +1,24 @@
 <!-- prettier-ignore -->
 {% extends "admin/admin-template.html" %} 
 
-{% block title %}- Brand{% endblock %} 
+{% block title %}- Band{% endblock %} 
 
 {% block upcontainer %}
 <div class="fixed z-50 w-full hidden" id="image-view">
-  <div class="bg-black bg-opacity-30">
-    <div class="flex justify-center items-center min-h-screen">
-      <div class="relative sm:w-96 lg:w-2/4">
-        <button class="absolute right-0 p-4 text-black" id="hide-modal">
+  <div class="bg-black bg-opacity-50">
+    <div class="flex justify-center items-center min-h-screen" id="hide-modal">
+      <div class="relative max-w-96">
+        <button
+          class="absolute right-0 p-2 text-black font-semibold"
+          id="hide-modal"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="size-6"
+            class="size-6 border border-2 border-black rounded-lg"
           >
             <path
               stroke-linecap="round"
@@ -24,11 +27,7 @@
             />
           </svg>
         </button>
-        <img
-          src="/media/band-cover/762de3c519564779a0d84808aa6000f8.jpg"
-          alt=""
-          id="modal-image"
-        />
+        <img src="" alt="" id="modal-image" />
       </div>
     </div>
   </div>
@@ -116,7 +115,7 @@
     </form>
   </div>
 </div>
-<div class="card bg-base-100 w-full shadow-xl mt-3">
+<div class="card bg-base-100 w-full mb-4 shadow-xl mt-3">
   <div class="card-body">
     <div class="overflow-x-auto">
       <table
@@ -136,7 +135,7 @@
         <tbody>
           {% for band in bands %}
           <tr>
-            <th class="min-w-12 lg:min-w-full lg:w-12">{{ loop.index }}</th>
+            <th class="min-w-12 lg:w-12">{{ loop.index }}</th>
             <!-- <td><img src="/{{ band.cover }}" class="max-w-sm rounded-lg shadow-2xl"/></td> -->
             <td width="2">
               <button
@@ -192,16 +191,16 @@
                 </svg>
               </a> -->
             </td>
-            <td class="min-w-44 lg:min-w-full lg:w-44">{{ band.name }}</td>
+            <td class="min-w-44 lg:min-w-24 lg:max-w-24">{{ band.name }}</td>
             <td width="6">
               <div
-                class="w-60 lg:w-full max-h-20 overflow-y-scroll overflow-x-hidden"
+                class="w-[18rem] lg:w-[40rem] max-h-20 overflow-y-scroll overflow-x-hidden"
               >
                 {{ band.description }}
               </div>
             </td>
             <!-- <td>{{ band.spotify }}{{ band.instagram }}</td> -->
-            <td class="min-w-36 lg:min-w-full lg:w-36">
+            <td class="min-w-36 lg:w-24">
               <div class="join gap-4">
                 <a
                   href="{{ band.instagram }}"
@@ -223,8 +222,27 @@
                 </a>
               </div>
             </td>
-            <td width="4">
+            <td class="min-w-36 lg:w-12">
               <div class="join">
+                <a
+                  href="/admin/band/{{ band.id }}/"
+                  class="btn btn-accent join-item"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
+                    />
+                  </svg>
+                </a>
                 <button
                   class="btn btn-primary join-item"
                   id="button-edit"
@@ -250,6 +268,7 @@
                     />
                   </svg>
                 </button>
+
                 <form action="#" method="post">
                   <input type="hidden" name="id" value="{{ band.id }}" />
                   <button
@@ -313,80 +332,8 @@
 {% endblock %} 
 
 {% block script %}
-<script>
-  const inputBandId = document.getElementById("input-band-id");
-  const inputBandName = document.getElementById("input-band-name");
-  const inputBandDescription = document.getElementById(
-    "input-band-description"
-  );
-  const inputBandSpotify = document.getElementById("input-band-spotify");
-  const inputBandInstagram = document.getElementById("input-band-instagram");
-  const inputBandCover = document.getElementById("input-band-cover");
-  const editImage = document.getElementById("edit-image");
-  const modalImageView = document.getElementById("image-view");
-  const modalImage = document.getElementById("modal-image");
-  const buttonHideModal = document.getElementById("hide-modal");
-  // const buttonShowModal = document.getElementById("show-modal");
-  const buttonShowModal = document.querySelectorAll("#show-modal");
-  const buttonReset = document.getElementById("button-reset");
-  const buttonForm = document.getElementById("button-form");
-  const buttonEdit = document.getElementById("button-edit");
-  const contaienr = document.getElementById("container");
-
-  inputBandCover.addEventListener("change", (event) => {
-    editImage.replaceChildren();
-    let image = document.createElement("img");
-    image.classList.add("max-w-44");
-    image.classList.add("aspect-auto");
-    image.classList.add("mx-auto");
-    image.classList.add("mt-10");
-    // console.log(URL.createObjectURL(event.srcElement.files[0]));
-    image.src = URL.createObjectURL(event.srcElement.files[0]);
-
-    // image.src = "/" + buttonEdit.dataset.cover;
-    editImage.appendChild(image);
-  });
-
-  buttonEdit.addEventListener("click", (event) => {
-    inputBandId.value = buttonEdit.dataset.id;
-    inputBandName.value = buttonEdit.dataset.name;
-    inputBandName.focus();
-    inputBandDescription.value = buttonEdit.dataset.description;
-    inputBandSpotify.value = buttonEdit.dataset.spotify;
-    inputBandInstagram.value = buttonEdit.dataset.instagram;
-    // inputBandCover.file = buttonEdit.dataset.cover;
-    editImage.replaceChildren();
-    let image = document.createElement("img");
-    image.src = "/" + buttonEdit.dataset.cover;
-    image.classList.add("max-w-60");
-    image.classList.add("aspect-auto");
-    image.classList.add("mx-auto");
-    image.classList.add("mt-10");
-    editImage.appendChild(image);
-    buttonForm.value = "edit";
-    buttonForm.innerHTML = "Edit";
-  });
-
-  buttonReset.addEventListener("click", (event) => {
-    event.preventDefault();
-    editImage.replaceChildren();
-    inputBandId.value = "";
-    buttonForm.value = "";
-    buttonForm.innerHTML = "Submit";
-    event.target.form.reset();
-  });
-
-  buttonShowModal.forEach((e) => {
-    e.addEventListener("click", (event) => {
-      modalImage.src = event.currentTarget.dataset.src;
-      modalImageView.classList.remove("hidden");
-      container.classList.add("overflow-hidden");
-    });
-  });
-
-  buttonHideModal.addEventListener("click", (event) => {
-    modalImageView.classList.add("hidden");
-    container.classList.remove("overflow-hidden");
-  });
-</script>
+<script
+  type="module"
+  src="{{ url_for('static', filename='js/admin/band.js') }}"
+></script>
 {% endblock %}

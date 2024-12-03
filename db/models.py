@@ -27,6 +27,7 @@ class Item(models.Model):
     band = models.ForeignKey(Band, on_delete=models.CASCADE)
     name = models.TextField()
     description = models.TextField()
+    use_stock = models.TextField()
 
 
 class ItemSize(models.Model):
@@ -34,7 +35,6 @@ class ItemSize(models.Model):
     price = models.IntegerField()
     size = models.TextField()
     stock = models.IntegerField()
-    use_stock = models.TextField()
 
 
 class ItemImage(models.Model):

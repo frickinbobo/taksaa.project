@@ -48,6 +48,10 @@ def logout():
   session['username'] = None
   return redirect('/login/')
 
+@app.route('/admin/', methods=['POST', 'GET'])
+def dashboard():
+  return redirect('/admin/band/')
+
 @app.route('/admin/band/', methods=['POST', 'GET'])
 def band():
   if not session.get('username'):
@@ -74,7 +78,6 @@ def band():
       cover = request.files['cover']
       if cover.filename:
         os.remove(band.cover)
-      # if not band.cover == cover and not cover == "":
         cover.filename = secure_filename(uuid.uuid4().hex + '.' + cover.filename.split('.')[-1])
         real_path = os.path.join(app.config['UPLOAD_FOLDER']+'band-cover/', cover.filename)
         cover.save(real_path)
@@ -88,6 +91,15 @@ def band():
 
   bands = Band.objects.all()
   return render_template('admin/band.html', bands=bands)
+
+
+@app.route('/admin/band/<int:id>/', methods=['POST', 'GET'])
+def item(id):
+  response = {}
+  band = Band.objects.filter(pk=id).first()
+  if band:
+    response['band'] = band
+  return render_template('admin/item.html', response=response)
 
 # API
 @app.route('/api/bands/', methods=['GET'])
@@ -105,8 +117,8 @@ def send_media(path):
 
 @app.get('/test/')
 def test():
-  user = User.objects.create(name='test', username='admin', password=generate_password_hash('admin'), role='test', status='test')
-  # band.commit()
+  # user = User.objects.create(name='test', username='admin', password=generate_password_hash('admin'), role='test', status='test')
+  return render_template('admin/test.html')
 
 if __name__ == '__main__':
   app.run(debug=True, host='0.0.0.0')

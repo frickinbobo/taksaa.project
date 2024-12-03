@@ -13768,16 +13768,14 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             let w = l(v, h);
             s.add(w),
               e.candidateRuleMap.has(w) || e.candidateRuleMap.set(w, []),
-              e.candidateRuleMap
-                .get(w)
-                .push([
-                  {
-                    sort: n.create("components"),
-                    layer: "components",
-                    options: h,
-                  },
-                  y,
-                ]);
+              e.candidateRuleMap.get(w).push([
+                {
+                  sort: n.create("components"),
+                  layer: "components",
+                  options: h,
+                },
+                y,
+              ]);
           }
         },
         addUtilities(p, h) {
@@ -13790,16 +13788,14 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             let w = l(v, h);
             s.add(w),
               e.candidateRuleMap.has(w) || e.candidateRuleMap.set(w, []),
-              e.candidateRuleMap
-                .get(w)
-                .push([
-                  {
-                    sort: n.create("utilities"),
-                    layer: "utilities",
-                    options: h,
-                  },
-                  y,
-                ]);
+              e.candidateRuleMap.get(w).push([
+                {
+                  sort: n.create("utilities"),
+                  layer: "utilities",
+                  options: h,
+                },
+                y,
+              ]);
           }
         },
         matchUtilities: function (p, h) {
@@ -23758,9 +23754,7 @@ Check your Browserslist config to be sure that your targets are set up correctly
   function vt(r) {
     return r && r.__esModule ? r : { default: r };
   }
-  console.warn(
-    "cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation"
-  );
+
   var Ns = "tailwind",
     uf = "text/tailwindcss",
     _v = "/template.html",
