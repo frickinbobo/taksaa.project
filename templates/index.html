@@ -5,46 +5,546 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="../static/css/style.css">
   </head>
-  <body>
+  <body id="body-container">
     <script src="{{ url_for('static', filename='js/gsap/minified/gsap.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+
     <!-- Navigation bar -->
-    <nav class="bg-black h-20 flex items-center justify-between px-10">
-      <!-- <div class="container py-3 flex items-center justify-between"> -->
-        <!-- Logo -->
-        <div class="text-2xl font-bold text-white">
-          Logo
-        </div>
-        <!-- Right Side Links -->
-        <div class="flex space-x-12">
-          <a href="#" class="text-white font-medium">HOME</a>
-          <a href="#" class="text-white font-medium">BAND</a>
-        </div>
-      <!-- </div> -->
-    </nav>
-    <!-- End Navigation bar -->
-    <!-- Hero Section -->
-    <section>
-      <!-- Top Hero Section -->
-      <div class="w-full bg-black flex justify-center">
-        <img src="https://content.instructables.com/FIA/L2W8/K81UNKWP/FIAL2W8K81UNKWP.png?auto=webp&frame=1&width=320&md=MjAyMC0wMy0yMyAwODoyMDozNC4w" width="220px" alt="">
+    <nav class="bg-black h-20 flex items-center justify-between px-4 md:px-10">
+      <!-- Logo -->
+      <img width="60px" src="../static/images/logo/taksaa logo putih.webp" alt="">
+      <!-- Right Side Links -->
+      <div class="hidden md:flex space-x-6 md:space-x-12">
+        <a href="#" class="text-white font-medium">HOME</a>
+        <a href="#" class="text-white font-medium">BAND</a>
       </div>
-      <!-- Middle Hero Section -> Using backgrond Image -->
-      <div class="w-full h-96 bg-black" style="background-image: url('https://www.robin-noorda.com/uploads/1/6/8/3/16830688/3347022_orig.jpg'); background-size: cover;">
+      <!-- Mobile Menu Button -->
+      <button id="menu-toggle" class="block md:hidden text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+      <!-- Mobile Dropdown Menu -->
+      <div
+      id="mobile-menu"
+      class="hidden absolute top-20 left-0 w-full bg-black p-4 shadow-lg space-y-2 transform transition-all duration-300 ease-in-out"
+      >
+      <a href="#" class="block text-white font-medium">HOME</a>
+      <a href="#" class="block text-white font-medium">BAND</a>
+    </div>
+  </nav>
+  <!-- End Navigation bar -->
+  <!-- Hero Section -->
+  <section>
+    <!-- Top Hero Section -->
+    <div class="w-full bg-black flex justify-center">
+      <img src="../static/images/logo/taksaa font putih.webp" width="220px" alt="">
+    </div>
+    <!-- Middle Hero Section -> Using backgrond Image -->
+    <div class="w-full cover-image bg-black" style="height: 555px; background-image: url('../static/images/logo/cover.webp'); background-size: cover;">
+    </div>
+    <!-- Bottom Hero Section -->
+    <div class="w-full bg-black pt-8">
+      <div class="flex justify-center">
+        <h2 class="text-white text-2xl mt-5">"In darkness, we find light"</h2>
       </div>
-      <!-- Bottom Hero Section -->
-       <div class="w-full bg-black">
-        <div class="flex justify-center">
-          <h2 class="text-white text-2xl mt-5">"In darkness, we find light"</h2>
-        </div>
-        <div class="flex justify-center">
-          <h2 class="text-white text-md mt-5 text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, at! Nihil, nemo nobis. Itaque natus eaque dolores. Iure, voluptates? Modi reiciendis laborum totam inventore facilis. Hic vitae explicabo molestias laborum?</h2>
-        </div>
+      <div class="flex justify-center">
+        <h2 class="text-white text-md mt-5 text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, at! Nihil, nemo nobis. Itaque natus eaque dolores. Iure, voluptates? Modi reiciendis laborum totam inventore facilis. Hic vitae explicabo molestias laborum?</h2>
+      </div>
+    </div>
+  </section>
+  <!-- End Hero Section -->
+  <!-- Band Section -->
+  <section class="bg-black pt-20">
+    <div class="flex justify-center">
+       <div class="w-4/5">
+         <div class="swiper mySwiper">
+           <div class="swiper-wrapper">
+             <!-- Slide 1 -->
+             <div class="swiper-slide flex justify-center">
+               <div class="w-72 pt-4">
+                 <h2 class="text-white text-2xl text-center">AVENGED</h2>
+                 <img src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg" alt="">
+               </div>
+             </div>
+             <div class="swiper-slide flex justify-center">
+               <div class="w-72 pt-4">
+                 <h2 class="text-white text-2xl text-center">AVENGED</h2>
+                 <img src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg" alt="">
+               </div>
+             </div>
+             <div class="swiper-slide flex justify-center">
+               <div class="w-72 pt-4">
+                 <h2 class="text-white text-2xl text-center">AVENGED</h2>
+                 <img src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg" alt="">
+               </div>
+             </div>
+             <div class="swiper-slide flex justify-center">
+               <div class="w-72 pt-4">
+                 <h2 class="text-white text-2xl text-center">AVENGED</h2>
+                 <img src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg" alt="">
+               </div>
+             </div>
+           </div>
+           <!-- Pagination -->
+           <div style="bottom: -20;" class="swiper-pagination"></div>
+           <!-- Navigation -->
+           <div class="swiper-button-next text-white"></div>
+           <div class="swiper-button-prev text-white"></div>
+           <!-- Pagination -->
+           <div class="swiper-pagination"></div>
+         </div>
        </div>
-    </section>
-    <!-- End Hero Section -->
-     
-    
+    </div>
+
+  </section>
+  <!-- End Band Section -->
+  <!-- Items Section -->
+  <section id="all-items">
+    <div class="w-full h-auto bg-black h-96 pt-24">
+      <h2 class="text-2xl text-center text-white">ALL ITEM</h2>
+      <div class="mt-12 grid lg:grid-cols-4 sm:grid-rows place-items-center">
+        <div class="w-72 pt-4">
+          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+          <div class="text-white text-1xl text-center">Rp. 180.000</div>
+        </div>
+        <div class="w-72 pt-4">
+          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+          <div class="text-white text-1xl text-center">Rp. 180.000</div>
+        </div>
+        <div class="w-72 pt-4">
+          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+          <div class="text-white text-1xl text-center">Rp. 180.000</div>
+        </div>
+        <div class="w-72 pt-4">
+          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+          <div class="text-white text-1xl text-center">Rp. 180.000</div>
+        </div>
+        <div class="w-72 pt-4">
+          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+          <div class="text-white text-1xl text-center">Rp. 180.000</div>
+        </div>
+        <div class="w-72 pt-4">
+          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+          <div class="text-white text-1xl text-center">Rp. 180.000</div>
+        </div>
+        <div class="w-72 pt-4">
+          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+          <div class="text-white text-1xl text-center">Rp. 180.000</div>
+        </div>
+        <div class="w-72 pt-4">
+          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+          <div class="text-white text-1xl text-center">Rp. 180.000</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Items Section -->
+  <!-- Form Section  -->
+  <section id="form" class="">
+    <div class="w-full h-auto bg-black pt-24">
+      <h2 class="text-2xl text-center text-white">PAYMENT FORM</h2>
+      <div class="mt-12 w-full flex justify-center">
+        <form>
+          <div class="w-full mb-3 flex gap-2">
+            <div class="w-2/4">
+              <label class="text-sm mb-1 text-white" for="nama">NAMA</label>
+            </div>
+            <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-black outline-none focus:border-blue-400">
+          </div>
+          <div class="w-full mb-3 flex gap-2">
+            <div class="w-2/4">
+              <label class=" text-sm mb-1 text-white" for="nama">ALAMAT</label>
+            </div>
+            <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
+          </div>
+          <div class="w-full mb-3 flex gap-2">
+            <div class="w-2/4">
+              <label class="text-sm mb-1 text-white" for="nama">NO HP</label>
+            </div>
+            <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
+          </div>
+        </form>
+      </div>
+      <div class="w-full flex justify-center bg-black text-white p-5">
+        <div class="w-2/5">
+          <form id="orderForm" method="POST" action="/submit-order">
+            <div class="space-y-4">
+              <!-- Item 1 -->
+              <div class="flex items-center justify-between border-b pb-4">
+                <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="ROADDISH REGULAR" class="w-16 h-16 object-cover">
+                <div class="flex-1 ml-4">
+                  <h2 class="text-lg font-bold">ROADDISH REGULAR</h2>
+                  <p class="text-sm">Rp 180.000</p>
+                  <div class="flex space-x-2 mt-2">
+                    <button type="button" class="border px-2 py-1" onclick="selectSize('ROADDISH', 180000, 'S')">S</button>
+                    <button type="button" class="border px-2 py-1" onclick="selectSize('ROADDISH', 180000, 'M')">M</button>
+                    <button type="button" class="border px-2 py-1" onclick="selectSize('ROADDISH', 180000, 'L')">L</button>
+                    <button type="button" class="border px-2 py-1" onclick="selectSize('ROADDISH', 180000, 'XL')">XL</button>
+                    <button type="button" class="border px-2 py-1" onclick="selectSize('ROADDISH', 180000, 'XXL')">XXL</button>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('ROADDISH', -1)">-</button>
+                  <input type="text" value="0" readonly class="w-10 text-center bg-black border text-white" id="quantity-ROADDISH">
+                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('ROADDISH', 1)">+</button>
+                </div>
+              </div>
+              <!-- Tambahkan produk lainnya dengan struktur serupa -->
+              <div class="flex items-center justify-between border-b pb-4">
+                <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="MADLAND REGULAR" class="w-16 h-16 object-cover">
+                <div class="flex-1 ml-4">
+                  <h2 class="text-lg font-bold">MADLAND REGULAR</h2>
+                  <p class="text-sm">Rp 280.000</p>
+                  <div class="flex space-x-2 mt-2">
+                    <button type="button" class="border px-2 py-1" onclick="selectSize('MADLAND', 280000, 'S')">S</button>
+                    <button type="button" class="border px-2 py-1" onclick="selectSize('MADLAND', 280000, 'M')">M</button>
+                    <button type="button" class="border px-2 py-1" onclick="selectSize('MADLAND', 280000, 'L')">L</button>
+                    <button type="button" class="border px-2 py-1" onclick="selectSize('MADLAND', 280000, 'XL')">XL</button>
+                    <button type="button" class="border px-2 py-1" onclick="selectSize('MADLAND', 280000, 'XXL')">XXL</button>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('MADLAND', -1)">-</button>
+                  <input type="text" value="0" readonly class="w-10 text-center bg-black border text-white" id="quantity-MADLAND">
+                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('MADLAND', 1)">+</button>
+                </div>
+              </div>
+            </div>
+        
+            <div class="mt-10">
+              <h2 class="text-lg font-bold text-white">Your Order:</h2>
+              <div id="order-summary" class="mt-4">
+                <!-- Order details will appear here -->
+              </div>
+            </div>
+        
+            <input type="hidden" name="orderData" id="orderData">
+            <button type="submit" class="mt-6 bg-blue-500 text-white px-4 py-2 rounded">Submit Order</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <h2 class="text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, dignissimos exercitationem nulla quas quae architecto. Saepe id hic obcaecati a, possimus molestias nostrum expedita voluptatibus, et dolorem non. Omnis, perspiciatis cupiditate earum commodi tempora odit libero, sapiente a saepe iusto unde molestiae? Blanditiis omnis aliquid rerum animi repellat nisi suscipit tenetur quam temporibus possimus voluptates id voluptatum esse reiciendis mollitia iste accusamus tempora quaerat, corrupti officia cum ullam dolore consequuntur! Voluptatem, deserunt? Eius quam, sequi dignissimos fugit suscipit quaerat eaque perspiciatis unde esse, animi eveniet? Veniam dicta quam aliquid eveniet earum rerum corrupti quos culpa beatae dolores magni provident molestias soluta, voluptatem rem eius quo. Nemo blanditiis rerum odit quasi perferendis esse sequi aperiam corporis aspernatur ad dolorem, culpa voluptas explicabo aut! Aliquam perspiciatis sed, ab commodi consectetur architecto at vel quas quo exercitationem repudiandae nostrum, ut delectus eaque sunt labore cumque, esse sint? Sapiente sunt doloribus inventore libero. Similique pariatur itaque officia, ad voluptatibus inventore optio a recusandae. Atque veritatis minima praesentium. Voluptatum, obcaecati veritatis. Eos, provident cumque consequuntur ipsam maiores at ex sed error neque natus voluptates quod beatae hic fugit laborum earum quasi voluptas quos magni. Quis non adipisci asperiores, illum laudantium quasi fuga perferendis doloremque totam.</h2>
+  <!-- End Form Section  -->
+  <!-- Button Order -->
+  <button id="fixedButton" class="hidden fixed border border-white bottom-12 left-1/2 -translate-x-1/2 bg-black hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded z-30">
+    BUY NOW
+  </button>
+  <!-- End Button Order -->
+  
+  <!-- Band Modal -->
+  <div id="band-modal" class="hidden fixed top-0 left-0 z-50 bg-black  w-full  h-full overflow-x-auto">
+    <div class="lg:flex block">
+      <div class="lg:w-1/2 w-full">
+        <img class="w-full" src="https://i.pinimg.com/736x/27/ca/78/27ca78589c387bdc552e46281ba71bd2.jpg" alt="">
+      </div>
+      <div class="lg:w-1/2 w-full">
+        <div class="lg:pr-24 flex lg:justify-end justify-center ">
+            <img class="w-1/2" src="https://i.pinimg.com/736x/13/7a/77/137a771c846bcb2ec81c83a799da8433.jpg" alt="">
+        </div>
+        <div class="flex lg:pr-24">
+          <h2 class="text-white lg:text-end text-center text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos, eum? Earum sed, similique tempora reiciendis ex eaque error vel tenetur exercitationem est nam distinctio accusantium sit fuga, eius sunt, cum labore deleniti ad neque!</h2>
+        </div>
+        <div class="swiper mySwiperModal mt-8">
+          <div class="swiper-wrapper">
+            <!-- Slide 1 -->
+            <div class="swiper-slide flex justify-center">
+              <div class="w-48 pt-4">
+                <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+                <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+                <div class="text-white text-1xl text-center">Rp. 180.000</div>
+              </div>
+            </div>
+            <!-- Tambahkan slide lainnya -->
+            <div class="swiper-slide flex justify-center">
+              <div class="w-48 pt-4">
+                <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+                <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+                <div class="text-white text-1xl text-center">Rp. 180.000</div>
+              </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="swiper-slide flex justify-center">
+              <div class="w-48 pt-4">
+                <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+                <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+                <div class="text-white text-1xl text-center">Rp. 180.000</div>
+              </div>
+            </div>
+            <div class="swiper-slide flex justify-center">
+              <div class="w-48 pt-4">
+                <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+                <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+                <div class="text-white text-1xl text-center">Rp. 180.000</div>
+              </div>
+            </div>
+          </div>
+          <!-- Scrollbar -->
+          <div class="swiper-scrollbar"></div>
+
+          <!-- Navigation -->
+          <div class="swiper-button-next text-white"></div>
+          <div class="swiper-button-prev text-white"></div>
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
+        </div>
+          <div class="mt-12 ml-28 flex justify-center">
+            <button class=" border border-white bottom-12 left-1/2 -translate-x-1/2 bg-black hover:bg-white  hover:text-black text-white font-bold py-2 px-4 rounded z-30">
+              BUY NOW
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- End Band Modal -->
+  <!-- Product Modal -->
+  <div id="band-modal" class="hidden fixed top-0 left-0 z-50 bg-black w-full h-full overflow-x-auto">
+    <div class="w-full h-full flex justify-center items-center">
+      <div class="w-1/4 p-20">
+        <div class="pt-10">
+          <h2 class="font-bold text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+          <h2 class="text-white text-2xl text-center">Rp. 180.000</h2>
+          <hr class="mt-8">
+          <h2 class="mt-8 font-bold text-white text-2xl text-center">Product Description</h2>
+          <h2 class="mt-3 text-center text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi placeat sint iste necessitatibus earum, cumque nisi minus laudantium vel perspiciatis maxime consequuntur fugiat ex, deleniti ut, nihil quisquam debitis molestiae provident aliquam beatae sit laborum maiores. Tempore vel praesentium odio ducimus! Repellat ullam rerum quo voluptates minus, omnis temporibus minima provident, officiis voluptatum harum corrupti inventore blanditiis dignissimos enim dolorem!</h2>
+          <div class="mt-10 w-full flex justify-center">
+            <button class=" border border-white bg-black hover:bg-white  hover:text-black text-white font-bold py-2 px-4 rounded z-30">BUY NOW</button>
+          </div>
+        </div>
+      </div>
+      <div class="w-3/4">
+        <div class="container mx-auto px-4 p-20">
+          <div class="swiper itemsSwiper">
+            <div class="swiper-wrapper">
+              <!-- Slide 1 -->
+              <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
+                <img src="https://dynamic.zacdn.com/eS-k2B2aZu6To-1Ynuk729SR_kc=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/mango-9272-0063174-2.jpg" alt="">
+              </div>
+              <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
+                <img src="https://dynamic.zacdn.com/1jA6SBRe_IgmkWXepqMXTwDo1_E=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/trendyol-8839-7700654-2.jpg" alt="">
+              </div>
+              <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
+                <img src="https://dynamic.zacdn.com/Hy02ju_dPGKSyQ7nmoO9ebHb4Ik=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/trendyol-5427-0186344-2.jpg" alt="">
+              </div>
+              <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
+                <img src="https://dynamic.zacdn.com/Hy02ju_dPGKSyQ7nmoO9ebHb4Ik=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/trendyol-5427-0186344-2.jpg" alt="">
+              </div>
+              <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
+                <img src="https://dynamic.zacdn.com/Hy02ju_dPGKSyQ7nmoO9ebHb4Ik=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/trendyol-5427-0186344-2.jpg" alt="">
+              </div>
+              
+            </div>
+            <!-- Navigation buttons -->
+            <!-- <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div> -->
+            <!-- Pagination -->
+            <!-- <div class="swiper-pagination"></div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Product Modal -->
+  
+ 
+  <!-- Js Import -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="../static/js/Fontend/toggle-buttons.js"></script>
+  <script src="../static/js/Fontend/slider.js"></script>
+  <script src="../static/js/Fontend/animated.js"></script>
+  <script>
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuToggle.addEventListener("click", () => {
+        if (mobileMenu.classList.contains("hidden")) {
+          mobileMenu.classList.remove("hidden");
+          mobileMenu.classList.add("translate-y-0", "opacity-100");
+      } else {
+          mobileMenu.classList.add("hidden");
+          mobileMenu.classList.remove("translate-y-0", "opacity-100");
+      }
+    });
+  </script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script>
+  const swiperModal = new Swiper('.mySwiperModal', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    mousewheel: {
+      invert: false, // Aktifkan scroll dengan mouse
+    },
+    scrollbar: {
+      el: '.swiper-scrollbar',
+      draggable: true, // Scrollbar bisa digeser manual
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2, // Untuk layar medium
+      },
+      1024: {
+        slidesPerView: 3, // Untuk layar besar
+      },
+    },
+    preventClicks: false, // Aktifkan klik
+    preventClicksPropagation: false, // Hindari menimpa klik dengan event lainnya
+  });
+</script>  
+<script>
+  const swiper = new Swiper('.mySwiper', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    mousewheel: {
+      invert: false, // Aktifkan scroll dengan mouse
+    },
+    scrollbar: {
+      el: '.swiper-scrollbar',
+      draggable: true, // Scrollbar bisa digeser manual
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true, // Membuat dot bisa di-klik
+      type: 'bullets', // Menentukan tipe pagination sebagai bullets
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2, // Untuk layar medium
+      },
+      1024: {
+        slidesPerView: 3, // Untuk layar besar
+      },
+    },
+    preventClicks: false, // Aktifkan klik
+    preventClicksPropagation: false, // Hindari menimpa klik dengan event lainnya
+  });
+</script>  
+
+
+<script>
+  const swiper3 = new Swiper('.itemsSwiper', {
+    slidesPerView: 'auto', // Adjust based on how many slides you want visible
+      spaceBetween: 6, // Gap between slides
+      freeMode: true, // Enable free mode for smooth scroll
+      grabCursor: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      },
+    });
+</script>
+<script>
+  let order = [];
+
+// Fungsi untuk memperbarui jumlah quantity
+function updateQuantity(productId, increment) {
+  const input = document.getElementById(`quantity-${productId}`);
+  if (!input) {
+    console.error(`Element with ID "quantity-${productId}" not found.`);
+    return;
+  }
+  let currentValue = parseInt(input.value, 10);
+  currentValue = isNaN(currentValue) ? 0 : currentValue;
+  const newValue = Math.max(0, currentValue + increment);
+  input.value = newValue;
+}
+
+// Fungsi untuk memilih ukuran dan menambahkan produk ke dalam pesanan
+function selectSize(productId, price, size) {
+  const quantityInput = document.getElementById(`quantity-${productId}`);
+  if (!quantityInput) {
+    console.error(`Element with ID "quantity-${productId}" not found.`);
+    return;
+  }
+  const quantity = parseInt(quantityInput.value, 10);
+  if (quantity > 0) {
+    const existingOrderIndex = order.findIndex(item => item.product === productId && item.size === size);
+    if (existingOrderIndex >= 0) {
+      order[existingOrderIndex].quantity += quantity;
+    } else {
+      order.push({ product: productId, size, price, quantity });
+    }
+    quantityInput.value = 0; // Reset quantity input setelah menambahkan ke order
+    updateOrderSummary();
+  } else {
+    alert("Choose the quantity first !!");
+  }
+}
+
+// Fungsi untuk menampilkan ringkasan pesanan
+function updateOrderSummary() {
+  const orderSummary = document.getElementById("order-summary");
+  orderSummary.innerHTML = "";
+
+  order.forEach(item => {
+    const total = item.price * item.quantity;
+    orderSummary.innerHTML += `
+      <div class="border-b py-2">
+        <p>${item.product} (${item.size}) - ${item.quantity} x Rp ${item.price.toLocaleString()}</p>
+        <p class="text-sm text-gray-400">Total: Rp ${total.toLocaleString()}</p>
+      </div>
+    `;
+  });
+
+  if (order.length === 0) {
+    orderSummary.innerHTML = `<p class="text-gray-400">No items in your order yet.</p>`;
+  }
+
+  // Simpan data pesanan ke input tersembunyi
+  const hiddenInput = document.getElementById("orderData");
+  hiddenInput.value = JSON.stringify(order);
+}
+
+// Saat form disubmit, pastikan data order diupdate terlebih dahulu
+const orderForm = document.getElementById("orderForm");
+orderForm.addEventListener("submit", function (event) {
+  if (order.length === 0) {
+    alert("No items in your order yet.");
+    event.preventDefault(); // Batalkan submit kalau pesanan kosong
+  } else {
+    updateOrderSummary();
+  }
+});
+</script>
+  
+  
+  <!-- End Js Import -->
   </body>
   </html>
   
