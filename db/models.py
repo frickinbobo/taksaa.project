@@ -19,6 +19,7 @@ class Band(models.Model):
     name = models.TextField()
     description = models.TextField()
     cover = models.TextField()
+    logo = models.TextField()
     spotify = models.TextField()
     instagram = models.TextField()
 

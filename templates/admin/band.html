@@ -98,7 +98,20 @@
           accept="image/*"
         />
       </label>
-      <div id="edit-image"></div>
+      <div id="edit-image-cover"></div>
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Band Logo</span>
+        </div>
+        <input
+          type="file"
+          id="input-band-logo"
+          name="logo"
+          class="file-input file-input-bordered file-input-primary w-full"
+          accept="image/*"
+        />
+      </label>
+      <div id="edit-image-logo"></div>
       <div class="card-actions justify-end mt-8">
         <button
           class="btn btn-primary"
@@ -126,6 +139,7 @@
           <tr>
             <th>#</th>
             <th>Cover</th>
+            <th>Logo</th>
             <th>Name</th>
             <th>Description</th>
             <th>Accounts</th>
@@ -164,10 +178,12 @@
                   />
                 </svg>
               </button>
-              <!-- <a
+            </td>
+            <td width="2">
+              <button
                 class="btn btn-primary"
-                href="/{{ band.cover }}"
-                target="_blank"
+                id="show-modal"
+                data-src="/{{ band.logo }}"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -189,12 +205,12 @@
                     d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                   />
                 </svg>
-              </a> -->
+              </button>
             </td>
-            <td class="min-w-44 lg:min-w-24 lg:max-w-24">{{ band.name }}</td>
+            <td class="min-w-44 lg:min-w-42 lg:max-w-42">{{ band.name }}</td>
             <td width="6">
               <div
-                class="w-[18rem] lg:w-[40rem] max-h-20 overflow-y-scroll overflow-x-hidden"
+                class="w-[18rem] lg:w-[24rem] max-h-20 overflow-y-scroll overflow-x-hidden"
               >
                 {{ band.description }}
               </div>
@@ -252,6 +268,7 @@
                   data-spotify="{{ band.spotify }}"
                   data-instagram="{{ band.instagram }}"
                   data-cover="{{ band.cover }}"
+                  data-logo="{{ band.logo }}"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
