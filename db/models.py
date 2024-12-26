@@ -19,6 +19,7 @@ class Band(models.Model):
     name = models.TextField()
     description = models.TextField()
     cover = models.TextField()
+    logo = models.TextField()
     spotify = models.TextField()
     instagram = models.TextField()
 
@@ -27,9 +28,10 @@ class Item(models.Model):
     band = models.ForeignKey(Band, on_delete=models.CASCADE)
     name = models.TextField()
     description = models.TextField()
+    use_stock = models.TextField()
 
 
-class ItemStock(models.Model):
+class ItemSize(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     price = models.IntegerField()
     size = models.TextField()
@@ -52,5 +54,5 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    item_stock = models.ForeignKey(ItemStock, on_delete=models.CASCADE)
+    item_size = models.ForeignKey(ItemSize, on_delete=models.CASCADE)
     quantity = models.IntegerField()

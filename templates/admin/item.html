@@ -1,0 +1,858 @@
+<!-- prettier-ignore -->
+{% extends "admin/admin-template.html" %} 
+
+{% block title %}- Item{% endblock %}
+
+{% block upcontainer %}
+<dialog id="modal-view-image" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <img class="mt-4" id="image-view" alt="" />
+  </div>
+</dialog>
+
+<dialog id="modal-show-size" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <div class="flex justify-between mt-6">
+      <h3>Size</h3>
+      <button class="btn btn-primary" id="add-new-size">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+      </button>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="table table-pin-rows table-pin-cols mt-4">
+        <thead>
+          <tr>
+            <th>#</th>
+            <td>Size</td>
+            <td>Price</td>
+            <td>Stock</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody id="size-table"></tbody>
+      </table>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="modal-show-image" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <div class="flex justify-between mt-6">
+      <h3>Image</h3>
+      <button class="btn btn-primary" id="add-new-image">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+      </button>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="table table-pin-rows table-pin-cols mt-4">
+        <thead>
+          <tr>
+            <th>#</th>
+            <td>Image</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody id="image-table">
+          <tr>
+            <td class="w-2">1</td>
+            <td>
+              <button class="btn btn-primary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="{1.5}"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+              </button>
+            </td>
+            <td class="w-24">
+              <div class="join">
+                <button
+                  class="btn btn-primary join-item"
+                  id="button-image-edit"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                    />
+                  </svg>
+                </button>
+                <form action="#" method="post">
+                  <input type="hidden" name="id" />
+                  <button
+                    class="btn btn-error join-item"
+                    name="button-form"
+                    value="delete-image"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                      />
+                    </svg>
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="modal-edit-size" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <h3 id="modal-edit-size-label">Edit Size</h3>
+    <form action="#" method="post">
+      <div class="grid grid-flow-row gap-4 rounded-lg mb-4">
+        <input type="hidden" name="id-edit" id="input-clothes-id-size-edit" />
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Size</span>
+          </div>
+          <select
+            class="select select-bordered w-full"
+            id="input-clothes-size-edit"
+            name="size-edit"
+            required
+          >
+            <option value="" selected>Choose size</option>
+            <option value="XS">XS (Extra Small)</option>
+            <option value="S">S (Small)</option>
+            <option value="M">M (Medium)</option>
+            <option value="L">L (Large)</option>
+            <option value="XL">XL (Extra Large)</option>
+            <option value="XXL">XXL (Double Extra Large)</option>
+            <option value="XXXL">XXXL (Triple Extra Large)</option>
+            <option value="XXXXL">XXXXL (Quadruple Extra Large)</option>
+            <option value="XXXXXL">XXXXXL (Quintuple Extra Large)</option>
+          </select>
+        </label>
+
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Price</span>
+          </div>
+          <label class="input input-bordered flex items-center gap-2">
+            <span>Rp.</span>
+            <input
+              type="number"
+              id="input-clothes-price-edit"
+              class="grow w-full"
+              name="price-edit"
+              placeholder="Price"
+              required
+            />
+            <span>/pcs</span>
+          </label>
+        </label>
+        <label class="form-control w-full">
+          <div class="label">
+            <span class="label-text">Stock</span>
+          </div>
+          <label class="input input-bordered flex items-center gap-2">
+            <input
+              type="number"
+              id="input-clothes-stock-edit"
+              class="grow w-full"
+              name="stock-edit"
+              placeholder="Stock"
+              required
+            />
+            pcs
+          </label>
+        </label>
+      </div>
+      <div class="card-actions justify-end mt-8">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          id="button-item"
+          data-type="put"
+        >
+          Edit
+        </button>
+        <button class="btn btn-error" type="reset" id="button-reset">
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<dialog id="modal-edit-item" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <h3>Edit Clothes</h3>
+    <form method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" id="input-clothes-id-edit" />
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Clothes Name</span>
+        </div>
+        <input
+          type="text"
+          id="input-clothes-name-edit"
+          class="input input-bordered w-full"
+          name="name"
+          placeholder="Clothes name"
+          required
+        />
+      </label>
+      <label class="form-control">
+        <div class="label">
+          <span class="label-text">Clothes Description</span>
+        </div>
+        <textarea
+          id="input-clothes-description-edit"
+          class="textarea textarea-bordered h-24"
+          name="description"
+          placeholder="Clothes description"
+          required
+        ></textarea>
+      </label>
+      <div class="form-control mt-2 w-32">
+        <label class="label cursor-pointer">
+          <span class="label-text">Use Stock</span>
+          <input
+            type="checkbox"
+            id="input-clothes-use-stock-edit"
+            name="use-stock"
+            class="toggle toggle-primary"
+          />
+        </label>
+      </div>
+      <div class="card-actions justify-end mt-8">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          value="edit"
+          name="button-form"
+          id="button-form"
+        >
+          Edit
+        </button>
+        <button class="btn btn-error" type="reset" id="button-reset">
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<dialog id="modal-edit-image" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <h3>Edit Image</h3>
+    <form method="post" id="form-edit-image" enctype="multipart/form-data">
+      <input type="hidden" name="id" id="input-clothes-id-image-edit" />
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Old Image</span>
+        </div>
+        <button
+          class="btn btn-primary w-16"
+          type="button"
+          id="button-view-old-image"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="{1.5}"
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </button>
+      </label>
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Select New Image</span>
+        </div>
+        <input
+          type="file"
+          id="input-clothes-images-edit"
+          name="image-edit"
+          class="file-input file-input-bordered file-input-primary w-full"
+          accept="image/*"
+        />
+      </label>
+      <label class="form-control w-full hidden" id="new-image">
+        <div class="label">
+          <span class="label-text">New Image</span>
+        </div>
+        <button
+          class="btn btn-primary w-16"
+          type="button"
+          id="button-view-new-image"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="{1.5}"
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </button>
+      </label>
+      <div class="card-actions justify-end mt-8">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          id="button-image"
+          name="button-form"
+          value="edit-image"
+        >
+          Edit
+        </button>
+        <button class="btn btn-error" type="reset" id="button-reset">
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<dialog id="modal-add-image" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <h3>Add Image(s)</h3>
+    <form method="post" id="form-add-image" enctype="multipart/form-data">
+      <input type="hidden" name="id" id="input-clothes-id-image-add" />
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Select New Image(s)</span>
+        </div>
+        <input
+          type="file"
+          id="input-clothes-images-add"
+          name="image-add"
+          class="file-input file-input-bordered file-input-primary w-full"
+          accept="image/*"
+          multiple
+        />
+      </label>
+      <div class="card-actions justify-end mt-8">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          id="button-image"
+          name="button-form"
+          value="add-image"
+        >
+          Submit
+        </button>
+        <button class="btn btn-error" type="reset" id="button-reset">
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+{% endblock %} {% block content %}
+<div class="card my-4 lg:card-side bg-base-100 shadow-xl">
+  <figure class="max-h-75 max-w-[25rem] w-full h-full mx-auto">
+    <img src="/{{ response['band'].cover }}" alt="Album" />
+  </figure>
+  <div class="card-body text-center">
+    <h2 class="card-title capitalize">{{ response['band'].name }}</h2>
+    <p class="text-ellipsis overflow-hidden ...">
+      {{ response['band'].description }}
+    </p>
+    <div class="card-actions justify-end"></div>
+  </div>
+</div>
+<div class="card bg-base-100 w-full shadow-xl">
+  <div class="card-body">
+    <h2 class="card-title capitalize">{{ response['band'].name }}'s Clothes</h2>
+    <form method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" id="input-item-id" />
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Clothes Name</span>
+        </div>
+        <input
+          type="text"
+          id="input-clothes-name"
+          class="input input-bordered w-full"
+          name="name"
+          placeholder="Clothes name"
+          required
+        />
+      </label>
+      <label class="form-control">
+        <div class="label">
+          <span class="label-text">Clothes Description</span>
+        </div>
+        <textarea
+          id="input-clothes-description"
+          class="textarea textarea-bordered h-24"
+          name="description"
+          placeholder="Clothes description"
+          required
+        ></textarea>
+      </label>
+      <div class="form-control mt-2 w-32">
+        <label class="label cursor-pointer">
+          <span class="label-text">Use Stock</span>
+          <input
+            type="checkbox"
+            name="use-stock"
+            class="toggle toggle-primary"
+          />
+        </label>
+      </div>
+      <div class="label">
+        <span class="label-text">Sizes</span>
+      </div>
+      <div class="px-4" id="form-sizes">
+        <div
+          class="card card-compact card-bordered bg-base-100 w-full"
+          id="size-1"
+        >
+          <div class="card-body">
+            <div
+              class="grid lg:grid-flow-col sm:grid-flow-row gap-4 rounded-lg mb-4"
+            >
+              <label class="form-control w-full">
+                <div class="label">
+                  <span class="label-text">Size</span>
+                </div>
+                <select
+                  class="select select-bordered w-full"
+                  id="input-clothes-size-1"
+                  name="size-1"
+                  required
+                >
+                  <option value="" selected>Choose size</option>
+                  <option value="XS">XS (Extra Small)</option>
+                  <option value="S">S (Small)</option>
+                  <option value="M">M (Medium)</option>
+                  <option value="L">L (Large)</option>
+                  <option value="XL">XL (Extra Large)</option>
+                  <option value="XXL">XXL (Double Extra Large)</option>
+                  <option value="XXXL">XXXL (Triple Extra Large)</option>
+                  <option value="XXXXL">XXXXL (Quadruple Extra Large)</option>
+                  <option value="XXXXXL">XXXXXL (Quintuple Extra Large)</option>
+                </select>
+              </label>
+
+              <label class="form-control w-full">
+                <div class="label">
+                  <span class="label-text">Price</span>
+                </div>
+                <label class="input input-bordered flex items-center gap-2">
+                  <span>Rp.</span>
+                  <input
+                    type="number"
+                    id="input-clothes-price-1"
+                    class="grow w-full"
+                    name="price-1"
+                    placeholder="Price"
+                    required
+                  />
+                  <span>/pcs</span>
+                </label>
+              </label>
+              <label class="form-control w-full">
+                <div class="label">
+                  <span class="label-text">Stock</span>
+                </div>
+                <label class="input input-bordered flex items-center gap-2">
+                  <input
+                    type="number"
+                    id="input-clothes-stock-1"
+                    class="grow w-full"
+                    name="stock-1"
+                    placeholder="Stock"
+                    required
+                  />
+                  pcs
+                </label>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider mb-4"></div>
+      </div>
+      <button
+        class="btn btn-outline btn-primary"
+        id="button-add-size"
+        type="button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+        Add size
+      </button>
+
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Clothes Images</span>
+        </div>
+        <input
+          type="file"
+          id="input-clothes-images"
+          name="images"
+          class="file-input file-input-bordered file-input-primary w-full"
+          accept="image/*"
+          multiple
+        />
+      </label>
+      <div id="edit-image"></div>
+      <div class="card-actions justify-end mt-8">
+        <button
+          class="btn btn-primary"
+          value="add"
+          name="button-form"
+          id="button-form"
+        >
+          Submit
+        </button>
+        <button class="btn btn-error" type="reset" id="button-reset">
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="card bg-base-100 w-full mb-4 shadow-xl mt-3">
+  <div class="card-body">
+    <div class="overflow-x-auto">
+      <table
+        class="table table-zebra table-pin-rows min-w-full"
+        id="item-table"
+      >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Use Stock</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in response['items'] %}
+          <tr>
+            <th class="min-w-6 lg:w-6">{{ loop.index }}</th>
+            <td class="min-w-44 w-44 lg:w-64 lg:min-w-64">
+              {{ item['item'].name }}
+            </td>
+            <td width="6">
+              <div
+                class="min-w-64 lg:min-w-96 max-h-20 overflow-y-scroll overflow-x-hidden"
+              >
+                {{ item['item'].description }}
+              </div>
+            </td>
+            <td class="min-w-12 lg:w-12">
+              {% if item['item'].use_stock == 'on' %}
+              <div class="btn btn-success btn-circle">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m4.5 12.75 6 6 9-13.5"
+                  />
+                </svg>
+              </div>
+              {% else %}
+              <div class="btn btn-error btn-circle">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+              </div>
+              {% endif %}
+            </td>
+            <td class="min-w-12 lg:w-12">
+              <div class="join">
+                <div class="dropdown">
+                  <button
+                    id="dropdown-size-image"
+                    class="btn btn-accent join-item"
+                  >
+                    <ul
+                      tabindex="0"
+                      class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                    >
+                      <li>
+                        <div
+                          id="button-edit-size"
+                          data-item-id="{{ item['item'].id }}"
+                          role="button"
+                          class="text-base-content"
+                        >
+                          View Size
+                        </div>
+                      </li>
+                      <li>
+                        <div
+                          id="button-edit-image"
+                          data-item-id="{{ item['item'].id }}"
+                          role="button"
+                          class="text-base-content"
+                        >
+                          View Image
+                        </div>
+                      </li>
+                    </ul>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <button
+                  class="btn btn-primary join-item"
+                  id="button-edit"
+                  data-id="{{ item['item'].id }}"
+                  data-name="{{ item['item'].name }}"
+                  data-description="{{ item['item'].description }}"
+                  data-use-stock="{{ item['item'].use_stock }}"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                    />
+                  </svg>
+                </button>
+                <form action="#" method="post">
+                  <input
+                    type="hidden"
+                    name="id"
+                    value="{{ item['item'].id }}"
+                  />
+                  <button
+                    class="btn btn-error join-item"
+                    name="button-form"
+                    value="delete"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                      />
+                    </svg>
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="join mx-auto">
+      <input
+        class="join-item btn btn-square"
+        type="radio"
+        name="options"
+        aria-label="1"
+        checked="checked"
+      />
+      <input
+        class="join-item btn btn-square"
+        type="radio"
+        name="options"
+        aria-label="2"
+      />
+      <input
+        class="join-item btn btn-square"
+        type="radio"
+        name="options"
+        aria-label="3"
+      />
+      <input
+        class="join-item btn btn-square"
+        type="radio"
+        name="options"
+        aria-label="4"
+      />
+    </div>
+  </div>
+</div>
+<!-- prettier-ignore -->
+{% endblock %} 
+
+{% block script %}
+<script
+  type="module"
+  src="{{ url_for('static', filename='js/admin/item.js') }}"
+></script>
+
+{% endblock %}

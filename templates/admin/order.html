@@ -1,117 +1,76 @@
 <!-- prettier-ignore -->
 {% extends "admin/admin-template.html" %} 
 
-{% block title %}- Band{% endblock %} 
+{% block title %}- Order{% endblock %} 
 
 {% block upcontainer %}
-<div class="fixed z-50 w-full hidden" id="image-view">
-  <div class="bg-black bg-opacity-50">
-    <div class="flex justify-center items-center min-h-screen" id="hide-modal">
-      <div class="relative max-w-96">
-        <button
-          class="absolute right-0 p-2 text-black font-semibold"
-          id="hide-modal"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-6 border border-2 border-black rounded-lg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18 18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-        <img src="" alt="" id="modal-image" />
-      </div>
-    </div>
-  </div>
-</div>
+
 {% endblock %} {% block content %}
 
 <div class="card bg-base-100 w-full shadow-xl">
   <div class="card-body">
-    <h2 class="card-title">BAND</h2>
+    <h2 class="card-title">Order</h2>
     <form method="post" enctype="multipart/form-data">
-      <input type="hidden" name="id" id="input-band-id" />
+      <input type="hidden" name="id" id="input-order-id" />
       <label class="form-control w-full">
         <div class="label">
-          <span class="label-text">Band Name</span>
+          <span class="label-text">Customer Name</span>
         </div>
         <input
           type="text"
-          id="input-band-name"
+          id="input-customer-name"
           class="input input-bordered w-full"
           name="name"
-          placeholder="Band name"
+          placeholder="Customer name"
+        />
+      </label>
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Customer Phone</span>
+        </div>
+        <input
+          type="text"
+          id="input-customer-phone"
+          class="input input-bordered w-full"
+          name="phone"
+          placeholder="Customer phone"
+        />
+      </label>
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Customer Email</span>
+        </div>
+        <input
+          type="email"
+          id="input-customer-email"
+          class="input input-bordered w-full"
+          name="email"
+          placeholder="Customer email"
         />
       </label>
       <label class="form-control">
         <div class="label">
-          <span class="label-text">Band Description</span>
+          <span class="label-text">Customer Address</span>
         </div>
         <textarea
-          id="input-band-description"
+          id="input-customer-address"
           class="textarea textarea-bordered h-24"
-          name="description"
-          placeholder="Band description"
+          name="address"
+          placeholder="Customer address"
         ></textarea>
       </label>
       <label class="form-control w-full">
         <div class="label">
-          <span class="label-text">Band Spotify Link</span>
-        </div>
-        <input
-          type="text"
-          id="input-band-spotify"
-          class="input input-bordered w-full"
-          name="spotify"
-          placeholder="Band spotify link"
-        />
-      </label>
-      <label class="form-control w-full">
-        <div class="label">
-          <span class="label-text">Band Instagram Link</span>
-        </div>
-        <input
-          type="text"
-          id="input-band-instagram"
-          class="input input-bordered w-full"
-          name="instagram"
-          placeholder="Band instagram link"
-        />
-      </label>
-      <label class="form-control w-full">
-        <div class="label">
-          <span class="label-text">Band Cover</span>
+          <span class="label-text">Customer Receipt</span>
         </div>
         <input
           type="file"
-          id="input-band-cover"
-          name="cover"
+          id="input-customer-receipt"
+          name="receipt"
           class="file-input file-input-bordered file-input-primary w-full"
           accept="image/*"
         />
       </label>
-      <div id="edit-image-cover"></div>
-      <label class="form-control w-full">
-        <div class="label">
-          <span class="label-text">Band Logo</span>
-        </div>
-        <input
-          type="file"
-          id="input-band-logo"
-          name="logo"
-          class="file-input file-input-bordered file-input-primary w-full"
-          accept="image/*"
-        />
-      </label>
-      <div id="edit-image-logo"></div>
       <div class="card-actions justify-end mt-8">
         <button
           class="btn btn-primary"
@@ -138,24 +97,23 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Cover</th>
-            <th>Logo</th>
+            <th>Receipt</th>
             <th>Name</th>
-            <th>Description</th>
-            <th>Accounts</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {% for band in bands %}
+          {% for order in orders %}
           <tr>
             <th class="min-w-12 lg:w-12">{{ loop.index }}</th>
-            <!-- <td><img src="/{{ band.cover }}" class="max-w-sm rounded-lg shadow-2xl"/></td> -->
             <td width="2">
               <button
                 class="btn btn-primary"
                 id="show-modal"
-                data-src="/{{ band.cover }}"
+                data-src="/{{ order['order'].customer_receipt }}"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -179,96 +137,33 @@
                 </svg>
               </button>
             </td>
-            <td width="2">
-              <button
-                class="btn btn-primary"
-                id="show-modal"
-                data-src="/{{ band.logo }}"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="{1.5}"
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                  />
-                </svg>
-              </button>
+            <td class="min-w-44 lg:min-w-42 lg:max-w-42">
+              {{ order['order'].customer_name }}
             </td>
-            <td class="min-w-44 lg:min-w-42 lg:max-w-42">{{ band.name }}</td>
+            <td class="min-w-44 lg:min-w-42 lg:max-w-42">
+              {{ order['order'].customer_phone }}
+            </td>
+            <td class="min-w-44 lg:min-w-42 lg:max-w-42">
+              {{ order['order'].customer_email }}
+            </td>
             <td width="6">
               <div
                 class="w-[18rem] lg:w-[24rem] max-h-20 overflow-y-scroll overflow-x-hidden"
               >
-                {{ band.description }}
-              </div>
-            </td>
-            <!-- <td>{{ band.spotify }}{{ band.instagram }}</td> -->
-            <td class="min-w-36 lg:w-24">
-              <div class="join gap-4">
-                <a
-                  href="{{ band.instagram }}"
-                  target="_blank"
-                  class="join-item"
-                >
-                  <img
-                    src="{{ url_for('static', filename='images/instagram.png') }}"
-                    alt=""
-                    class="aspect-square size-12"
-                  />
-                </a>
-                <a href="{{ band.spotify }}" target="_blank" class="join-item">
-                  <img
-                    src="{{ url_for('static', filename='images/spotify.png') }}"
-                    alt=""
-                    class="aspect-square size-12"
-                  />
-                </a>
+                {{ order['order'].customer_address }}
               </div>
             </td>
             <td class="min-w-36 lg:w-12">
               <div class="join">
-                <a
-                  href="/admin/band/{{ band.id }}/"
-                  class="btn btn-accent join-item"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
-                    />
-                  </svg>
-                </a>
                 <button
                   class="btn btn-primary join-item"
                   id="button-edit"
-                  data-id="{{ band.id }}"
-                  data-name="{{ band.name }}"
-                  data-description="{{ band.description }}"
-                  data-spotify="{{ band.spotify }}"
-                  data-instagram="{{ band.instagram }}"
-                  data-cover="{{ band.cover }}"
-                  data-logo="{{ band.logo }}"
+                  data-id="{{ order['order'].customer_id }}"
+                  data-name="{{ order['order'].customer_name }}"
+                  data-phone="{{ order['order'].customer_phone }}"
+                  data-email="{{ order['order'].customer_email }}"
+                  data-address="{{ order['order'].customer_address }}"
+                  data-receipt="{{ order['order'].customer_receipt}}"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -287,7 +182,11 @@
                 </button>
 
                 <form action="#" method="post">
-                  <input type="hidden" name="id" value="{{ band.id }}" />
+                  <input
+                    type="hidden"
+                    name="id"
+                    value="{{ order['order'].customer_id }}"
+                  />
                   <button
                     class="btn btn-error join-item"
                     name="button-form"
@@ -351,6 +250,6 @@
 {% block script %}
 <script
   type="module"
-  src="{{ url_for('static', filename='js/admin/band.js') }}"
+  src="{{ url_for('static', filename='js/admin/order.js') }}"
 ></script>
 {% endblock %}

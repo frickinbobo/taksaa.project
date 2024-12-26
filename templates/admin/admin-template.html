@@ -11,7 +11,8 @@
     />
     <script src="{{ url_for('static', filename='js/tailwind/tailwind.js') }}"></script>
   </head>
-  <body>
+  <body id="container">
+    {% block upcontainer %} {% endblock %}
     <div class="navbar bg-primary">
       <div class="navbar-start">
         <div class="dropdown">
@@ -40,9 +41,8 @@
             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li><a>Dashboard</a></li>
-            <li><a>Bands</a></li>
-            <li><a>Items</a></li>
-            <li><a>Orders</a></li>
+            <li><a href="/admin/band/">Bands</a></li>
+            <li><a href="/admin/order/">Orders</a></li>
           </ul>
         </div>
       </div>
@@ -72,6 +72,7 @@
         </div>
       </div>
     </div>
+
     <div class="container mx-auto px-4">{% block content %} {% endblock %}</div>
     {% block script %} {% endblock %}
   </body>
