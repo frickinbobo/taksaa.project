@@ -11,7 +11,7 @@
         ✕
       </button>
     </form>
-    <img class="mt-4" id="image-view" alt="" />
+    <img class="mt-4 mx-auto" id="image-view" alt="" />
   </div>
 </dialog>
 
@@ -465,10 +465,27 @@
   </div>
 </dialog>
 
-{% endblock %} {% block content %}
+{% endblock %} {% block content %} {% if message %}
+<div role="alert" class="alert alert-{{ message['status'] }} my-4">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6 shrink-0 stroke-current"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+  <span>{{message['message']}}</span>
+</div>
+{% endif %}
 <div class="card my-4 lg:card-side bg-base-100 shadow-xl">
   <figure class="max-h-75 max-w-[25rem] w-full h-full mx-auto">
-    <img src="/{{ response['band'].cover }}" alt="Album" />
+    <img src="{{ response['band'].cover }}" alt="Album" />
   </figure>
   <div class="card-body text-center">
     <h2 class="card-title capitalize">{{ response['band'].name }}</h2>
@@ -647,202 +664,7 @@
 <div class="card bg-base-100 w-full mb-4 shadow-xl mt-3">
   <div class="card-body">
     <div class="overflow-x-auto">
-      <table
-        class="table table-zebra table-pin-rows min-w-full"
-        id="item-table"
-      >
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Use Stock</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in response['items'] %}
-          <tr>
-            <th class="min-w-6 lg:w-6">{{ loop.index }}</th>
-            <td class="min-w-44 w-44 lg:w-64 lg:min-w-64">
-              {{ item['item'].name }}
-            </td>
-            <td width="6">
-              <div
-                class="min-w-64 lg:min-w-96 max-h-20 overflow-y-scroll overflow-x-hidden"
-              >
-                {{ item['item'].description }}
-              </div>
-            </td>
-            <td class="min-w-12 lg:w-12">
-              {% if item['item'].use_stock == 'on' %}
-              <div class="btn btn-success btn-circle">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="size-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="m4.5 12.75 6 6 9-13.5"
-                  />
-                </svg>
-              </div>
-              {% else %}
-              <div class="btn btn-error btn-circle">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="size-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />
-                </svg>
-              </div>
-              {% endif %}
-            </td>
-            <td class="min-w-12 lg:w-12">
-              <div class="join">
-                <div class="dropdown">
-                  <button
-                    id="dropdown-size-image"
-                    class="btn btn-accent join-item"
-                  >
-                    <ul
-                      tabindex="0"
-                      class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
-                    >
-                      <li>
-                        <div
-                          id="button-edit-size"
-                          data-item-id="{{ item['item'].id }}"
-                          role="button"
-                          class="text-base-content"
-                        >
-                          View Size
-                        </div>
-                      </li>
-                      <li>
-                        <div
-                          id="button-edit-image"
-                          data-item-id="{{ item['item'].id }}"
-                          role="button"
-                          class="text-base-content"
-                        >
-                          View Image
-                        </div>
-                      </li>
-                    </ul>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="size-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                <button
-                  class="btn btn-primary join-item"
-                  id="button-edit"
-                  data-id="{{ item['item'].id }}"
-                  data-name="{{ item['item'].name }}"
-                  data-description="{{ item['item'].description }}"
-                  data-use-stock="{{ item['item'].use_stock }}"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                    />
-                  </svg>
-                </button>
-                <form action="#" method="post">
-                  <input
-                    type="hidden"
-                    name="id"
-                    value="{{ item['item'].id }}"
-                  />
-                  <button
-                    class="btn btn-error join-item"
-                    name="button-form"
-                    value="delete"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="size-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                      />
-                    </svg>
-                  </button>
-                </form>
-              </div>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <div class="join mx-auto">
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="1"
-        checked="checked"
-      />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="2"
-      />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="3"
-      />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="4"
-      />
+      <table id="item-table"></table>
     </div>
   </div>
 </div>
@@ -854,5 +676,403 @@
   type="module"
   src="{{ url_for('static', filename='js/admin/item.js') }}"
 ></script>
+<script>
+  let inputClothesSizeEdit = document.getElementById("input-clothes-size-edit");
+  let inputClothesPriceEdit = document.getElementById(
+    "input-clothes-price-edit"
+  );
+  let inputClothesStockEdit = document.getElementById(
+    "input-clothes-stock-edit"
+  );
+
+  let inputClothesIdEdit = document.getElementById("input-clothes-id-edit");
+  let inputClothesNameEdit = document.getElementById("input-clothes-name-edit");
+  let inputClothesDescriptionEdit = document.getElementById(
+    "input-clothes-description-edit"
+  );
+  let inputClothesUseStockEdit = document.getElementById(
+    "input-clothes-use-stock-edit"
+  );
+  let inputClothesIdSizeEdit = document.getElementById(
+    "input-clothes-id-size-edit"
+  );
+  const modalEditItem = document.getElementById("modal-edit-item");
+  const modalEditSize = document.getElementById("modal-edit-size");
+  const modalShowSize = document.getElementById("modal-show-size");
+
+  const modalShowImage = document.getElementById("modal-show-image");
+  const modalEditImage = document.getElementById("modal-edit-image");
+
+  const buttonEditSize = document.querySelectorAll("#button-edit-size");
+  const buttonItem = document.getElementById("button-item");
+
+  const imageTable = document.getElementById("image-table");
+  const sizeTable = document.getElementById("size-table");
+
+  function appendSizeToTable(e) {
+    fetch("/api/get/item-data/size/" + e.dataset.itemId)
+      .then((response) => response.json())
+      .then((data) => {
+        data["item"] = JSON.parse(data["item"]);
+        data["sizes"] = JSON.parse(data["sizes"]);
+        let i = 0;
+        sizeTable.replaceChildren();
+        data.sizes.forEach((size) => {
+          i = i + 1;
+          let tr = document.createElement("tr");
+          let tdNum = document.createElement("td");
+          tdNum.innerHTML = i;
+          let tdSize = document.createElement("td");
+          tdSize.innerHTML = size.fields.size;
+          let tdPrice = document.createElement("td");
+          tdPrice.innerHTML = size.fields.price;
+          let tdStock = document.createElement("td");
+          tdStock.innerHTML = size.fields.stock;
+          let tdAction = document.createElement("td");
+          let divJoin = document.createElement("div");
+          divJoin.classList.add("join");
+          let buttonEdit = document.createElement("button");
+          buttonEdit.classList.add("btn", "btn-primary", "join-item");
+          buttonEdit.id = "button-size-edit";
+          buttonEdit.insertAdjacentHTML(
+            "beforeend",
+            '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/></svg>'
+          );
+          buttonEdit.addEventListener("click", (event) => {
+            inputClothesIdSizeEdit.value = size.pk;
+            inputClothesSizeEdit.value = size.fields.size;
+            inputClothesPriceEdit.value = size.fields.price;
+            inputClothesStockEdit.value = size.fields.stock;
+            buttonItem.dataset.itemId = e.dataset.itemId;
+            modalEditSize.showModal();
+          });
+          let formDelete = document.createElement("form");
+          formDelete.action = "#";
+          formDelete.method = "POST";
+          let inputId = document.createElement("input");
+          inputId.type = "hidden";
+          inputId.name = "id";
+          inputId.value = size.pk;
+          let buttonDelete = document.createElement("button");
+          buttonDelete.classList.add("btn", "btn-error", "join-item");
+          buttonDelete.name = "button-form";
+          buttonDelete.value = "delete-size";
+          buttonDelete.insertAdjacentHTML(
+            "beforeend",
+            '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/></svg>'
+          );
+          buttonDelete.addEventListener("click", (event) => {
+            event.preventDefault();
+            fetch("/api/delete/item-data/size/" + inputId.value, {
+              method: "DELETE",
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                sizeTable.replaceChildren();
+                appendSizeToTable(e);
+              });
+          });
+          formDelete.append(inputId, buttonDelete);
+          divJoin.append(buttonEdit, formDelete);
+          tdAction.append(divJoin);
+          tr.append(tdNum, tdSize, tdPrice, tdStock, tdAction);
+          sizeTable.append(tr);
+        });
+        modalShowSize.showModal();
+      });
+  }
+
+  function appendImageToTable(e) {
+    fetch("/api/get/item-data/image/" + e.dataset.itemId)
+      .then((response) => response.json())
+      .then((data) => {
+        modalShowImage.showModal();
+        data["item"] = JSON.parse(data["item"]);
+        data["images"] = JSON.parse(data["images"]);
+        let i = 0;
+        imageTable.replaceChildren();
+        data.images.forEach((image) => {
+          i = i + 1;
+          let tr = document.createElement("tr");
+          let tdNum = document.createElement("td");
+          tdNum.innerHTML = i;
+          let tdImage = document.createElement("td");
+          let buttonViewImage = document.createElement("button");
+          buttonViewImage.classList.add("btn", "btn-primary");
+          buttonViewImage.insertAdjacentHTML(
+            "beforeend",
+            '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="{1.5}" stroke="currentColor" className="size-6"><path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>'
+          );
+          buttonViewImage.addEventListener("click", (event) => {
+            const modalViewImage = document.getElementById("modal-view-image");
+            const imageView = document.getElementById("image-view");
+            imageView.src = image.fields.image;
+            modalViewImage.showModal();
+          });
+          tdImage.appendChild(buttonViewImage);
+          let tdAction = document.createElement("td");
+          let divJoin = document.createElement("div");
+          divJoin.classList.add("join");
+          let buttonEdit = document.createElement("button");
+          buttonEdit.classList.add("btn", "btn-primary", "join-item");
+          buttonEdit.id = "button-image-edit";
+          buttonEdit.insertAdjacentHTML(
+            "beforeend",
+            '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/></svg>'
+          );
+          buttonEdit.addEventListener("click", (event) => {
+            const buttonViewOldImage = document.getElementById(
+              "button-view-old-image"
+            );
+            const inputClothesIdImageEdit = document.getElementById(
+              "input-clothes-id-image-edit"
+            );
+            inputClothesIdImageEdit.value = image.pk;
+            buttonViewOldImage.addEventListener("click", (event) => {
+              const modalViewImage =
+                document.getElementById("modal-view-image");
+              const imageView = document.getElementById("image-view");
+              imageView.src = image.fields.image;
+              modalViewImage.showModal();
+            });
+
+            modalEditImage.showModal();
+          });
+          let formDelete = document.createElement("form");
+          formDelete.action = "#";
+          formDelete.method = "POST";
+          let inputId = document.createElement("input");
+          inputId.type = "hidden";
+          inputId.name = "id";
+          inputId.value = image.pk;
+          let buttonDelete = document.createElement("button");
+          buttonDelete.classList.add("btn", "btn-error", "join-item");
+          buttonDelete.name = "button-form";
+          buttonDelete.value = "delete-image";
+          buttonDelete.insertAdjacentHTML(
+            "beforeend",
+            '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/></svg>'
+          );
+          buttonDelete.addEventListener("click", (event) => {
+            event.preventDefault();
+            fetch("/api/delete/item-data/image/" + inputId.value, {
+              method: "DELETE",
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                imageTable.replaceChildren();
+                appendImageToTable(e);
+              });
+          });
+          formDelete.append(inputId, buttonDelete);
+          divJoin.append(buttonEdit, formDelete);
+          tdAction.append(divJoin);
+          tr.append(tdNum, tdImage, tdAction);
+          imageTable.append(tr);
+        });
+        modalShowImage.showModal();
+      });
+  }
+
+  function fbuttonEdit(button) {
+    inputClothesIdEdit.value = button.dataset.id;
+    inputClothesNameEdit.value = button.dataset.name;
+    inputClothesDescriptionEdit.value = button.dataset.description;
+    inputClothesUseStockEdit.checked =
+      button.dataset.useStock == "on" ? "checked" : "";
+    modalEditItem.showModal();
+  }
+
+  function fbuttonEditSize(button) {
+    const addNewSize = document.getElementById("add-new-size");
+    addNewSize.dataset.itemId = button.dataset.itemId;
+    appendSizeToTable(button);
+  }
+
+  function fbuttonEditImage(button) {
+    const addNewImage = document.getElementById("add-new-image");
+    addNewImage.dataset.itemId = button.dataset.itemId;
+    appendImageToTable(button);
+  }
+  let currentUrl = window.location.href;
+
+  fetch("/api/get/band/" + currentUrl.split("/")[5] + "/items/")
+    .then((response) => response.json())
+    .then((jsonified_data) => {
+      let data = [];
+      let i = 1;
+      jsonified_data.forEach((d) => {
+        d["image"] = JSON.parse(d["image"]);
+        d["item"] = JSON.parse(d["item"])[0];
+        d["size"] = JSON.parse(d["size"]);
+        let temp = {
+          "#": null,
+          Name: null,
+          Description: null,
+          "Use Stock": null,
+          Action: null,
+        };
+
+        temp["#"] = i;
+        temp["Name"] = d.item.fields.name;
+        temp["Description"] = d.item.fields.description;
+        console.log(temp["Description"]);
+        temp["Use Stock"] =
+          d.item.fields.use_stock === "on"
+            ? `<div class="btn btn-success btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m4.5 12.75 6 6 9-13.5"
+              />
+            </svg>
+          </div>`
+            : `<div class="btn btn-error btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+          </div>`;
+        temp["Action"] = `
+          <div class="join">
+            <div class="dropdown">
+              <button
+                id="dropdown-size-image"
+                class="btn btn-accent join-item"
+              >
+                <ul
+                  tabindex="0"
+                  class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                >
+                  <li>
+                    <div
+                      id="button-edit-size"
+                      data-item-id="${d.item.pk}"
+                      role="button"
+                      class="text-base-content"
+                      onclick=fbuttonEditSize(this)
+                    >
+                      View Size
+                    </div>
+                  </li>
+                  <li>
+                    <div
+                      id="button-edit-image"
+                      data-item-id="${d.item.pk}"
+                      role="button"
+                      class="text-base-content"
+                      onclick=fbuttonEditImage(this)
+                    >
+                      View Image
+                    </div>
+                  </li>
+                </ul>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <button
+              class="btn btn-primary join-item"
+              id="button-edit"
+              data-id="${d.item.pk}"
+              data-name="${d.item.fields.name}"
+              data-description="${d.item.fields.description.replace(
+                /(?:\r\n|\r|\n)/g,
+                "<br>"
+              )}"
+              data-use-stock="${d.item.fields.use_stock}"
+              onclick=fbuttonEdit(this)
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                />
+              </svg>
+            </button>
+            <form action="#" method="post">
+              <input
+                type="hidden"
+                name="id"
+                value="${d.item.pk}"
+              />
+              <button
+                class="btn btn-error join-item"
+                name="button-form"
+                value="delete"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                  />
+                </svg>
+              </button>
+            </form>
+          </div>
+        `;
+        data.push(temp);
+        i = i + 1;
+      });
+      console.log(data);
+
+      let dataTable = new window.simpleDatatables.DataTable("#item-table", {
+        searchable: true,
+        fixedHeight: false,
+        perPageSelect: [5, 10, 25, 50, 100],
+        data: {
+          headings: Object.keys(data[0]),
+          data: data.map((item) => Object.values(item)),
+        },
+      });
+    });
+</script>
 
 {% endblock %}

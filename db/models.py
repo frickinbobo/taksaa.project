@@ -19,7 +19,9 @@ class Band(models.Model):
     name = models.TextField()
     description = models.TextField()
     cover = models.TextField()
+    cover_path = models.TextField()
     logo = models.TextField()
+    logo_path = models.TextField()
     spotify = models.TextField()
     instagram = models.TextField()
 
@@ -41,6 +43,7 @@ class ItemSize(models.Model):
 class ItemImage(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     image = models.TextField()
+    path = models.TextField()
 
 
 class Order(models.Model):
@@ -49,7 +52,9 @@ class Order(models.Model):
     customer_email = models.EmailField()
     customer_address = models.TextField()
     customer_receipt = models.TextField()
+    customer_receipt_path = models.TextField()
     status = models.TextField()
+    type = models.TextField()
 
 
 class OrderItem(models.Model):
