@@ -5,37 +5,33 @@ const inputBandSpotify = document.getElementById("input-band-spotify");
 const inputBandInstagram = document.getElementById("input-band-instagram");
 const inputBandCover = document.getElementById("input-band-cover");
 const inputBandLogo = document.getElementById("input-band-logo");
-const editImageCover = document.getElementById("edit-image-cover");
-const editImageLogo = document.getElementById("edit-image-logo");
-const modalImageView = document.getElementById("image-view");
-const modalImage = document.getElementById("modal-image");
-const buttonHideModal = document.getElementById("hide-modal");
-const buttonShowModal = document.querySelectorAll("#show-modal");
-const buttonReset = document.getElementById("button-reset");
+const viewImageCover = document.getElementById("view-image-cover");
+const viewImageLogo = document.getElementById("view-image-logo");
+const modalViewImage = document.getElementById("modal-view-image");
 const buttonForm = document.getElementById("button-form");
+const imageView = document.getElementById("image-view");
+const buttonHideModal = document.getElementById("hide-modal");
+const buttonReset = document.getElementById("button-reset");
 const buttonEdit = document.querySelectorAll("#button-edit");
 const contaienr = document.getElementById("container");
+const formControlViewCover = document.getElementById("form-control-view-cover");
+const formControlViewLogo = document.getElementById("form-control-view-logo");
+const showImage = document.querySelectorAll("#show-image");
 
 inputBandCover.addEventListener("change", (event) => {
-  editImageCover.replaceChildren();
-  let image = document.createElement("img");
-  image.classList.add("max-w-44");
-  image.classList.add("aspect-auto");
-  image.classList.add("mx-auto");
-  image.classList.add("mt-10");
-  image.src = URL.createObjectURL(event.target.files[0]);
-  editImageCover.appendChild(image);
+  formControlViewCover.classList.remove("hidden");
+  viewImageCover.addEventListener("click", (e) => {
+    imageView.src = URL.createObjectURL(event.target.files[0]);
+    modalViewImage.showModal();
+  });
 });
 
 inputBandLogo.addEventListener("change", (event) => {
-  editImageLogo.replaceChildren();
-  let image = document.createElement("img");
-  image.classList.add("max-w-44");
-  image.classList.add("aspect-auto");
-  image.classList.add("mx-auto");
-  image.classList.add("mt-10");
-  image.src = URL.createObjectURL(event.target.files[0]);
-  editImageLogo.appendChild(image);
+  formControlViewLogo.classList.remove("hidden");
+  viewImageLogo.addEventListener("click", (e) => {
+    imageView.src = URL.createObjectURL(event.target.files[0]);
+    modalViewImage.showModal();
+  });
 });
 
 buttonEdit.forEach((e) => {
@@ -46,22 +42,19 @@ buttonEdit.forEach((e) => {
     inputBandDescription.value = event.currentTarget.dataset.description;
     inputBandSpotify.value = event.currentTarget.dataset.spotify;
     inputBandInstagram.value = event.currentTarget.dataset.instagram;
-    editImageCover.replaceChildren();
-    editImageLogo.replaceChildren();
-    let imageCover = document.createElement("img");
-    imageCover.src = "/" + event.currentTarget.dataset.cover;
-    imageCover.classList.add("max-w-60");
-    imageCover.classList.add("aspect-auto");
-    imageCover.classList.add("mx-auto");
-    imageCover.classList.add("mt-10");
-    editImageCover.appendChild(imageCover);
-    let imageLogo = document.createElement("img");
-    imageLogo.src = "/" + event.currentTarget.dataset.logo;
-    imageLogo.classList.add("max-w-60");
-    imageLogo.classList.add("aspect-auto");
-    imageLogo.classList.add("mx-auto");
-    imageLogo.classList.add("mt-10");
-    editImageLogo.appendChild(imageLogo);
+
+    formControlViewCover.classList.remove("hidden");
+    viewImageCover.addEventListener("click", (a) => {
+      imageView.src = e.dataset.cover;
+      modalViewImage.showModal();
+    });
+
+    formControlViewLogo.classList.remove("hidden");
+    viewImageLogo.addEventListener("click", (a) => {
+      imageView.src = e.dataset.logo;
+      modalViewImage.showModal();
+    });
+
     buttonForm.value = "edit";
     buttonForm.innerHTML = "Edit";
   });
@@ -69,23 +62,21 @@ buttonEdit.forEach((e) => {
 
 buttonReset.addEventListener("click", (event) => {
   event.preventDefault();
-  editImageCover.replaceChildren();
-  editImageLogo.replaceChildren();
+  formControlViewCover.classList.add("hidden");
+  formControlViewLogo.classList.add("hidden");
   inputBandId.value = "";
   buttonForm.value = "";
   buttonForm.innerHTML = "Submit";
   event.target.form.reset();
 });
 
-buttonShowModal.forEach((e) => {
-  e.addEventListener("click", (event) => {
-    modalImage.src = event.currentTarget.dataset.src;
-    modalImageView.classList.remove("hidden");
-    container.classList.add("overflow-hidden");
-  });
-});
+// showImage.forEach((button) => {
+//   button.addEventListener("click", (event) => {
+//     imageView.src = button.dataset.src;
+//     modalViewImage.showModal();
+//   });
+// });
 
-buttonHideModal.addEventListener("click", (event) => {
-  modalImageView.classList.add("hidden");
-  container.classList.remove("overflow-hidden");
+modalViewImage.addEventListener("close", (event) => {
+  imageView.src = "";
 });

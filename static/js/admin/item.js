@@ -417,7 +417,7 @@ function appendImageToTable(e) {
         buttonViewImage.addEventListener("click", (event) => {
           const modalViewImage = document.getElementById("modal-view-image");
           const imageView = document.getElementById("image-view");
-          imageView.src = "/" + image.fields.image;
+          imageView.src = image.fields.image;
           modalViewImage.showModal();
         });
         tdImage.appendChild(buttonViewImage);
@@ -442,7 +442,7 @@ function appendImageToTable(e) {
           buttonViewOldImage.addEventListener("click", (event) => {
             const modalViewImage = document.getElementById("modal-view-image");
             const imageView = document.getElementById("image-view");
-            imageView.src = "/" + image.fields.image;
+            imageView.src = image.fields.image;
             modalViewImage.showModal();
           });
 
@@ -555,3 +555,4 @@ modalEditSize.addEventListener("close", (event) => {
   buttonItem.dataset.type = "put";
   buttonItem.dataset.itemId = "";
 });
+

@@ -4,14 +4,210 @@
 {% block title %}- Order{% endblock %} 
 
 {% block upcontainer %}
+<dialog id="modal-view-image" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <img class="mt-4 mx-auto" id="image-view" alt="" />
+  </div>
+</dialog>
 
-{% endblock %} {% block content %}
+<!-- <dialog id="modal-show-clothes" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <div class="card bg-base-100 w-full shadow-xl mt-4">
+      <div class="card-body">
+        <h2 class="card-title">Clothes</h2>
+        {% for clothe in clothes %}
+        <div
+          class="card bg-base-100 w-auto shadow-xl"
+          id="edit-clothe-{{ clothe['item'].id }}"
+        >
+          <div class="flex flex-row items-center gap-4 my-4">
+            <div class="image">
+              <img
+                src="/{{ clothe['images'][0].image }}"
+                alt=""
+                class="min-w-24 w-24 h-24 object-cover rounded"
+              />
+            </div>
+            <div>
+              <h2>{{ clothe['item'].name }}</h2>
+              <div class="grid items-center justify-between">
+                <div>
+                  {% for size in clothe['sizes'] %}
+                  <button
+                    type="button"
+                    class="size-btn btn btn-outline btn-xs mb-2"
+                    data-id="{{ clothe['item'].id }}"
+                    data-item-name="{{ clothe['item'].name }}"
+                    data-clothe-id="{{ size.id }}"
+                    data-size="{{ size.size }}"
+                    data-price="{{ size.price }}"
+                    data-image="/{{ clothe['images'][0].image }}"
+                    onclick="toggleSize(this, this.dataset.id)"
+                  >
+                    {{ size.size }}
+                  </button>
+                  {% endfor %}
+                </div>
+                <div>
+                  <button
+                    class="btn btn-outline btn-sm"
+                    type="button"
+                    id="minus-edit-{{ clothe['item'].id }}"
+                    data-id="{{ clothe['item'].id }}"
+                    onclick="updateQuantity(this.dataset.id, -1)"
+                  >
+                    -
+                  </button>
+                  <input
+                    type="text"
+                    class="w-12 btn btn-outline btn-sm"
+                    value="0"
+                    id="stock-count-edit-{{ clothe['item'].id }}"
+                  />
+                  <button
+                    class="btn btn-outline btn-sm"
+                    type="button"
+                    id="plus-edit-{{ clothe['item'].id }}"
+                    data-id="{{ clothe['item'].id }}"
+                    onclick="updateQuantity(this.dataset.id, +1)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</dialog> -->
+
+<dialog id="modal-view-clothes" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <h3 class="text-lg font-bold">Add Clothes</h3>
+    <div class="card bg-base-100 w-full shadow-xl">
+      <div class="card-body max-h-96 overflow-y-auto">
+        <!-- start -->
+        {% for clothe in clothes %}
+        <div
+          class="card bg-base-100 w-auto shadow-xl"
+          data-id="{{ clothe['item'].id }}"
+        >
+          <div class="flex flex-row items-center gap-4 my-4">
+            <div class="image">
+              <img
+                src="{{ clothe['images'][0].image }}"
+                alt=""
+                class="min-w-24 w-24 h-24 object-cover rounded"
+              />
+            </div>
+            <div>
+              <h2>{{ clothe['item'].name }}</h2>
+              <div class="grid items-center justify-between">
+                <div>
+                  {% for size in clothe['sizes'] %}
+                  <button
+                    type="button"
+                    class="size-btn btn btn-outline btn-xs mb-2"
+                    data-id="{{ clothe['item'].id }}"
+                    data-item-name="{{ clothe['item'].name }}"
+                    data-clothe-id="{{ size.id }}"
+                    data-size="{{ size.size }}"
+                    data-price="{{ size.price }}"
+                    data-image="{{ clothe['images'][0].image }}"
+                    onclick="toggleSize(this, this.dataset.id)"
+                  >
+                    {{ size.size }}
+                  </button>
+                  {% endfor %}
+                </div>
+                <div>
+                  <button
+                    class="btn btn-outline btn-sm"
+                    type="button"
+                    id="minus-{{ clothe['item'].id }}"
+                    data-id="{{ clothe['item'].id }}"
+                    onclick="updateQuantity(this.dataset.id, -1)"
+                  >
+                    -
+                  </button>
+                  <input
+                    type="text"
+                    class="w-12 btn btn-outline btn-sm"
+                    value="0"
+                    id="stock-count-{{ clothe['item'].id }}"
+                  />
+                  <button
+                    class="btn btn-outline btn-sm"
+                    type="button"
+                    id="plus-{{ clothe['item'].id }}"
+                    data-id="{{ clothe['item'].id }}"
+                    onclick="updateQuantity(this.dataset.id, +1)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="btn btn-primary btn-sm"
+            data-item-id="{{ clothe['item'].id }}"
+            onclick="addOrder(this.dataset.itemId)"
+          >
+            Add
+          </button>
+        </div>
+        <div class="divider"></div>
+        {% endfor %}
+        <!-- end -->
+      </div>
+    </div>
+  </div>
+</dialog>
+
+{% endblock %} {% block content %} {% if message %}
+<div role="alert" class="alert alert-{{ message['status'] }} my-4">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6 shrink-0 stroke-current"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+  <span>{{message['message']}}</span>
+</div>
+{% endif %}
 
 <div class="card bg-base-100 w-full shadow-xl">
   <div class="card-body">
     <h2 class="card-title">Order</h2>
     <form method="post" enctype="multipart/form-data">
-      <input type="hidden" name="id" id="input-order-id" />
+      <input type="hidden" name="id" id="input-customer-id" />
       <label class="form-control w-full">
         <div class="label">
           <span class="label-text">Customer Name</span>
@@ -61,6 +257,71 @@
       </label>
       <label class="form-control w-full">
         <div class="label">
+          <span class="label-text">Choose Clothes</span>
+        </div>
+
+        <button
+          class="btn btn-outline btn-primary"
+          id="button-view-clothes"
+          type="button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+          Add Clothes
+        </button>
+      </label>
+      <label for="" class="form-control w-full hidden" id="your-order">
+        <div class="label">
+          <span class="label-text">Your Order</span>
+        </div>
+        <div class="card bg-base-100 w-full shadow-xl">
+          <div class="card-body m-0 p-2">
+            <div id="order-view"></div>
+          </div>
+        </div>
+      </label>
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Payment Type</span>
+        </div>
+        <select
+          class="select select-bordered"
+          id="input-payment-type"
+          name="type"
+        >
+          <option disabled selected value="">Pick one</option>
+          <option value="COD">COD</option>
+          <option value="Transfer">Transfer</option>
+        </select>
+      </label>
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Order Status</span>
+        </div>
+        <select
+          class="select select-bordered"
+          id="input-order-status"
+          name="status"
+        >
+          <option disabled selected value="">Pick one</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Finished">Finished</option>
+        </select>
+      </label>
+      <label class="form-control w-full">
+        <div class="label">
           <span class="label-text">Customer Receipt</span>
         </div>
         <input
@@ -70,6 +331,38 @@
           class="file-input file-input-bordered file-input-primary w-full"
           accept="image/*"
         />
+      </label>
+      <label class="form-control hidden" id="form-control-view-receipt">
+        <div class="label">
+          <span class="label-text">View Receipt</span>
+        </div>
+        <button
+          class="btn btn-primary max-w-14"
+          type="button"
+          id="view-image"
+          data-src=""
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="{1.5}"
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </button>
       </label>
       <div class="card-actions justify-end mt-8">
         <button
@@ -89,158 +382,31 @@
 </div>
 <div class="card bg-base-100 w-full mb-4 shadow-xl mt-3">
   <div class="card-body">
+    <div class="flex justify-end">
+      <a href="/admin/convert-to-excel/order/" target="_blank">
+        <button class="btn btn-success">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+            />
+          </svg>
+        </button>
+      </a>
+    </div>
     <div class="overflow-x-auto">
       <table
         class="table table-zebra table-pin-rows min-w-full"
-        id="band-table"
-      >
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Receipt</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for order in orders %}
-          <tr>
-            <th class="min-w-12 lg:w-12">{{ loop.index }}</th>
-            <td width="2">
-              <button
-                class="btn btn-primary"
-                id="show-modal"
-                data-src="/{{ order['order'].customer_receipt }}"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="{1.5}"
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                  />
-                </svg>
-              </button>
-            </td>
-            <td class="min-w-44 lg:min-w-42 lg:max-w-42">
-              {{ order['order'].customer_name }}
-            </td>
-            <td class="min-w-44 lg:min-w-42 lg:max-w-42">
-              {{ order['order'].customer_phone }}
-            </td>
-            <td class="min-w-44 lg:min-w-42 lg:max-w-42">
-              {{ order['order'].customer_email }}
-            </td>
-            <td width="6">
-              <div
-                class="w-[18rem] lg:w-[24rem] max-h-20 overflow-y-scroll overflow-x-hidden"
-              >
-                {{ order['order'].customer_address }}
-              </div>
-            </td>
-            <td class="min-w-36 lg:w-12">
-              <div class="join">
-                <button
-                  class="btn btn-primary join-item"
-                  id="button-edit"
-                  data-id="{{ order['order'].customer_id }}"
-                  data-name="{{ order['order'].customer_name }}"
-                  data-phone="{{ order['order'].customer_phone }}"
-                  data-email="{{ order['order'].customer_email }}"
-                  data-address="{{ order['order'].customer_address }}"
-                  data-receipt="{{ order['order'].customer_receipt}}"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                    />
-                  </svg>
-                </button>
-
-                <form action="#" method="post">
-                  <input
-                    type="hidden"
-                    name="id"
-                    value="{{ order['order'].customer_id }}"
-                  />
-                  <button
-                    class="btn btn-error join-item"
-                    name="button-form"
-                    value="delete"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="size-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                      />
-                    </svg>
-                  </button>
-                </form>
-              </div>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <div class="join mx-auto">
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="1"
-        checked="checked"
-      />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="2"
-      />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="3"
-      />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="4"
-      />
+        id="order-table"
+      ></table>
     </div>
   </div>
 </div>
@@ -252,4 +418,593 @@
   type="module"
   src="{{ url_for('static', filename='js/admin/order.js') }}"
 ></script>
+<script>
+  function updateOrdersListEdit(orders) {
+    let yourOrder = document.getElementById("your-order");
+    yourOrder.classList.remove("hidden");
+    if (Object.keys(orders).length == 0) {
+      yourOrder.classList.add("hidden");
+    }
+    let orderView = document.getElementById("order-view");
+    orderView.replaceChildren();
+    orderView.parentNode.parentNode.classList.remove("hidden");
+
+    let i = 0;
+    Object.keys(orders).forEach((orderKey) => {
+      i = i + 1;
+      const order = orders[orderKey];
+      const price = order.price * order.quantity;
+
+      let card = document.createElement("div");
+      card.classList.add(
+        "card",
+        "bg-base-100",
+        "shadow-xl",
+        "overflow-y-auto",
+        "mb-2"
+      );
+
+      let cardBody = document.createElement("div");
+      cardBody.classList.add("card-body", "m-0", "p-2");
+
+      let flex = document.createElement("div");
+      flex.classList.add("flex", "items-center", "gap-4");
+
+      let join = document.createElement("div");
+      join.classList.add("join");
+
+      let buttonDelete = document.createElement("button");
+      buttonDelete.classList.add(
+        "join-item",
+        "btn",
+        "btn-error",
+        "h-24",
+        "p-0"
+      );
+      buttonDelete.type = "button";
+      buttonDelete.dataset.orderKey = orderKey;
+      buttonDelete.addEventListener("click", (event) => {
+        orders = deleteKeys(orders, [buttonDelete.dataset.orderKey]);
+        updateOrdersListEdit(orders);
+      });
+      buttonDelete.insertAdjacentHTML(
+        "beforeend",
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"></path></svg>'
+      );
+
+      let img = document.createElement("img");
+      img.src = order.image;
+      img.classList.add(
+        "join-item",
+        "min-w-24",
+        "w-24",
+        "h-24",
+        "object-cover",
+        "rounded"
+      );
+      img.alt = "";
+
+      join.append(buttonDelete, img);
+
+      let table = document.createElement("table");
+      table.classList.add("w-auto");
+
+      let tr1 = document.createElement("tr");
+      let td1 = document.createElement("td");
+      td1.colspan = 3;
+      td1.innerHTML = order.name;
+      tr1.append(td1);
+
+      let tr2 = document.createElement("tr");
+      td1 = document.createElement("td");
+      td1.classList.add("lg:w-2", "min-w-24");
+      td1.innerHTML = "Size";
+      let td2 = document.createElement("td");
+      td2.classList.add("min-w-2");
+      td2.innerHTML = ":";
+      let td3 = document.createElement("td");
+      td3.innerHTML = order.sizeText;
+      tr2.append(td1, td2, td3);
+
+      let tr3 = document.createElement("tr");
+      td1 = document.createElement("td");
+      td1.classList.add("lg:w-2", "min-w-24");
+      td1.innerHTML = "Quantity";
+      td2 = document.createElement("td");
+      td2.classList.add("min-w-2");
+      td2.innerHTML = ":";
+      td3 = document.createElement("td");
+      td3.innerHTML = order.quantity;
+      tr3.append(td1, td2, td3);
+
+      let tr4 = document.createElement("tr");
+      td1 = document.createElement("td");
+      td1.classList.add("lg:w-2", "min-w-24");
+      td1.innerHTML = "Price/pcs";
+      td2 = document.createElement("td");
+      td2.classList.add("min-w-2");
+      td2.innerHTML = ":";
+      td3 = document.createElement("td");
+      td3.innerHTML = order.price;
+      tr4.append(td1, td2, td3);
+
+      table.append(tr1, tr2, tr3, tr4);
+
+      flex.append(join, table);
+      cardBody.append(flex);
+      let inputId = document.createElement("input");
+      inputId.type = "hidden";
+      inputId.name = "id-" + i;
+      inputId.value = order.clotheId;
+
+      let inputSize = document.createElement("input");
+      inputSize.type = "hidden";
+      inputSize.name = "size-" + i;
+      inputSize.value = order.sizeText;
+
+      let inputQuantity = document.createElement("input");
+      inputQuantity.type = "hidden";
+      inputQuantity.name = "quantity-" + i;
+      inputQuantity.value = order.quantity;
+
+      card.append(inputId, inputSize, inputQuantity, cardBody);
+      orderView.append(card);
+    });
+  }
+
+  function viewEditImage(src) {
+    const modalViewImage = document.getElementById("modal-view-image");
+    const imageView = document.getElementById("image-view");
+    imageView.src = src;
+    modalViewImage.showModal();
+  }
+
+  function fbuttonShowModal(button) {
+    viewEditImage(button.dataset.src);
+  }
+
+  function fbuttonEdit(button) {
+    const inputCustomerId = document.getElementById("input-customer-id");
+    const inputCustomerName = document.getElementById("input-customer-name");
+    const inputCustomerPhone = document.getElementById("input-customer-phone");
+    const inputCustomerEmail = document.getElementById("input-customer-email");
+    const inputCustomerAddress = document.getElementById(
+      "input-customer-address"
+    );
+    const inputCustomerReceipt = document.getElementById(
+      "input-customer-receipt"
+    );
+    const formControlViewReceipt = document.getElementById(
+      "form-control-view-receipt"
+    );
+    const inputPaymentType = document.getElementById("input-payment-type");
+    const inputOrderStatus = document.getElementById("input-order-status");
+    const buttonShowModal = document.querySelectorAll("#show-modal");
+    const buttonViewImage = document.getElementById("view-image");
+    const buttonForm = document.getElementById("button-form");
+    fetch("/api/get/order/" + button.dataset.id + "/items/", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        let clothes = data.clothes;
+        clothes.forEach((clothe) => {
+          clothe.clothe = JSON.parse(clothe.clothe)[0];
+        });
+        orders = {};
+        clothes.forEach((clothe) => {
+          const orderKey = `${clothe.clothe.fields.item}-${clothe.clothe.fields.size}`;
+          if (orders[orderKey]) {
+            orders[orderKey].quantity += clothe.quantity;
+          } else {
+            let id = clothe.clothe.fields.item;
+            let clotheId = clothe.clothe.pk;
+            let sizeText = clothe.clothe.fields.size;
+            let name = clothe.name;
+            let quantity = clothe.quantity;
+            let price = clothe.clothe.fields.price;
+            let image = clothe.image;
+            orders[orderKey] = {
+              id,
+              clotheId,
+              sizeText,
+              name,
+              quantity,
+              price,
+              image,
+            };
+          }
+        });
+        updateOrdersListEdit(orders);
+        let order = data.order;
+      });
+    inputCustomerName.focus();
+    inputCustomerId.value = event.currentTarget.dataset.id;
+    inputCustomerName.value = event.currentTarget.dataset.name;
+    inputCustomerPhone.value = event.currentTarget.dataset.phone;
+    inputCustomerEmail.value = event.currentTarget.dataset.email;
+    inputCustomerAddress.value = event.currentTarget.dataset.address;
+    inputPaymentType.value = event.currentTarget.dataset.paymentType;
+    inputOrderStatus.value = event.currentTarget.dataset.orderStatus;
+    buttonViewImage.dataset.src = event.currentTarget.dataset.receipt;
+    buttonViewImage.addEventListener("click", (e) => {
+      viewEditImage(buttonViewImage.dataset.src);
+    });
+    formControlViewReceipt.classList.remove("hidden");
+    buttonForm.value = "edit";
+    buttonForm.innerHTML = "Edit";
+  }
+
+  fetch("/api/get/orders/")
+    .then((response) => response.json())
+    .then((jsonified_data) => {
+      let data = [];
+      console.log(jsonified_data);
+      jsonified_data["clothes"].forEach((d) => {
+        d["images"] = JSON.parse(d["images"]);
+        d["item"] = JSON.parse(d["item"])[0];
+        d["sizes"] = JSON.parse(d["sizes"]);
+      });
+      let i = 1;
+      jsonified_data["orders"].forEach((d) => {
+        d["order"] = JSON.parse(d["order"])[0];
+        d["order_item"] = JSON.parse(d["order_item"]);
+        let temp = {
+          "#": null,
+          Receipt: null,
+          Name: null,
+          Phone: null,
+          Email: null,
+          Address: null,
+          "Payment Type": null,
+          "Order Status": null,
+          Action: null,
+        };
+
+        temp["#"] = i;
+        temp["Receipt"] = `
+          <button
+            class="btn btn-primary"
+            id="show-modal"
+            data-src="${d.order.fields.customer_receipt}"
+            onclick=fbuttonShowModal(this)
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="{1.5}"
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+            </svg>
+          </button>
+        `;
+        temp["Name"] = d.order.fields.customer_name;
+        temp["Phone"] = d.order.fields.customer_phone;
+        temp["Email"] = d.order.fields.customer_email;
+        temp["Address"] = d.order.fields.customer_address;
+        temp["Payment Type"] = d.order.fields.type;
+        temp["Order Status"] = d.order.fields.status;
+        temp["Action"] = `
+          <div class="join">
+            <button
+              class="btn btn-primary join-item"
+              id="button-edit"
+              data-id="${d.order.pk}"
+              data-name="${d.order.fields.customer_name}"
+              data-phone="${d.order.fields.customer_phone}"
+              data-email="${d.order.fields.customer_email}"
+              data-address="${d.order.fields.customer_address.replace(
+                /(?:\r\n|\r|\n)/g,
+                "<br>"
+              )}"
+              data-payment-type="${d.order.fields.type}"
+              data-order-status="${d.order.fields.status}"
+              data-receipt="${d.order.fields.customer_receipt}"
+              onclick=fbuttonEdit(this)
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                />
+              </svg>
+            </button>
+
+            <form action="#" method="post">
+              <input
+                type="hidden"
+                name="id"
+                value="${d.order.pk}"
+              />
+              <button
+                class="btn btn-error join-item"
+                name="button-form"
+                value="delete"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                  />
+                </svg>
+              </button>
+            </form>
+          </div>
+        `;
+        data.push(temp);
+      });
+
+      let dataTable = new window.simpleDatatables.DataTable("#order-table", {
+        searchable: true,
+        fixedHeight: false,
+        perPageSelect: [5, 10, 25, 50, 100],
+        data: {
+          headings: Object.keys(data[0]),
+          data: data.map((item) => Object.values(item)),
+        },
+      });
+    });
+</script>
+<script>
+  orders = {};
+
+  function updateQuantity(id, amount) {
+    stockCount = document.getElementById("stock-count-" + id);
+    stockCount.value = Math.max(0, parseInt(stockCount.value) + amount);
+  }
+
+  function toggleSize(button, id) {
+    const sizeButtons = document.querySelectorAll(`.size-btn[data-id="${id}"]`);
+    const isActive = button.classList.contains("btn-primary");
+    // Reset semua tombol
+    sizeButtons.forEach((btn) => {
+      btn.dataset.selected = false;
+      btn.classList.remove("btn-primary", "text-base-content");
+      btn.classList.add("btn-outline", "text-base-content");
+    });
+
+    if (!isActive) {
+      // Aktifkan tombol baru
+      button.classList.add("btn-primary", "text-base-content");
+      button.classList.remove("btn-outline", "text-base-content");
+      button.dataset.selected = true;
+    } else {
+      button.dataset.selected = false;
+    }
+  }
+
+  function addOrder(id) {
+    size = document.querySelectorAll(
+      `.size-btn[data-id='${id}'][data-selected='true']`
+    );
+    quantity = parseInt(document.getElementById("stock-count-" + id).value);
+
+    if (!size.length > 0) {
+      alert("Please select a size before adding to order.");
+      return;
+    }
+
+    if (quantity <= 0) {
+      alert("Please select a quantity greater than zero.");
+      return;
+    }
+    clotheId = size[0].dataset.clotheId;
+    sizeText = size[0].dataset.size;
+    price = parseInt(size[0].dataset.price);
+    image = size[0].dataset.image;
+    name = size[0].dataset.itemName;
+    const orderKey = `${id}-${sizeText}`;
+    if (orders[orderKey]) {
+      orders[orderKey].quantity += quantity;
+    } else {
+      orders[orderKey] = {
+        id,
+        clotheId,
+        sizeText,
+        name,
+        quantity,
+        price,
+        image,
+      };
+    }
+
+    // Reset input setelah menambahkan
+    size[0].classList.remove("btn-primary", "text-base-content");
+    size[0].classList.add("btn-outline", "text-base-content");
+    size[0].dataset.selected = false;
+    document.getElementById("stock-count-" + id).value = 0;
+    updateOrdersList();
+  }
+
+  function deleteKeys(myObj, array) {
+    for (let index = 0; index < array.length; index++) {
+      delete myObj[array[index]];
+    }
+    return myObj;
+  }
+
+  function updateOrdersList() {
+    let yourOrder = document.getElementById("your-order");
+    yourOrder.classList.remove("hidden");
+    if (Object.keys(orders).length == 0) {
+      yourOrder.classList.add("hidden");
+    }
+    orderView = document.getElementById("order-view");
+    orderView.replaceChildren();
+    orderView.parentNode.parentNode.classList.remove("hidden");
+
+    let i = 0;
+    Object.keys(orders).forEach((orderKey) => {
+      i = i + 1;
+      const order = orders[orderKey];
+      const price = order.price * order.quantity;
+
+      let card = document.createElement("div");
+      card.classList.add(
+        "card",
+        "bg-base-100",
+        "shadow-xl",
+        "overflow-y-auto",
+        "mb-2"
+      );
+
+      let cardBody = document.createElement("div");
+      cardBody.classList.add("card-body", "m-0", "p-2");
+
+      let flex = document.createElement("div");
+      flex.classList.add("flex", "items-center", "gap-4");
+
+      let join = document.createElement("div");
+      join.classList.add("join");
+
+      let buttonDelete = document.createElement("button");
+      buttonDelete.classList.add(
+        "join-item",
+        "btn",
+        "btn-error",
+        "h-24",
+        "p-0"
+      );
+      buttonDelete.type = "button";
+      buttonDelete.dataset.orderKey = orderKey;
+      buttonDelete.addEventListener("click", (event) => {
+        orders = deleteKeys(orders, [buttonDelete.dataset.orderKey]);
+        updateOrdersList();
+      });
+      buttonDelete.insertAdjacentHTML(
+        "beforeend",
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"></path></svg>'
+      );
+
+      let img = document.createElement("img");
+      img.src = order.image;
+      img.classList.add(
+        "join-item",
+        "min-w-24",
+        "w-24",
+        "h-24",
+        "object-cover",
+        "rounded"
+      );
+      img.alt = "";
+
+      join.append(buttonDelete, img);
+
+      let table = document.createElement("table");
+      table.classList.add("w-auto");
+
+      let tr1 = document.createElement("tr");
+      let td1 = document.createElement("td");
+      td1.colspan = 3;
+      td1.innerHTML = order.name;
+      tr1.append(td1);
+
+      let tr2 = document.createElement("tr");
+      td1 = document.createElement("td");
+      td1.classList.add("lg:w-2", "min-w-24");
+      td1.innerHTML = "Size";
+      let td2 = document.createElement("td");
+      td2.classList.add("min-w-2");
+      td2.innerHTML = ":";
+      let td3 = document.createElement("td");
+      td3.innerHTML = order.sizeText;
+      tr2.append(td1, td2, td3);
+
+      let tr3 = document.createElement("tr");
+      td1 = document.createElement("td");
+      td1.classList.add("lg:w-2", "min-w-24");
+      td1.innerHTML = "Quantity";
+      td2 = document.createElement("td");
+      td2.classList.add("min-w-2");
+      td2.innerHTML = ":";
+      td3 = document.createElement("td");
+      td3.innerHTML = order.quantity;
+      tr3.append(td1, td2, td3);
+
+      let tr4 = document.createElement("tr");
+      td1 = document.createElement("td");
+      td1.classList.add("lg:w-2", "min-w-24");
+      td1.innerHTML = "Price/pcs";
+      td2 = document.createElement("td");
+      td2.classList.add("min-w-2");
+      td2.innerHTML = ":";
+      td3 = document.createElement("td");
+      td3.innerHTML = order.price;
+      tr4.append(td1, td2, td3);
+
+      table.append(tr1, tr2, tr3, tr4);
+
+      flex.append(join, table);
+      cardBody.append(flex);
+      let inputId = document.createElement("input");
+      inputId.type = "hidden";
+      inputId.name = "id-" + i;
+      inputId.value = order.clotheId;
+
+      let inputSize = document.createElement("input");
+      inputSize.type = "hidden";
+      inputSize.name = "size-" + i;
+      inputSize.value = order.sizeText;
+
+      let inputQuantity = document.createElement("input");
+      inputQuantity.type = "hidden";
+      inputQuantity.name = "quantity-" + i;
+      inputQuantity.value = order.quantity;
+
+      card.append(inputId, inputSize, inputQuantity, cardBody);
+      orderView.append(card);
+    });
+  }
+
+  // const buttonShowClothes = document.querySelectorAll("#button-show-clothes");
+  // buttonShowClothes.forEach((button) => {
+  //   button.addEventListener("click", (event) => {
+  //     const modalShowClothes = document.getElementById("modal-show-clothes");
+  //     event.preventDefault();
+  //     fetch("/api/get/order/" + button.dataset.orderId + "/items/", {
+  //       method: "GET",
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         let clothes = data.clothes;
+  //         clothes.forEach((clothe) => {
+  //           clothe.clothe = JSON.parse(clothe.clothe)[0];
+  //         });
+
+  //         let order = data.order;
+  //       });
+  //     modalShowClothes.showModal();
+  //   });
+  // });
+</script>
+
 {% endblock %}

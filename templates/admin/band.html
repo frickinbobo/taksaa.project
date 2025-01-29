@@ -4,36 +4,35 @@
 {% block title %}- Band{% endblock %} 
 
 {% block upcontainer %}
-<div class="fixed z-50 w-full hidden" id="image-view">
-  <div class="bg-black bg-opacity-50">
-    <div class="flex justify-center items-center min-h-screen" id="hide-modal">
-      <div class="relative max-w-96">
-        <button
-          class="absolute right-0 p-2 text-black font-semibold"
-          id="hide-modal"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-6 border border-2 border-black rounded-lg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18 18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-        <img src="" alt="" id="modal-image" />
-      </div>
-    </div>
-  </div>
-</div>
-{% endblock %} {% block content %}
 
+<dialog id="modal-view-image" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <img class="mt-4 mx-auto" id="image-view" alt="" />
+  </div>
+</dialog>
+{% endblock %} {% block content %} {% if message %}
+<div role="alert" class="alert alert-{{ message['status'] }} my-4">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6 shrink-0 stroke-current"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+  <span>{{message['message']}}</span>
+</div>
+{% endif %}
 <div class="card bg-base-100 w-full shadow-xl">
   <div class="card-body">
     <h2 class="card-title">BAND</h2>
@@ -98,7 +97,38 @@
           accept="image/*"
         />
       </label>
-      <div id="edit-image-cover"></div>
+      <label class="form-control hidden" id="form-control-view-cover">
+        <div class="label">
+          <span class="label-text">View Cover</span>
+        </div>
+        <button
+          class="btn btn-primary max-w-14"
+          type="button"
+          id="view-image-cover"
+          data-src=""
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="{1.5}"
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </button>
+      </label>
       <label class="form-control w-full">
         <div class="label">
           <span class="label-text">Band Logo</span>
@@ -111,7 +141,38 @@
           accept="image/*"
         />
       </label>
-      <div id="edit-image-logo"></div>
+      <label class="form-control hidden" id="form-control-view-logo">
+        <div class="label">
+          <span class="label-text">View Logo</span>
+        </div>
+        <button
+          class="btn btn-primary max-w-14"
+          type="button"
+          id="view-image-logo"
+          data-src=""
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="{1.5}"
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </button>
+      </label>
       <div class="card-actions justify-end mt-8">
         <button
           class="btn btn-primary"
@@ -131,31 +192,87 @@
 <div class="card bg-base-100 w-full mb-4 shadow-xl mt-3">
   <div class="card-body">
     <div class="overflow-x-auto">
-      <table
-        class="table table-zebra table-pin-rows min-w-full"
-        id="band-table"
-      >
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Cover</th>
-            <th>Logo</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Accounts</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for band in bands %}
-          <tr>
-            <th class="min-w-12 lg:w-12">{{ loop.index }}</th>
-            <!-- <td><img src="/{{ band.cover }}" class="max-w-sm rounded-lg shadow-2xl"/></td> -->
-            <td width="2">
-              <button
+      <table id="band-table"></table>
+    </div>
+  </div>
+</div>
+<!-- prettier-ignore -->
+{% endblock %} 
+
+{% block script %}
+
+<script>
+  const inputBandId = document.getElementById("input-band-id");
+  const inputBandName = document.getElementById("input-band-name");
+  const inputBandDescription = document.getElementById(
+    "input-band-description"
+  );
+  const inputBandSpotify = document.getElementById("input-band-spotify");
+  const inputBandInstagram = document.getElementById("input-band-instagram");
+  const inputBandCover = document.getElementById("input-band-cover");
+  const inputBandLogo = document.getElementById("input-band-logo");
+  const viewImageCover = document.getElementById("view-image-cover");
+  const viewImageLogo = document.getElementById("view-image-logo");
+  const buttonForm = document.getElementById("button-form");
+  const formControlViewCover = document.getElementById(
+    "form-control-view-cover"
+  );
+  const formControlViewLogo = document.getElementById("form-control-view-logo");
+  let imageView = document.getElementById("image-view");
+  let modalViewImage = document.getElementById("modal-view-image");
+
+  function fshowImage(button) {
+    imageView.src = button.dataset.src;
+    modalViewImage.showModal();
+  }
+
+  function editBand(button) {
+    inputBandId.value = button.dataset.id;
+    inputBandName.value = button.dataset.name;
+    inputBandName.focus();
+    inputBandDescription.value = button.dataset.description;
+    inputBandSpotify.value = button.dataset.spotify;
+    inputBandInstagram.value = button.dataset.instagram;
+
+    formControlViewCover.classList.remove("hidden");
+    viewImageCover.addEventListener("click", (a) => {
+      imageView.src = button.dataset.cover;
+      modalViewImage.showModal();
+    });
+
+    formControlViewLogo.classList.remove("hidden");
+    viewImageLogo.addEventListener("click", (a) => {
+      imageView.src = button.dataset.logo;
+      modalViewImage.showModal();
+    });
+
+    buttonForm.value = "edit";
+    buttonForm.innerHTML = "Edit";
+  }
+  fetch("/api/get/bands/")
+    .then((response) => response.json())
+    .then((jsonified_data) => {
+      data = [];
+      let bands = JSON.parse(jsonified_data);
+      let i = 1;
+      bands.forEach((band) => {
+        let temp = {
+          "#": null,
+          Cover: null,
+          Logo: null,
+          Name: null,
+          Description: null,
+          Accounts: null,
+          Action: null,
+        };
+        band = band.fields;
+        console.log(band);
+        temp["#"] = i;
+        temp["Cover"] = `<button
                 class="btn btn-primary"
-                id="show-modal"
-                data-src="/{{ band.cover }}"
+                id="show-image"
+                data-src="${band.cover}"
+                onclick=fshowImage(this)
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -177,13 +294,12 @@
                     d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                   />
                 </svg>
-              </button>
-            </td>
-            <td width="2">
-              <button
+              </button>`;
+        temp["Logo"] = `<button
                 class="btn btn-primary"
-                id="show-modal"
-                data-src="/{{ band.logo }}"
+                id="show-image"
+                data-src="${band.logo}"
+                onclick=fshowImage(this)
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -205,43 +321,34 @@
                     d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                   />
                 </svg>
-              </button>
-            </td>
-            <td class="min-w-44 lg:min-w-42 lg:max-w-42">{{ band.name }}</td>
-            <td width="6">
-              <div
-                class="w-[18rem] lg:w-[24rem] max-h-20 overflow-y-scroll overflow-x-hidden"
-              >
-                {{ band.description }}
-              </div>
-            </td>
-            <!-- <td>{{ band.spotify }}{{ band.instagram }}</td> -->
-            <td class="min-w-36 lg:w-24">
-              <div class="join gap-4">
+              </button>`;
+        temp["Name"] = band.name;
+        temp["Description"] = band.description;
+        temp["Accounts"] = `
+            <div class="join gap-4">
                 <a
-                  href="{{ band.instagram }}"
+                  href="${band.instagram}"
                   target="_blank"
                   class="join-item"
                 >
                   <img
                     src="{{ url_for('static', filename='images/instagram.png') }}"
                     alt=""
-                    class="aspect-square size-12"
+                    class="aspect-square min-w-12 w-12"
                   />
                 </a>
-                <a href="{{ band.spotify }}" target="_blank" class="join-item">
+                <a href="${band.spotify}" target="_blank" class="join-item">
                   <img
                     src="{{ url_for('static', filename='images/spotify.png') }}"
                     alt=""
-                    class="aspect-square size-12"
+                    class="aspect-square min-w-12 w-12"
                   />
                 </a>
-              </div>
-            </td>
-            <td class="min-w-36 lg:w-12">
+              </div>`;
+        temp["Action"] = `
               <div class="join">
                 <a
-                  href="/admin/band/{{ band.id }}/"
+                  href="/admin/band/${JSON.parse(jsonified_data)[i - 1].pk}/"
                   class="btn btn-accent join-item"
                 >
                   <svg
@@ -262,13 +369,17 @@
                 <button
                   class="btn btn-primary join-item"
                   id="button-edit"
-                  data-id="{{ band.id }}"
-                  data-name="{{ band.name }}"
-                  data-description="{{ band.description }}"
-                  data-spotify="{{ band.spotify }}"
-                  data-instagram="{{ band.instagram }}"
-                  data-cover="{{ band.cover }}"
-                  data-logo="{{ band.logo }}"
+                  data-id="${JSON.parse(jsonified_data)[i - 1].pk}"
+                  data-name="${band.name}"
+                  data-description="${band.description.replace(
+                    /(?:\r\n|\r|\n)/g,
+                    "<br>"
+                  )}"
+                  data-spotify="${band.spotify}"
+                  data-instagram="${band.instagram}"
+                  data-cover="${band.cover}"
+                  data-logo="${band.logo}"
+                  onclick=editBand(this)
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -287,7 +398,9 @@
                 </button>
 
                 <form action="#" method="post">
-                  <input type="hidden" name="id" value="{{ band.id }}" />
+                  <input type="hidden" name="id" value="${
+                    JSON.parse(jsonified_data)[i - 1].pk
+                  }" />
                   <button
                     class="btn btn-error join-item"
                     name="button-form"
@@ -310,47 +423,24 @@
                   </button>
                 </form>
               </div>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <div class="join mx-auto">
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="1"
-        checked="checked"
-      />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="2"
-      />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="3"
-      />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="4"
-      />
-    </div>
-  </div>
-</div>
-<!-- prettier-ignore -->
-{% endblock %} 
-
-{% block script %}
+            `;
+        data.push(temp);
+        i += 1;
+      });
+      let dataTable = new window.simpleDatatables.DataTable("#band-table", {
+        searchable: true,
+        fixedHeight: false,
+        perPageSelect: [5, 10, 25, 50, 100],
+        data: {
+          headings: Object.keys(data[0]),
+          data: data.map((item) => Object.values(item)),
+        },
+      });
+    });
+</script>
 <script
   type="module"
   src="{{ url_for('static', filename='js/admin/band.js') }}"
+  defer
 ></script>
 {% endblock %}
