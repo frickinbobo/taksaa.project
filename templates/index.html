@@ -439,13 +439,13 @@
           <label for="payment-method" class="mt-5 block font-medium text-white">Metode Pembayaran</label>
           <select id="payment-method" onchange="handlePaymentChange()" class="mt-1 block w-full bg-black p-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm">
             <option value="">Pilih metode pembayaran</option>
-            <option value="bayar-ditempat">Bayar Ditempat</option>
-            <option value="transfer">Transfer</option>
+            <option value="COD">Bayar Ditempat (COD)</option>
+            <option value="Transfer">Transfer</option>
           </select>
           <div id="account-info" class="hidden mt-2">
             <label for="account-number" class="block text-sm font-medium text-white">Nomor Rekening</label>
             <p id="account-number" class="mt-1 text-white">1234-5678-9012-3456 (Bank ABC)</p>
-            <p class="text-red-600">Note : Ongkir dibayar melalui kurir saat barang diterima ! </p>
+            <p class="text-red-600">Note : Ongkir ditanggung pembeli dan dibayarkan pada saat barang diterima! </p>
           </div>
           <input type="hidden" name="orderData" id="orderData">
           <button type="submit" class="mt-6 bg-green-500 text-white px-4 py-2 rounded">Submit Order</button>
