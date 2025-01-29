@@ -3,6 +3,7 @@ const inputBandName = document.getElementById("input-band-name");
 const inputBandDescription = document.getElementById("input-band-description");
 const inputBandSpotify = document.getElementById("input-band-spotify");
 const inputBandInstagram = document.getElementById("input-band-instagram");
+const inputBandShow = document.getElementById("input-band-show");
 const inputBandCover = document.getElementById("input-band-cover");
 const inputBandLogo = document.getElementById("input-band-logo");
 const viewImageCover = document.getElementById("view-image-cover");
@@ -42,6 +43,8 @@ buttonEdit.forEach((e) => {
     inputBandDescription.value = event.currentTarget.dataset.description;
     inputBandSpotify.value = event.currentTarget.dataset.spotify;
     inputBandInstagram.value = event.currentTarget.dataset.instagram;
+    inputBandShow.checked =
+      event.currentTarget.dataset.stock == "on" ? "checked" : "";
 
     formControlViewCover.classList.remove("hidden");
     viewImageCover.addEventListener("click", (a) => {

@@ -289,6 +289,7 @@
         <div class="card bg-base-100 w-full shadow-xl">
           <div class="card-body m-0 p-2">
             <div id="order-view"></div>
+            <div id="total"></div>
           </div>
         </div>
       </label>
@@ -420,6 +421,7 @@
 ></script>
 <script>
   function updateOrdersListEdit(orders) {
+    let total = 0;
     let yourOrder = document.getElementById("your-order");
     yourOrder.classList.remove("hidden");
     if (Object.keys(orders).length == 0) {
@@ -433,7 +435,8 @@
     Object.keys(orders).forEach((orderKey) => {
       i = i + 1;
       const order = orders[orderKey];
-      const price = order.price * order.quantity;
+      let price = order.price * order.quantity;
+      total = total + price;
 
       let card = document.createElement("div");
       card.classList.add(
@@ -525,7 +528,7 @@
       td2.classList.add("min-w-2");
       td2.innerHTML = ":";
       td3 = document.createElement("td");
-      td3.innerHTML = order.price;
+      td3.innerHTML = "Rp. " + order.price;
       tr4.append(td1, td2, td3);
 
       table.append(tr1, tr2, tr3, tr4);
@@ -550,6 +553,9 @@
       card.append(inputId, inputSize, inputQuantity, cardBody);
       orderView.append(card);
     });
+
+    eTotal = document.getElementById("total");
+    eTotal.innerHTML = "Total : Rp." + total;
   }
 
   function viewEditImage(src) {
@@ -853,6 +859,7 @@
   }
 
   function updateOrdersList() {
+    let total = 0;
     let yourOrder = document.getElementById("your-order");
     yourOrder.classList.remove("hidden");
     if (Object.keys(orders).length == 0) {
@@ -867,6 +874,7 @@
       i = i + 1;
       const order = orders[orderKey];
       const price = order.price * order.quantity;
+      total = total + price;
 
       let card = document.createElement("div");
       card.classList.add(
@@ -983,6 +991,8 @@
       card.append(inputId, inputSize, inputQuantity, cardBody);
       orderView.append(card);
     });
+    eTotal = document.getElementById("total");
+    eTotal.innerHTML = "Total : Rp." + total;
   }
 
   // const buttonShowClothes = document.querySelectorAll("#button-show-clothes");

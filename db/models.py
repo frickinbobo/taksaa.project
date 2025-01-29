@@ -24,6 +24,7 @@ class Band(models.Model):
     logo_path = models.TextField()
     spotify = models.TextField()
     instagram = models.TextField()
+    show = models.TextField()
 
 
 class Item(models.Model):
@@ -31,6 +32,7 @@ class Item(models.Model):
     name = models.TextField()
     description = models.TextField()
     use_stock = models.TextField()
+    show = models.TextField()
 
 
 class ItemSize(models.Model):
