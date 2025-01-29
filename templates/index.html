@@ -7,51 +7,72 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="../static/css/style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   </head>
   <body id="body-container">
     <script src="{{ url_for('static', filename='js/gsap/minified/gsap.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-
+    <style>
+      .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: white transparent;
+      }
+    
+      /* Untuk browser selain Firefox */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+      }
+    
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: white;
+        border-radius: 9999px;
+      }
+    
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+    </style>
     <!-- Navigation bar -->
     <nav class="bg-black h-20 flex items-center justify-between px-4 md:px-10">
-      <!-- Logo -->
       <img width="60px" src="../static/images/logo/taksaa logo putih.webp" alt="">
-      <!-- Right Side Links -->
       <div class="hidden md:flex space-x-6 md:space-x-12">
         <a href="#" class="text-white font-medium">HOME</a>
         <a href="#" class="text-white font-medium">BAND</a>
       </div>
-      <!-- Mobile Menu Button -->
       <button id="menu-toggle" class="block md:hidden text-white">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
         </svg>
       </button>
-      <!-- Mobile Dropdown Menu -->
-      <div
-      id="mobile-menu"
-      class="hidden absolute top-20 left-0 w-full bg-black p-4 shadow-lg space-y-2 transform transition-all duration-300 ease-in-out"
+      <div 
+        id="mobile-menu" 
+        class="hidden absolute top-20 right-0 w-full bg-black p-4 shadow-lg space-y-2 transform transition-all duration-300 ease-in-out" 
       >
-      <a href="#" class="block text-white font-medium">HOME</a>
-      <a href="#" class="block text-white font-medium">BAND</a>
-    </div>
-  </nav>
+        <div class="w-full flex justify-end">
+          <div class="">
+            <a href="#" class="block text-white font-medium">HOME</a>
+            <a href="#" class="block text-white font-medium">BAND</a>
+          </div>
+        </div>
+      </div>
+    </nav>
   <!-- End Navigation bar -->
   <!-- Hero Section -->
   <section>
     <!-- Top Hero Section -->
     <div class="w-full bg-black flex justify-center">
-      <img src="../static/images/logo/taksaa font putih.webp" width="220px" alt="">
+      <img data-aos="fade-up" src="../static/images/logo/taksaa font putih.webp" width="220px" alt="">
     </div>
     <!-- Middle Hero Section -> Using backgrond Image -->
-    <div class="w-full cover-image bg-black" style="height: 555px; background-image: url('../static/images/logo/cover.webp'); background-size: cover;">
+    <div class="w-full">
+      <img class="w-full" src="../static/images/logo/cover.webp" alt="">
     </div>
     <!-- Bottom Hero Section -->
     <div class="w-full bg-black pt-8">
-      <div class="flex justify-center">
+      <div data-aos="fade-down" class="flex justify-center">
         <h2 class="text-white text-2xl mt-5">"In darkness, we find light"</h2>
       </div>
-      <div class="flex justify-center">
+      <div data-aos="fade-down" class="flex justify-center">
         <h2 class="text-white text-md mt-5 text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, at! Nihil, nemo nobis. Itaque natus eaque dolores. Iure, voluptates? Modi reiciendis laborum totam inventore facilis. Hic vitae explicabo molestias laborum?</h2>
       </div>
     </div>
@@ -64,25 +85,31 @@
          <div class="swiper mySwiper">
            <div class="swiper-wrapper">
              <!-- Slide 1 -->
-             <div class="swiper-slide flex justify-center">
+             <div onclick="openBandCard()" class="swiper-slide flex justify-center cursor-pointer">
                <div class="w-72 pt-4">
                  <h2 class="text-white text-2xl text-center">AVENGED</h2>
                  <img src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg" alt="">
                </div>
              </div>
-             <div class="swiper-slide flex justify-center">
+             <div onclick="openBandCard()" class="swiper-slide flex justify-center cursor-pointer">
                <div class="w-72 pt-4">
                  <h2 class="text-white text-2xl text-center">AVENGED</h2>
                  <img src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg" alt="">
                </div>
              </div>
-             <div class="swiper-slide flex justify-center">
+             <div onclick="openBandCard()" class="swiper-slide flex justify-center cursor-pointer">
                <div class="w-72 pt-4">
                  <h2 class="text-white text-2xl text-center">AVENGED</h2>
                  <img src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg" alt="">
                </div>
              </div>
-             <div class="swiper-slide flex justify-center">
+             <div onclick="openBandCard()" class="swiper-slide flex justify-center cursor-pointer">
+               <div class="w-72 pt-4">
+                 <h2 class="text-white text-2xl text-center">AVENGED</h2>
+                 <img src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg" alt="">
+               </div>
+             </div>
+             <div onclick="openBandCard()" class="swiper-slide flex justify-center cursor-pointer">
                <div class="w-72 pt-4">
                  <h2 class="text-white text-2xl text-center">AVENGED</h2>
                  <img src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg" alt="">
@@ -104,138 +131,328 @@
   <!-- End Band Section -->
   <!-- Items Section -->
   <section id="all-items">
-    <div class="w-full h-auto bg-black h-96 pt-24">
-      <h2 class="text-2xl text-center text-white">ALL ITEM</h2>
-      <div class="mt-12 grid lg:grid-cols-4 sm:grid-rows place-items-center">
-        <div class="w-72 pt-4">
-          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
-          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
-          <div class="text-white text-1xl text-center">Rp. 180.000</div>
-        </div>
-        <div class="w-72 pt-4">
-          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
-          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
-          <div class="text-white text-1xl text-center">Rp. 180.000</div>
-        </div>
-        <div class="w-72 pt-4">
-          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
-          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
-          <div class="text-white text-1xl text-center">Rp. 180.000</div>
-        </div>
-        <div class="w-72 pt-4">
-          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
-          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
-          <div class="text-white text-1xl text-center">Rp. 180.000</div>
-        </div>
-        <div class="w-72 pt-4">
-          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
-          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
-          <div class="text-white text-1xl text-center">Rp. 180.000</div>
-        </div>
-        <div class="w-72 pt-4">
-          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
-          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
-          <div class="text-white text-1xl text-center">Rp. 180.000</div>
-        </div>
-        <div class="w-72 pt-4">
-          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
-          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
-          <div class="text-white text-1xl text-center">Rp. 180.000</div>
-        </div>
-        <div class="w-72 pt-4">
-          <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
-          <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
-          <div class="text-white text-1xl text-center">Rp. 180.000</div>
-        </div>
+    <div class="w-full h-auto bg-black pt-24">
+      <h2 data-aos="fade-up" class="text-2xl text-center text-white">ALL ITEMS</h2>
+
+      <div class="w-full flex justify-center">
+         <div class="w-3/4">
+           <div id="items-container" class="mt-12 grid lg:grid-cols-4 md:grid-cols-2 place-items-center sm:grid-cols-2 gap-12">
+             <div onclick="openProductModal()" class="w-72 pt-4 item cursor-pointer">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             <div class="w-72 pt-4 item">
+               <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+               <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+               <div class="text-white text-1xl text-center">Rp. 180.000</div>
+             </div>
+             
+           </div>
+       </div>
+
+       </div>
+
+      <div class="flex justify-center mt-6">
+        <button id="prevBtn" class="bg-black text-white px-4 py-2 mx-2 disabled:opacity-50">Prev</button>
+        <button id="nextBtn" class="bg-black text-white px-4 py-2 mx-2">Next</button>
       </div>
     </div>
   </section>
+
   <!-- End Items Section -->
   <!-- Form Section  -->
   <section id="form" class="">
+    <form id="orderForm">
     <div class="w-full h-auto bg-black pt-24">
-      <h2 class="text-2xl text-center text-white">PAYMENT FORM</h2>
+      <h2 data-aos="fade-down" class="text-2xl text-center text-white">PAYMENT FORM</h2>
       <div class="mt-12 w-full flex justify-center">
-        <form>
-          <div class="w-full mb-3 flex gap-2">
-            <div class="w-2/4">
-              <label class="text-sm mb-1 text-white" for="nama">NAMA</label>
+          <div data-aos="fade-right" class="">
+            <div class="w-full mb-3 flex gap-2">
+              <div class="w-2/4">
+                <label class="text-sm mb-1 text-white" for="nama">NAMA</label>
+              </div>
+              <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-black outline-none focus:border-blue-400">
             </div>
-            <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-black outline-none focus:border-blue-400">
-          </div>
-          <div class="w-full mb-3 flex gap-2">
-            <div class="w-2/4">
-              <label class=" text-sm mb-1 text-white" for="nama">ALAMAT</label>
+            <div class="w-full mb-3 flex gap-2">
+              <div class="w-2/4">
+                <label class=" text-sm mb-1 text-white" for="nama">ALAMAT</label>
+              </div>
+              <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
             </div>
-            <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
-          </div>
-          <div class="w-full mb-3 flex gap-2">
-            <div class="w-2/4">
-              <label class="text-sm mb-1 text-white" for="nama">NO HP</label>
+            <div class="w-full mb-3 flex gap-2">
+              <div class="w-2/4">
+                <label class="text-sm mb-1 text-white" for="nama">NO HP</label>
+              </div>
+              <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
             </div>
-            <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
-          </div>
-        </form>
+            <div class="w-full mb-3 flex gap-2">
+              <div class="w-2/4">
+                <label class="text-sm mb-1 text-white" for="email">EMAIL</label>
+              </div>
+              <input type="email" id="email" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
+            </div>
+        </div>
       </div>
-      <div class="w-full flex justify-center bg-black text-white p-5">
-        <div class="w-2/5">
-          <form id="orderForm" method="POST" action="/submit-order">
-            <div class="space-y-4">
-              <!-- Item 1 -->
-              <div class="flex items-center justify-between border-b pb-4">
-                <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="ROADDISH REGULAR" class="w-16 h-16 object-cover">
-                <div class="flex-1 ml-4">
-                  <h2 class="text-lg font-bold">ROADDISH REGULAR</h2>
-                  <p class="text-sm">Rp 180.000</p>
-                  <div class="flex space-x-2 mt-2">
-                    <button type="button" class="border px-2 py-1" onclick="selectSize('ROADDISH', 180000, 'S')">S</button>
-                    <button type="button" class="border px-2 py-1" onclick="selectSize('ROADDISH', 180000, 'M')">M</button>
-                    <button type="button" class="border px-2 py-1" onclick="selectSize('ROADDISH', 180000, 'L')">L</button>
-                    <button type="button" class="border px-2 py-1" onclick="selectSize('ROADDISH', 180000, 'XL')">XL</button>
-                    <button type="button" class="border px-2 py-1" onclick="selectSize('ROADDISH', 180000, 'XXL')">XXL</button>
+      
+      <div class="flex justify-center text-white">
+        <div class="w-full lg:w-2/5">
+          <div class="flex justify-center lg:justify-end pt-8 mb-2">
+            <input type="text" id="search-bar" class=" p-2 border border-gray-700 rounded bg-black text-white" 
+                   placeholder="Search items..." oninput="filterItems()">
+          </div>
+          <div class="space-y-6 max-h-64 overflow-y-auto border border-gray-700 p-4 rounded custom-scrollbar">
+            <!-- Item 1 -->
+            <div id="ROADDISH" class="flex flex-col border-b pb-4">
+              <div class="lg:flex block items-center justify-between">
+                <div class="flex items-center">
+                  <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="ROADDISH REGULAR" class="w-16 h-16 object-cover">
+                  <div class="flex-1 ml-4">
+                    <h2 class="text-lg font-bold">ROADDISH REGULAR</h2>
+
+                    <input id="price-ROADDISH" value="180000" type="hidden" name="price" readonly>
+                    <div class="flex space-x-2 mt-2">
+                      <label>
+                        <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" data-size="S" onclick="toggleSize(this, 'ROADDISH')">S</button>
+                      </label>
+                      <label>
+                        <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" data-size="M" onclick="toggleSize(this, 'ROADDISH')">M</button>
+                      </label>
+                      <label>
+                        <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" data-size="L" onclick="toggleSize(this, 'ROADDISH')">L</button>
+                      </label>
+                      <label>
+                        <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" data-size="XL" onclick="toggleSize(this, 'ROADDISH')">XL</button>
+                      </label>
+                      <label>
+                        <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" data-size="XXL" onclick="toggleSize(this, 'ROADDISH')">XXL</button>
+                      </label>
+                    </div>
                   </div>
                 </div>
-                <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-2 mt-5">
                   <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('ROADDISH', -1)">-</button>
-                  <input type="text" value="0" readonly class="w-10 text-center bg-black border text-white" id="quantity-ROADDISH">
+                  <input type="text" value="0" readonly class="w-10 py-1 text-center bg-black border text-white" id="quantity-ROADDISH">
                   <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('ROADDISH', 1)">+</button>
                 </div>
               </div>
-              <!-- Tambahkan produk lainnya dengan struktur serupa -->
-              <div class="flex items-center justify-between border-b pb-4">
-                <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="MADLAND REGULAR" class="w-16 h-16 object-cover">
-                <div class="flex-1 ml-4">
-                  <h2 class="text-lg font-bold">MADLAND REGULAR</h2>
-                  <p class="text-sm">Rp 280.000</p>
-                  <div class="flex space-x-2 mt-2">
-                    <button type="button" class="border px-2 py-1" onclick="selectSize('MADLAND', 280000, 'S')">S</button>
-                    <button type="button" class="border px-2 py-1" onclick="selectSize('MADLAND', 280000, 'M')">M</button>
-                    <button type="button" class="border px-2 py-1" onclick="selectSize('MADLAND', 280000, 'L')">L</button>
-                    <button type="button" class="border px-2 py-1" onclick="selectSize('MADLAND', 280000, 'XL')">XL</button>
-                    <button type="button" class="border px-2 py-1" onclick="selectSize('MADLAND', 280000, 'XXL')">XXL</button>
+              <button type="button" class="mt-4 bg-black text-white border border-white px-4 py-2 rounded self-end hover:bg-white hover:text-black" onclick="addToOrder('ROADDISH')">Add</button>
+            </div>
+            <div id="DICK" class="flex flex-col border-b pb-4">
+              <div class="lg:flex block items-center justify-between">
+                <div class="flex items-center">
+                  <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="DICK ALTERNATIF" class="w-16 h-16 object-cover">
+                  <div class="flex-1 ml-4">
+                    <h2 class="text-lg font-bold">DICK ALTERNATIF</h2>
+                    <input id="price-DICK" value="280000" type="hidden" name="price" readonly>
+                    <div class="flex space-x-2 mt-2">
+                      <label>
+                        <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" data-size="S" onclick="toggleSize(this, 'DICK')">S</button>
+                      </label>
+                      <label>
+                        <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" data-size="M" onclick="toggleSize(this, 'DICK')">M</button>
+                      </label>
+                      <label>
+                        <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" data-size="L" onclick="toggleSize(this, 'DICK')">L</button>
+                      </label>
+                      <label>
+                        <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" data-size="XL" onclick="toggleSize(this, 'DICK')">XL</button>
+                      </label>
+                      <label>
+                        <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" data-size="XXL" onclick="toggleSize(this, 'DICK')">XXL</button>
+                      </label>
+                    </div>
                   </div>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('MADLAND', -1)">-</button>
-                  <input type="text" value="0" readonly class="w-10 text-center bg-black border text-white" id="quantity-MADLAND">
-                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('MADLAND', 1)">+</button>
+                <div class="flex items-center space-x-2 mt-5">
+                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('DICK', -1)">-</button>
+                  <input type="text" value="0" readonly class="w-10 py-1 text-center bg-black border text-white" id="quantity-DICK">
+                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('DICK', 1)">+</button>
                 </div>
               </div>
+              <button type="button" class="mt-4 bg-black text-white border border-white px-4 py-2 rounded self-end hover:bg-white hover:text-black" onclick="addToOrder('DICK')">Add</button>
             </div>
-        
-            <div class="mt-10">
-              <h2 class="text-lg font-bold text-white">Your Order:</h2>
-              <div id="order-summary" class="mt-4">
-                <!-- Order details will appear here -->
-              </div>
+            <!-- Tambahkan item lainnya dengan struktur serupa -->
+          </div>
+          
+          <div class="mt-10">
+            <h2 class="text-lg font-bold text-white">Your Order:</h2>
+            <div id="order-summary" class="mt-4 border border-gray-700 p-4 rounded max-h-52 overflow-y-auto">
+              <!-- Order details will appear here -->
             </div>
-        
-            <input type="hidden" name="orderData" id="orderData">
-            <button type="submit" class="mt-6 bg-blue-500 text-white px-4 py-2 rounded">Submit Order</button>
-          </form>
+          </div>
+          <label for="payment-method" class="mt-5 block font-medium text-white">Metode Pembayaran</label>
+          <select id="payment-method" onchange="handlePaymentChange()" class="mt-1 block w-full bg-black p-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm">
+            <option value="">Pilih metode pembayaran</option>
+            <option value="bayar-ditempat">Bayar Ditempat</option>
+            <option value="transfer">Transfer</option>
+          </select>
+          <div id="account-info" class="hidden mt-2">
+            <label for="account-number" class="block text-sm font-medium text-white">Nomor Rekening</label>
+            <p id="account-number" class="mt-1 text-white">1234-5678-9012-3456 (Bank ABC)</p>
+            <p class="text-red-600">Note : Ongkir dibayar melalui kurir saat barang diterima ! </p>
+          </div>
+          <input type="hidden" name="orderData" id="orderData">
+          <button type="submit" class="mt-6 bg-green-500 text-white px-4 py-2 rounded">Submit Order</button>
         </div>
       </div>
-    </div>
+      </div>
+    </form>
   </section>
   <h2 class="text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, dignissimos exercitationem nulla quas quae architecto. Saepe id hic obcaecati a, possimus molestias nostrum expedita voluptatibus, et dolorem non. Omnis, perspiciatis cupiditate earum commodi tempora odit libero, sapiente a saepe iusto unde molestiae? Blanditiis omnis aliquid rerum animi repellat nisi suscipit tenetur quam temporibus possimus voluptates id voluptatum esse reiciendis mollitia iste accusamus tempora quaerat, corrupti officia cum ullam dolore consequuntur! Voluptatem, deserunt? Eius quam, sequi dignissimos fugit suscipit quaerat eaque perspiciatis unde esse, animi eveniet? Veniam dicta quam aliquid eveniet earum rerum corrupti quos culpa beatae dolores magni provident molestias soluta, voluptatem rem eius quo. Nemo blanditiis rerum odit quasi perferendis esse sequi aperiam corporis aspernatur ad dolorem, culpa voluptas explicabo aut! Aliquam perspiciatis sed, ab commodi consectetur architecto at vel quas quo exercitationem repudiandae nostrum, ut delectus eaque sunt labore cumque, esse sint? Sapiente sunt doloribus inventore libero. Similique pariatur itaque officia, ad voluptatibus inventore optio a recusandae. Atque veritatis minima praesentium. Voluptatum, obcaecati veritatis. Eos, provident cumque consequuntur ipsam maiores at ex sed error neque natus voluptates quod beatae hic fugit laborum earum quasi voluptas quos magni. Quis non adipisci asperiores, illum laudantium quasi fuga perferendis doloremque totam.</h2>
   <!-- End Form Section  -->
@@ -246,8 +463,20 @@
   <!-- End Button Order -->
   
   <!-- Band Modal -->
-  <div id="band-modal" class="hidden fixed top-0 left-0 z-50 bg-black  w-full  h-full overflow-x-auto">
-    <div class="lg:flex block">
+  <div id="band-modal" class="hidden fixed top-0 left-0 z-50 bg-black  w-full  h-full overflow-x-auto custom-scrollbar">
+    <div class="flex justify-between">
+      <div class="relative">
+        <a class="top-4" href="">
+          <img  width="60px" src="../static/images/logo/taksaa logo putih.webp" alt="">
+        </a>
+      </div>  
+      <div class="relative">
+        <button onclick="closeBandCard()" class="w-12 absolute top-4 right-4 text-white bg-transparent border-2 border-white rounded-full p-2 hover:bg-gray-700">
+          X
+        </button>
+      </div>  
+    </div>
+    <div class="lg:flex block lg:pt-2 pt-12">
       <div class="lg:w-1/2 w-full">
         <img class="w-full" src="https://i.pinimg.com/736x/27/ca/78/27ca78589c387bdc552e46281ba71bd2.jpg" alt="">
       </div>
@@ -255,14 +484,16 @@
         <div class="lg:pr-24 flex lg:justify-end justify-center ">
             <img class="w-1/2" src="https://i.pinimg.com/736x/13/7a/77/137a771c846bcb2ec81c83a799da8433.jpg" alt="">
         </div>
-        <div class="flex lg:pr-24">
-          <h2 class="text-white lg:text-end text-center text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos, eum? Earum sed, similique tempora reiciendis ex eaque error vel tenetur exercitationem est nam distinctio accusantium sit fuga, eius sunt, cum labore deleniti ad neque!</h2>
+        <div class="flex lg:pr-24 w-full lg:justify-start justify-center max-h-72 overflow-y-auto">
+          <div class="lg:w-full w-3/4">
+            <h2 class="text-white lg:text-end text-center text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos, eum? Earum sed, similique tempora reiciendis ex eaque error vel tenetur exercitationem est nam distinctio accusantium sit fuga, eius sunt, cum labore deleniti ad neque!</h2>
+          </div>
         </div>
         <div class="swiper mySwiperModal mt-8">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
             <div class="swiper-slide flex justify-center">
-              <div class="w-48 pt-4">
+              <div onclick="openProductModal()" class="w-48 pt-4 cursor-pointer">
                 <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
                 <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
                 <div class="text-white text-1xl text-center">Rp. 180.000</div>
@@ -311,21 +542,42 @@
     </div>
   <!-- End Band Modal -->
   <!-- Product Modal -->
-  <div id="band-modal" class="hidden fixed top-0 left-0 z-50 bg-black w-full h-full overflow-x-auto">
-    <div class="w-full h-full flex justify-center items-center">
-      <div class="w-1/4 p-20">
+  <div data-aos="fade-right" data-aos-duration="1500" id="product-modal" class="hidden fixed top-0 left-0 z-50 bg-black w-full h-full overflow-x-auto">
+    <div class="flex justify-between">
+      <div class="relative">
+        <a class="pt-4 pl-12" href="">
+          <img  width="60px" src="../static/images/logo/taksaa logo putih.webp" alt="">
+        </a>
+      </div>  
+      <div class="relative">
+        <button onclick="closeBandCard()" class="w-12 absolute top-4 right-4 text-white bg-transparent border-2 border-white rounded-full p-2 hover:bg-gray-700">
+          X
+        </button>
+      </div>  
+    </div>
+    <div class="w-full h-full block lg:flex justify-center items-center">
+      <div class="w-full lg:w-1/4 p-20">
         <div class="pt-10">
           <h2 class="font-bold text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
           <h2 class="text-white text-2xl text-center">Rp. 180.000</h2>
           <hr class="mt-8">
           <h2 class="mt-8 font-bold text-white text-2xl text-center">Product Description</h2>
-          <h2 class="mt-3 text-center text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi placeat sint iste necessitatibus earum, cumque nisi minus laudantium vel perspiciatis maxime consequuntur fugiat ex, deleniti ut, nihil quisquam debitis molestiae provident aliquam beatae sit laborum maiores. Tempore vel praesentium odio ducimus! Repellat ullam rerum quo voluptates minus, omnis temporibus minima provident, officiis voluptatum harum corrupti inventore blanditiis dignissimos enim dolorem!</h2>
+          <div class="max-h-64 overflow-y-auto custom-scrollbar mt-5">
+            <h2 class="mt-3 lg:text-left lg:px-8 text-center text-white">Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, blanditiis. Minima repellat molestias eius iste magnam eligendi vitae id quis veniam, ex maiores earum quae facere. Voluptas quisquam hic ea facilis, ratione ipsam possimus doloribus ipsum corrupti, aliquid dolor beatae assumenda quia laborum temporibus, ut unde explicabo. Labore dolorum quisquam nisi tempore adipisci alias atque deleniti odit facilis temporibus sequi voluptate, fugiat obcaecati, tempora recusandae! Veritatis, ut? Id veniam eius iure reprehenderit sequi voluptates placeat, laboriosam sed ipsa porro aut repudiandae rerum molestiae repellendus earum unde. Vero quidem itaque fugit nisi distinctio excepturi, hic illo sed earum nemo consectetur ea libero nam, optio molestiae tempora iusto quaerat eos sapiente! Eius nemo voluptatem ea ut quasi iure itaque dolores, ex illum corrupti enim et nobis alias veritatis iusto. Ratione repellendus praesentium temporibus ducimus libero! Quasi excepturi veritatis earum aut ipsam quas iste ea praesentium atque expedita neque repellendus officiis, eligendi, suscipit amet corrupti illum. Nesciunt, repudiandae impedit! Itaque nobis illo minima architecto repellendus veniam ratione. Dicta nam, consequatur quidem dolores, maxime, earum aliquid quas vel doloribus id accusantium facilis fuga. Praesentium maxime ipsum veritatis repellat eligendi adipisci sit eveniet. Consequatur necessitatibus assumenda exercitationem harum soluta magnam itaque ut quidem non architecto possimus earum molestiae, doloribus cum minus eligendi debitis repudiandae reiciendis eius. Autem, corporis optio. Magni voluptates quam et quis amet cumque quo! Voluptates, nihil quaerat minima voluptas doloribus tempora deserunt?ipsum dolor sit amet, consectetur adipisicing elit. Animi placeat sint iste necessitatibus earum, cumque nisi minus laudantium vel perspiciatis maxime consequuntur fugiat ex, deleniti ut, nihil quisquam debitis molestiae provident aliquam beatae sit laborum maiores. Tempore vel praesentium odio ducimus! Repellat ullam rerum quo voluptates minus, omnis temporibus minima provident, officiis voluptatum harum corrupti inventore blanditiis dignissimos enim dolorem!</h2>
+          </div>
           <div class="mt-10 w-full flex justify-center">
-            <button class=" border border-white bg-black hover:bg-white  hover:text-black text-white font-bold py-2 px-4 rounded z-30">BUY NOW</button>
+            <a href="#DICK">
+              <button onclick="closeProductCard()" class=" border border-white bg-black hover:bg-white  hover:text-black text-white font-bold py-2 px-4 rounded z-30">BUY NOW</button>
+            </a>
+          </div>
+          <div class="pt-12 flex justify-center md:hidden">
+            <a href="#product-modal-image">
+              <img class="w-8" src="../static/images/SVGs/down-chevron.svg" alt="">
+            </a>
           </div>
         </div>
       </div>
-      <div class="w-3/4">
+      <div id="product-modal-image" class="w-full lg:w-3/4">
         <div class="container mx-auto px-4 p-20">
           <div class="swiper itemsSwiper">
             <div class="swiper-wrapper">
@@ -365,6 +617,8 @@
   <script src="../static/js/Fontend/toggle-buttons.js"></script>
   <script src="../static/js/Fontend/slider.js"></script>
   <script src="../static/js/Fontend/animated.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  </script>
   <script>
       const menuToggle = document.getElementById("menu-toggle");
       const mobileMenu = document.getElementById("mobile-menu");
@@ -385,7 +639,95 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    AOS.init();
+// ... (event listener untuk modal seperti di atas)
+  </script>
+  <script>
+    function handlePaymentChange() {
+      const paymentMethod = document.getElementById("payment-method").value;
+      const accountInfo = document.getElementById("account-info");
 
+      if (paymentMethod === "transfer") {
+        accountInfo.classList.remove("hidden");
+      } else {
+        accountInfo.classList.add("hidden");
+      }
+    }
+  </script>
+   <script>
+    function openBandCard() {
+      const bandModal = document.getElementById('band-modal');
+      const productModal = document.getElementById('product-modal');
+      productModal.classList.add("hidden");
+      bandModal.classList.remove("hidden");
+      
+      AOS.refresh();
+    }
+    function closeBandCard() {
+      const bandModal = document.getElementById('band-modal');
+      bandModal.classList.add("hidden")
+      
+    }
+    function openProductModal() {
+      const bandModal = document.getElementById('band-modal');
+      const productModal = document.getElementById('product-modal');
+      bandModal.classList.add("hidden");
+      productModal.classList.remove("hidden");
+      
+     // Memastikan AOS akan menginisiasi animasi pada elemen baru
+      
+    }
+    function closeProductCard() {
+      const bandModal = document.getElementById('product-modal');
+      bandModal.classList.add("hidden")
+      
+    }
+    </script>
+  <script>
+    const itemsPerPage = 8;  // Number of items per page
+    let currentPage = 1;
+  
+    // Function to render the items based on the page
+    function renderItems() {
+      const items = document.querySelectorAll('.item');  // Get all items
+      const totalItems = items.length;
+      const totalPages = Math.ceil(totalItems / itemsPerPage);  // Calculate total pages
+  
+      // Show the relevant items based on current page
+      items.forEach((item, index) => {
+        if (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+  
+      // Handle pagination buttons
+      document.getElementById("prevBtn").disabled = currentPage === 1;
+      document.getElementById("nextBtn").disabled = currentPage === totalPages;
+    }
+  
+    // Event listeners for pagination buttons
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderItems();
+      }
+    });
+  
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      const totalItems = document.querySelectorAll('.item').length;
+      const totalPages = Math.ceil(totalItems / itemsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderItems();
+      }
+    });
+  
+    // Initialize items
+    renderItems();
+  </script>
 <script>
   const swiperModal = new Swiper('.mySwiperModal', {
     slidesPerView: 1,
@@ -470,83 +812,122 @@
     });
 </script>
 <script>
-  let order = [];
+  const orders = {};
 
-// Fungsi untuk memperbarui jumlah quantity
-function updateQuantity(productId, increment) {
-  const input = document.getElementById(`quantity-${productId}`);
-  if (!input) {
-    console.error(`Element with ID "quantity-${productId}" not found.`);
-    return;
-  }
-  let currentValue = parseInt(input.value, 10);
-  currentValue = isNaN(currentValue) ? 0 : currentValue;
-  const newValue = Math.max(0, currentValue + increment);
-  input.value = newValue;
-}
+function toggleSize(button, productId) {
+  const sizeButtons = document.querySelectorAll(`.size-btn[data-size][onclick*="${productId}"]`);
+  const isActive = button.classList.contains("bg-white");
 
-// Fungsi untuk memilih ukuran dan menambahkan produk ke dalam pesanan
-function selectSize(productId, price, size) {
-  const quantityInput = document.getElementById(`quantity-${productId}`);
-  if (!quantityInput) {
-    console.error(`Element with ID "quantity-${productId}" not found.`);
-    return;
-  }
-  const quantity = parseInt(quantityInput.value, 10);
-  if (quantity > 0) {
-    const existingOrderIndex = order.findIndex(item => item.product === productId && item.size === size);
-    if (existingOrderIndex >= 0) {
-      order[existingOrderIndex].quantity += quantity;
-    } else {
-      order.push({ product: productId, size, price, quantity });
-    }
-    quantityInput.value = 0; // Reset quantity input setelah menambahkan ke order
-    updateOrderSummary();
-  } else {
-    alert("Choose the quantity first !!");
-  }
-}
-
-// Fungsi untuk menampilkan ringkasan pesanan
-function updateOrderSummary() {
-  const orderSummary = document.getElementById("order-summary");
-  orderSummary.innerHTML = "";
-
-  order.forEach(item => {
-    const total = item.price * item.quantity;
-    orderSummary.innerHTML += `
-      <div class="border-b py-2">
-        <p>${item.product} (${item.size}) - ${item.quantity} x Rp ${item.price.toLocaleString()}</p>
-        <p class="text-sm text-gray-400">Total: Rp ${total.toLocaleString()}</p>
-      </div>
-    `;
+  // Reset semua tombol
+  sizeButtons.forEach(btn => {
+    btn.classList.remove("bg-white", "text-black");
+    btn.classList.add("bg-transparent", "text-white");
   });
 
-  if (order.length === 0) {
-    orderSummary.innerHTML = `<p class="text-gray-400">No items in your order yet.</p>`;
-  }
+  if (!isActive) {
+    // Aktifkan tombol baru
+    button.classList.add("bg-white", "text-black");
+    button.classList.remove("bg-transparent", "text-white");
 
-  // Simpan data pesanan ke input tersembunyi
-  const hiddenInput = document.getElementById("orderData");
-  hiddenInput.value = JSON.stringify(order);
+    console.log(`Selected size for ${productId}:`, button.dataset.size);
+  } else {
+    console.log(`Unselected size for ${productId}`);
+  }
 }
 
-// Saat form disubmit, pastikan data order diupdate terlebih dahulu
-const orderForm = document.getElementById("orderForm");
-orderForm.addEventListener("submit", function (event) {
-  if (order.length === 0) {
-    alert("No items in your order yet.");
-    event.preventDefault(); // Batalkan submit kalau pesanan kosong
-  } else {
-    updateOrderSummary();
+function updateQuantity(productId, change) {
+  const quantityInput = document.getElementById(`quantity-${productId}`);
+  let currentQuantity = parseInt(quantityInput.value);
+  currentQuantity = Math.max(0, currentQuantity + change); // Jangan biarkan jumlah di bawah 0
+  quantityInput.value = currentQuantity;
+}
+
+function addToOrder(productId) {
+  const sizeButton = document.querySelector(`.size-btn.bg-white[onclick*="${productId}"]`);
+  const quantityInput = document.getElementById(`quantity-${productId}`);
+  const priceInput = document.getElementById(`price-${productId}`);
+  const size = sizeButton ? sizeButton.dataset.size : null;
+  const quantity = parseInt(quantityInput.value);
+  const price = parseInt(priceInput.value);
+  console.log(size)
+  if (!size) {
+    alert("Please select a size before adding to order.");
+    return;
   }
-});
+
+  if (quantity <= 0) {
+    alert("Please select a quantity greater than zero.");
+    return;
+  }
+
+  const orderKey = `${productId}-${size}`;
+  if (orders[orderKey]) {
+    orders[orderKey].quantity += quantity; // Tambahkan jumlah jika item sama sudah ada
+  } else {
+    orders[orderKey] = { productId, size, quantity, price};
+  }
+
+  // Reset input setelah menambahkan
+  sizeButton.classList.remove("bg-white", "text-black");
+  sizeButton.classList.add("bg-transparent", "text-white");
+  quantityInput.value = 0;
+
+  console.log("Order added:", orders);
+  updateOrderSummary();
+}
+
+function updateOrderSummary() {
+  const orderSummary = document.getElementById("order-summary");
+  orderSummary.innerHTML = ""; // Kosongkan daftar
+
+  Object.keys(orders).forEach(orderKey => {
+    const order = orders[orderKey];
+    const price = order.price * order.quantity
+    const orderItem = document.createElement("div");
+    orderItem.className = "flex justify-between border-b pb-2 mb-2";
+
+    orderItem.innerHTML = `
+      <div>
+        <p>${order.productId}</p>
+        <p>Size: ${order.size}</p>
+        <p>Quantity: ${order.quantity}</p>
+        <p>Price : Rp. ${price}</p>
+      </div>
+      <button class="text-white" onclick="removeFromOrder('${orderKey}')">Remove</button>
+    `;
+    orderSummary.appendChild(orderItem);
+  });
+
+  // Update hidden input for form submission
+  document.getElementById("orderData").value = JSON.stringify(orders);
+}
+
+function removeFromOrder(orderKey) {
+  delete orders[orderKey];
+  updateOrderSummary();
+}
+
+function filterItems() {
+  const searchInput = document.getElementById("search-bar").value.toLowerCase();
+  const items = document.querySelectorAll(".space-y-6 > div");
+
+  items.forEach(item => {
+    const itemName = item.querySelector("h2").innerText.toLowerCase();
+    if (itemName.includes(searchInput)) {
+      item.style.display = ""; // Tampilkan item jika cocok
+    } else {
+      item.style.display = "none"; // Sembunyikan item jika tidak cocok
+    }
+  });
+}
+
+
 </script>
   
   
   <!-- End Js Import -->
   </body>
-  </html>
+</html>
   
   <!-- <div class="">
     <img src="https://www.nme.com/wp-content/uploads/2016/09/2012BlckMetal1.borknagar181012.jpg" alt="">
