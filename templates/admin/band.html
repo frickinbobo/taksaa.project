@@ -85,6 +85,17 @@
           placeholder="Band instagram link"
         />
       </label>
+      <div class="form-control mt-2 w-32">
+        <label class="label cursor-pointer">
+          <span class="label-text">Show</span>
+          <input
+            type="checkbox"
+            id="input-band-show"
+            name="show"
+            class="toggle toggle-primary"
+          />
+        </label>
+      </div>
       <label class="form-control w-full">
         <div class="label">
           <span class="label-text">Band Cover</span>
@@ -209,6 +220,7 @@
   );
   const inputBandSpotify = document.getElementById("input-band-spotify");
   const inputBandInstagram = document.getElementById("input-band-instagram");
+  const inputBandShow = document.getElementById("input-band-show");
   const inputBandCover = document.getElementById("input-band-cover");
   const inputBandLogo = document.getElementById("input-band-logo");
   const viewImageCover = document.getElementById("view-image-cover");
@@ -233,6 +245,8 @@
     inputBandDescription.value = button.dataset.description;
     inputBandSpotify.value = button.dataset.spotify;
     inputBandInstagram.value = button.dataset.instagram;
+    inputBandShow.checked =
+      event.currentTarget.dataset.show == "on" ? "checked" : "";
 
     formControlViewCover.classList.remove("hidden");
     viewImageCover.addEventListener("click", (a) => {
@@ -377,6 +391,7 @@
                   )}"
                   data-spotify="${band.spotify}"
                   data-instagram="${band.instagram}"
+                  data-show="${band.show}"
                   data-cover="${band.cover}"
                   data-logo="${band.logo}"
                   onclick=editBand(this)

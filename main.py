@@ -94,6 +94,10 @@ def band():
       description = request.form['description']
       spotify = request.form['spotify']
       instagram = request.form['instagram']
+      if 'show' in request.form.keys():
+        show = request.form['show']
+      else:
+        show = "off"
       cover = request.files['cover']
       cover.filename = secure_filename(uuid.uuid4().hex + '.' + cover.filename.split('.')[-1])
       real_path_cover = '/band/band-covers/'+cover.filename
@@ -109,7 +113,7 @@ def band():
       # logo.filename = secure_filename(uuid.uuid4().hex + '.' + logo.filename.split('.')[-1])
       # real_path_logo = os.path.join(app.config['UPLOAD_FOLDER']+'band/band-logos/', logo.filename)
       # logo.save(real_path_logo)
-      band = Band.objects.create(name=name, description=description, spotify=spotify, instagram=instagram, cover=shared_link_cover, cover_path=real_path_cover, logo=shared_link_logo, logo_path=real_path_logo)
+      band = Band.objects.create(name=name, description=description, spotify=spotify, instagram=instagram, show=show, cover=shared_link_cover, cover_path=real_path_cover, logo=shared_link_logo, logo_path=real_path_logo)
       message = {'status': 'success', 'message': 'Band has been added successfully!'}
     elif request.form['button-form'] == 'edit':
       band = Band.objects.filter(pk=request.form['id']).first()
@@ -118,6 +122,10 @@ def band():
       description = request.form['description']
       spotify = request.form['spotify']
       instagram = request.form['instagram']
+      if 'show' in request.form.keys():
+        show = request.form['show']
+      else:
+        show = "off"
       cover = request.files['cover']
       logo = request.files['logo']
       
@@ -130,21 +138,21 @@ def band():
         logo.filename = secure_filename(uuid.uuid4().hex + '.' + logo.filename.split('.')[-1])
         real_path_logo = '/band/band-logos/'+logo.filename
         shared_link_logo = uploader(logo, '/band/band-logos/')
-        edited = Band.objects.filter(pk=id).update(name=name, description=description, spotify=spotify, instagram=instagram, cover=shared_link_cover, cover_path=real_path_cover, logo=shared_link_logo, logo_path=real_path_logo)
+        edited = Band.objects.filter(pk=id).update(name=name, description=description, spotify=spotify, instagram=instagram, show=show, cover=shared_link_cover, cover_path=real_path_cover, logo=shared_link_logo, logo_path=real_path_logo)
       elif cover.filename:
         destroyer(band.cover_path)
         cover.filename = secure_filename(uuid.uuid4().hex + '.' + cover.filename.split('.')[-1])
         real_path_cover = '/band/band-covers/'+cover.filename
         shared_link_cover = uploader(cover, '/band/band-covers/')
-        edited = Band.objects.filter(pk=id).update(name=name, description=description, spotify=spotify, instagram=instagram, cover=shared_link_cover, cover_path=real_path_cover)
+        edited = Band.objects.filter(pk=id).update(name=name, description=description, spotify=spotify, instagram=instagram, show=show, cover=shared_link_cover, cover_path=real_path_cover)
       elif logo.filename:
         destroyer(band.logo_path)
         logo.filename = secure_filename(uuid.uuid4().hex + '.' + logo.filename.split('.')[-1])
         real_path_logo = '/band/band-logos/'+logo.filename
         shared_link_logo = uploader(logo, '/band/band-logos/')
-        edited = Band.objects.filter(pk=id).update(name=name, description=description, spotify=spotify, instagram=instagram, logo=shared_link_logo, logo_path=real_path_logo)
+        edited = Band.objects.filter(pk=id).update(name=name, description=description, spotify=spotify, instagram=instagram, show=show, logo=shared_link_logo, logo_path=real_path_logo)
       else:
-        edited = Band.objects.filter(pk=id).update(name=name, description=description, spotify=spotify, instagram=instagram)
+        edited = Band.objects.filter(pk=id).update(name=name, description=description, spotify=spotify, instagram=instagram, show=show)
       message = {'status': 'success', 'message': 'Band has been edited successfully!'}
     if request.form['button-form'] == 'delete':
       band = Band.objects.filter(pk=request.form['id'])
@@ -176,7 +184,11 @@ def item(id):
         use_stock = request.form['use-stock']
       else:
         use_stock = "off"
-      new_item = Item.objects.create(band=band, name=name, description=description, use_stock=use_stock)
+      if 'show' in request.form.keys():
+        show = request.form['show']
+      else:
+        show = "off"
+      new_item = Item.objects.create(band=band, name=name, description=description, use_stock=use_stock, show=show)
       sizes = []
       prices = []
       stocks = []
@@ -218,10 +230,30 @@ def item(id):
         name = request.form['name']
         description = request.form['description']
         if 'use-stock' in request.form.keys():
+          orders = Order.objects.all()
+          for order in orders:
+            if order.status == 'In Progress':
+              for orderitem in order.orderitem_set.all():
+                if orderitem.item_size.item.id == item.first().id:
+                  before_stock = ItemSize.objects.filter(pk=orderitem.item_size.id).first().stock
+                  ItemSize.objects.filter(pk=orderitem.item_size.id).update(stock=before_stock-orderitem.quantity)
           use_stock = request.form['use-stock']
         else:
+          orders = Order.objects.all()
+          for order in orders:
+            if order.status == 'In Progress':
+              for orderitem in order.orderitem_set.all():
+                if orderitem.item_size.item.id == item.first().id:
+                  before_stock = ItemSize.objects.filter(pk=orderitem.item_size.id).first().stock
+                  ItemSize.objects.filter(pk=orderitem.item_size.id).update(stock=before_stock+orderitem.quantity)
           use_stock = "off"
-        item.update(name=name, description=description, use_stock=use_stock)
+        
+        if 'show' in request.form.keys():
+          show = request.form['show']
+        else:
+          show = "off"
+        print(show)
+        item.update(name=name, description=description, use_stock=use_stock, show=show)
 
       message = {'status': 'success', 'message': 'Clothes has been edited successfully!'}
       
@@ -300,6 +332,10 @@ def order():
           quantities.append(request.form[size])
         
       for i in range(len(items)):
+        item_size = ItemSize.objects.filter(pk=items[i].id).first()
+        before_stock = item_size.stock
+        if item_size.item.use_stock == 'on':
+          ItemSize.objects.filter(pk=item_size.id).update(stock=before_stock-int(quantities[i]))
         new_size = OrderItem.objects.create(order=new_order, item_size=items[i], quantity=quantities[i])
 
       message = {'status': 'success', 'message': 'Order has been added successfully!'}
@@ -329,12 +365,27 @@ def order():
 
         for i in range(len(items)):
           if not items[i].id in saved_clothes:
+            item_size = ItemSize.objects.filter(pk=items[i].id).first()
+            before_stock = item_size.stock
+            if item_size.item.use_stock == 'on':
+              ItemSize.objects.filter(pk=item_size.id).update(stock=before_stock-int(quantities[i]))
             OrderItem.objects.create(order=order, item_size=items[i], quantity=quantities[i])
             saved_clothes.append(items[i].id)
+          else:
+            orderitem = OrderItem.objects.filter(item_size=items[i])
+            item_size = ItemSize.objects.filter(pk=items[i].id).first()
+            before_stock = items[i].stock
+            if item_size.item.use_stock == 'on':
+              ItemSize.objects.filter(pk=item_size.id).update(stock=before_stock-(int(quantities[i])-orderitem.first().quantity))
+            orderitem.update(quantity=quantities[i])
 
         for id in saved_clothes:
           item_size = ItemSize.objects.filter(pk=id).first()
           if not item_size.id in new_clothes:
+            if status == 'In Progress':
+              before_stock = item_size.stock
+              if item_size.item.use_stock == 'on':
+                ItemSize.objects.filter(pk=item_size.id).update(stock=before_stock+int(quantities[i]))
             OrderItem.objects.filter(item_size=item_size).delete()
 
 
@@ -352,6 +403,11 @@ def order():
     if request.form['button-form'] == 'delete':
       order = Order.objects.filter(pk=request.form['id'])
       if order:
+        if order.first().status == 'In Progress':
+          for orderitem in order.first().orderitem_set.all():
+            item_size = ItemSize.objects.filter(pk=orderitem.item_size.id)
+            before_stock = item_size.first().stock
+            item_size.update(stock=before_stock+orderitem.quantity)
         try:
           destroyer(order.customer_receipt_path)
         except:
@@ -437,6 +493,41 @@ def api_get_orderitem(id_order):
   data = {'order': order, 'clothes': clothes}
   return jsonify(data)
 
+@app.route('/api/get/all-band/', methods=['GET'])
+def api_get_allband():
+  bands = serializers.serialize('json', Band.objects.filter(show='on'))
+  return jsonify(bands)
+
+@app.route('/api/get/all-clothe/', methods=['GET'])
+def api_get_all_clothes():
+  data=[]
+  clothes = Item.objects.filter(show='on')
+  for clothe in clothes:
+    temp = {}
+    temp['clothe'] = serializers.serialize('json', [clothe])
+    temp['sizes'] = serializers.serialize('json', ItemSize.objects.filter(item=clothe))
+    temp['images'] = serializers.serialize('json', ItemImage.objects.filter(item=clothe))
+    data.append(temp)
+  
+  return jsonify(data)
+
+@app.route('/api/get/band/<int:id_band>/clothes/', methods=['GET'])
+def api_get_band_clothes(id_band):
+  data = {}
+  band = Band.objects.filter(pk=id_band)
+  if band:
+    data['band'] = serializers.serialize('json', band)
+    clothes = Item.objects.filter(band=band.first(), show='on')
+    data['clothes'] = []
+    for clothe in clothes:
+      temp = {}
+      temp['clothe'] = serializers.serialize('json', [clothe])
+      temp['sizes'] = serializers.serialize('json', ItemSize.objects.filter(item=clothe))
+      temp['images'] = serializers.serialize('json', ItemImage.objects.filter(item=clothe))
+      data['clothes'].append(temp)
+  else:
+    data = {'status': 304}
+  return jsonify(data)
 # Delete
 @app.route('/api/delete/item-data/size/<int:id_item>/', methods=['DELETE'])
 def delete_item(id_item):
