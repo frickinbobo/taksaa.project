@@ -493,6 +493,41 @@ def api_get_orderitem(id_order):
   data = {'order': order, 'clothes': clothes}
   return jsonify(data)
 
+@app.route('/api/get/all-band/', methods=['GET'])
+def api_get_allband():
+  bands = serializers.serialize('json', Band.objects.filter(show='on'))
+  return jsonify(bands)
+
+@app.route('/api/get/all-clothe/', methods=['GET'])
+def api_get_all_clothes():
+  data=[]
+  clothes = Item.objects.filter(show='on')
+  for clothe in clothes:
+    temp = {}
+    temp['clothe'] = serializers.serialize('json', [clothe])
+    temp['sizes'] = serializers.serialize('json', ItemSize.objects.filter(item=clothe))
+    temp['images'] = serializers.serialize('json', ItemImage.objects.filter(item=clothe))
+    data.append(temp)
+  
+  return jsonify(data)
+
+@app.route('/api/get/band/<int:id_band>/clothes/', methods=['GET'])
+def api_get_band_clothes(id_band):
+  data = {}
+  band = Band.objects.filter(pk=id_band)
+  if band:
+    data['band'] = serializers.serialize('json', band)
+    clothes = Item.objects.filter(band=band.first(), show='on')
+    data['clothes'] = []
+    for clothe in clothes:
+      temp = {}
+      temp['clothe'] = serializers.serialize('json', [clothe])
+      temp['sizes'] = serializers.serialize('json', ItemSize.objects.filter(item=clothe))
+      temp['images'] = serializers.serialize('json', ItemImage.objects.filter(item=clothe))
+      data['clothes'].append(temp)
+  else:
+    data = {'status': 304}
+  return jsonify(data)
 # Delete
 @app.route('/api/delete/item-data/size/<int:id_item>/', methods=['DELETE'])
 def delete_item(id_item):
