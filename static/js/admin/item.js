@@ -368,7 +368,7 @@ buttonItem.addEventListener("click", (e) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        size: inputClothesSizeEdit.value,
+        name: inputClothesSizeEdit.value,
         price: inputClothesPriceEdit.value,
         stock: inputClothesStockEdit.value,
       }),

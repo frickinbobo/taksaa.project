@@ -581,6 +581,29 @@ def post_item(id_item):
   
   return jsonify({})
 
+@app.route('/api/post/order/', methods=['POST'])
+def post_order():
+  if request.method == 'POST':
+    try:
+      name = request.form['name']
+      address = request.form['address']
+      phone = request.form['phone']
+      email = request.form['email']
+      type = request.form['type']
+      receipt = request.files['receipt']
+      clothes = json.loads(request.form['orders'])
+      receipt.filename = secure_filename(uuid.uuid4().hex + '.' + receipt.filename.split('.')[-1])
+      real_path = '/customer-receipt/'+receipt.filename
+      shared_link = uploader(receipt, '/customer-receipt/')
+      
+      order = Order.objects.create(customer_name=name, customer_phone=phone, customer_email=email, customer_address=address, status='In Progress', type=type, customer_receipt=shared_link, customer_receipt_path=real_path)
+      for key in clothes.keys():
+        item_size = ItemSize.objects.filter(pk=key).first()
+        order_item = OrderItem.objects.create(order=order, item_size=item_size, quantity=clothes[key]['quantity'])
+      return jsonify({'status': 200, 'message': 'Success!'})
+    except Exception as e:
+      return jsonify({'status': 500, 'message': e})
+
 # Expose Media Folder
 @app.get('/media/<path:path>')
 def send_media(path):
