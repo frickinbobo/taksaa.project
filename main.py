@@ -525,8 +525,20 @@ def api_get_band_clothes(id_band):
       temp['sizes'] = serializers.serialize('json', ItemSize.objects.filter(item=clothe))
       temp['images'] = serializers.serialize('json', ItemImage.objects.filter(item=clothe))
       data['clothes'].append(temp)
+      
   else:
     data = {'status': 304}
+  return jsonify(data)
+
+@app.route('/api/get/clothes/<int:id_clothe>/', methods=['GET'])
+def api_get_clothes(id_clothe):
+  data = {}
+  clothe = Item.objects.filter(pk=id_clothe, show='on')
+  if clothe:
+    data['clothe'] = serializers.serialize('json', clothe)
+    data['sizes'] = serializers.serialize('json', clothe.first().itemsize_set.all())
+    data['images'] = serializers.serialize('json', clothe.first().itemimage_set.all())
+
   return jsonify(data)
 # Delete
 @app.route('/api/delete/item-data/size/<int:id_item>/', methods=['DELETE'])

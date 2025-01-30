@@ -92,7 +92,7 @@
     <div class="flex justify-center">
        <div class="w-4/5">
          <div class="swiper mySwiper">
-           <div class="swiper-wrapper">
+           <div class="swiper-wrapper" id="band-container">
              <!-- Slide 1 -->
              <div onclick="openBandCard()" class="swiper-slide flex justify-center cursor-pointer">
                <div class="w-72 pt-4">
@@ -336,25 +336,40 @@
               <div class="w-2/4">
                 <label class="text-sm mb-1 text-white" for="nama">NAMA</label>
               </div>
-              <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-black outline-none focus:border-blue-400">
+              <input type="text" id="name" name="name" class="text-white w-full border-b-2 border-white bg-black outline-none focus:border-blue-400">
             </div>
             <div class="w-full mb-3 flex gap-2">
               <div class="w-2/4">
                 <label class=" text-sm mb-1 text-white" for="nama">ALAMAT</label>
               </div>
-              <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
+              <input type="text" id="address" name="address" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
             </div>
             <div class="w-full mb-3 flex gap-2">
               <div class="w-2/4">
                 <label class="text-sm mb-1 text-white" for="nama">NO HP</label>
               </div>
-              <input type="text" id="nama" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
+              <input type="text" id="phone" name="phone" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
             </div>
             <div class="w-full mb-3 flex gap-2">
               <div class="w-2/4">
                 <label class="text-sm mb-1 text-white" for="email">EMAIL</label>
               </div>
-              <input type="email" id="email" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
+              <input type="email" id="email" name="email" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
+            </div>
+            <div class="flex gap-12">
+              <label for="payment-method" class="text-sm mb-1 text-white">Metode Pembayaran</label>
+              <select id="payment-method" name="type" onchange="handlePaymentChange()" class="mt-1 block w-full bg-black text-white p-2 border-b-2 border-gray-300 shadow-sm sm:text-sm cursor-pointer">
+                <option value="">Pilih metode pembayaran</option>
+                <option value="COD">Bayar Ditempat (COD)</option>
+                <option value="Transfer">Transfer</option>
+              </select>
+            </div>
+            <div id="account-info" class="hidden mt-2">
+              <label for="account-number" class="block text-sm font-medium text-white">Nomor Rekening</label>
+              <p id="account-number" class="mt-1 text-white">1234-5678-9012-3456 (Bank ABC)</p>
+              <p class="text-red-600">Note : Ongkir ditanggung pembeli dan dibayarkan pada saat barang diterima! </p>
+              <input type="email" id="email" name="email" class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400">
+              <input type="file" name="receipt" id="receipt" accept="image/*">
             </div>
         </div>
       </div>
@@ -365,17 +380,16 @@
             <input type="text" id="search-bar" class=" p-2 border border-gray-700 rounded bg-black text-white" 
                    placeholder="Search items..." oninput="filterItems()">
           </div>
-          <div class="space-y-6 max-h-64 overflow-y-auto border border-gray-700 p-4 rounded custom-scrollbar">
+          <div id="clothes-form" class="space-y-6 max-h-64 overflow-y-auto border border-gray-700 p-4 rounded custom-scrollbar">
             <!-- Item 1 -->
             <div id="ROADDISH" class="flex flex-col border-b pb-4">
               <div class="lg:flex block items-center justify-between">
                 <div class="flex items-center">
-                  <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="ROADDISH REGULAR" class="w-16 h-16 object-cover">
+                  <img id="form-image" src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="ROADDISH REGULAR" class="w-16 h-16 object-cover">
                   <div class="flex-1 ml-4">
-                    <h2 class="text-lg font-bold">ROADDISH REGULAR</h2>
-
+                    <h2 id="form-clothe-name" class="text-lg font-bold">ROADDISH REGULAR</h2>
                     <input id="price-ROADDISH" value="180000" type="hidden" name="price" readonly>
-                    <div class="flex space-x-2 mt-2">
+                    <div id="form-size" class="flex space-x-2 mt-2">
                       <label>
                         <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" data-size="S" onclick="toggleSize(this, 'ROADDISH')">S</button>
                       </label>
@@ -445,17 +459,6 @@
               <!-- Order details will appear here -->
             </div>
           </div>
-          <label for="payment-method" class="mt-5 block font-medium text-white">Metode Pembayaran</label>
-          <select id="payment-method" onchange="handlePaymentChange()" class="mt-1 block w-full bg-black p-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm">
-            <option value="">Pilih metode pembayaran</option>
-            <option value="COD">Bayar Ditempat (COD)</option>
-            <option value="Transfer">Transfer</option>
-          </select>
-          <div id="account-info" class="hidden mt-2">
-            <label for="account-number" class="block text-sm font-medium text-white">Nomor Rekening</label>
-            <p id="account-number" class="mt-1 text-white">1234-5678-9012-3456 (Bank ABC)</p>
-            <p class="text-red-600">Note : Ongkir ditanggung pembeli dan dibayarkan pada saat barang diterima! </p>
-          </div>
           <input type="hidden" name="orderData" id="orderData">
           <button type="submit" class="mt-6 bg-green-500 text-white px-4 py-2 rounded">Submit Order</button>
         </div>
@@ -472,7 +475,7 @@
   <!-- End Button Order -->
   
   <!-- Band Modal -->
-  <div id="band-modal" class="hidden fixed top-0 left-0 z-50 bg-black  w-full  h-full overflow-x-auto custom-scrollbar">
+  <div id="band-modal" class="hidden fixed top-0 left-0 z-50 bg-black  w-full h-full overflow-x-auto custom-scrollbar">
     <div class="flex justify-between">
       <div class="relative">
         <a class="top-4" href="">
@@ -487,19 +490,19 @@
     </div>
     <div class="lg:flex block lg:pt-2 pt-12">
       <div class="lg:w-1/2 w-full">
-        <img class="w-full" src="https://i.pinimg.com/736x/27/ca/78/27ca78589c387bdc552e46281ba71bd2.jpg" alt="">
+        <img id="band-modal-cover" class="w-full" src="https://i.pinimg.com/736x/27/ca/78/27ca78589c387bdc552e46281ba71bd2.jpg" alt="">
       </div>
       <div class="lg:w-1/2 w-full">
-        <div class="lg:pr-24 flex lg:justify-end justify-center ">
-            <img class="w-1/2" src="https://i.pinimg.com/736x/13/7a/77/137a771c846bcb2ec81c83a799da8433.jpg" alt="">
+        <div class="lg:pr-24 flex lg:justify-end justify-center " >
+            <img id="band-modal-logo" class="w-1/2" src="https://i.pinimg.com/736x/13/7a/77/137a771c846bcb2ec81c83a799da8433.jpg" alt="">
         </div>
         <div class="flex lg:pr-24 w-full lg:justify-start justify-center max-h-72 overflow-y-auto">
-          <div class="lg:w-full w-3/4">
-            <h2 class="text-white lg:text-end text-center text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos, eum? Earum sed, similique tempora reiciendis ex eaque error vel tenetur exercitationem est nam distinctio accusantium sit fuga, eius sunt, cum labore deleniti ad neque!</h2>
+          <div class="lg:w-full w-3/4" >
+            <h2 id="band-modal-description" class="text-white lg:text-end text-center text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos, eum? Earum sed, similique tempora reiciendis ex eaque error vel tenetur exercitationem est nam distinctio accusantium sit fuga, eius sunt, cum labore deleniti ad neque!</h2>
           </div>
         </div>
         <div class="swiper mySwiperModal mt-8">
-          <div class="swiper-wrapper">
+          <div class="swiper-wrapper" id="band-modal-clothes">
             <!-- Slide 1 -->
             <div class="swiper-slide flex justify-center">
               <div onclick="openProductModal()" class="w-48 pt-4 cursor-pointer">
@@ -559,7 +562,7 @@
         </a>
       </div>  
       <div class="relative">
-        <button onclick="closeBandCard()" class="w-12 absolute top-4 right-4 text-white bg-transparent border-2 border-white rounded-full p-2 hover:bg-gray-700">
+        <button onclick="closeProductCard()" class="w-12 absolute top-4 right-4 text-white bg-transparent border-2 border-white rounded-full p-2 hover:bg-gray-700">
           X
         </button>
       </div>  
@@ -567,12 +570,12 @@
     <div class="w-full h-full block lg:flex justify-center items-center">
       <div class="w-full lg:w-1/4 p-20">
         <div class="pt-10">
-          <h2 class="font-bold text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
-          <h2 class="text-white text-2xl text-center">Rp. 180.000</h2>
+          <h2 id="product-modal-name" class="font-bold text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+          <h2 id="product-modal-price" class="text-white text-2xl text-center">Rp. 180.000</h2>
           <hr class="mt-8">
           <h2 class="mt-8 font-bold text-white text-2xl text-center">Product Description</h2>
           <div class="max-h-64 overflow-y-auto custom-scrollbar mt-5">
-            <h2 class="mt-3 lg:text-left lg:px-8 text-center text-white">Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, blanditiis. Minima repellat molestias eius iste magnam eligendi vitae id quis veniam, ex maiores earum quae facere. Voluptas quisquam hic ea facilis, ratione ipsam possimus doloribus ipsum corrupti, aliquid dolor beatae assumenda quia laborum temporibus, ut unde explicabo. Labore dolorum quisquam nisi tempore adipisci alias atque deleniti odit facilis temporibus sequi voluptate, fugiat obcaecati, tempora recusandae! Veritatis, ut? Id veniam eius iure reprehenderit sequi voluptates placeat, laboriosam sed ipsa porro aut repudiandae rerum molestiae repellendus earum unde. Vero quidem itaque fugit nisi distinctio excepturi, hic illo sed earum nemo consectetur ea libero nam, optio molestiae tempora iusto quaerat eos sapiente! Eius nemo voluptatem ea ut quasi iure itaque dolores, ex illum corrupti enim et nobis alias veritatis iusto. Ratione repellendus praesentium temporibus ducimus libero! Quasi excepturi veritatis earum aut ipsam quas iste ea praesentium atque expedita neque repellendus officiis, eligendi, suscipit amet corrupti illum. Nesciunt, repudiandae impedit! Itaque nobis illo minima architecto repellendus veniam ratione. Dicta nam, consequatur quidem dolores, maxime, earum aliquid quas vel doloribus id accusantium facilis fuga. Praesentium maxime ipsum veritatis repellat eligendi adipisci sit eveniet. Consequatur necessitatibus assumenda exercitationem harum soluta magnam itaque ut quidem non architecto possimus earum molestiae, doloribus cum minus eligendi debitis repudiandae reiciendis eius. Autem, corporis optio. Magni voluptates quam et quis amet cumque quo! Voluptates, nihil quaerat minima voluptas doloribus tempora deserunt?ipsum dolor sit amet, consectetur adipisicing elit. Animi placeat sint iste necessitatibus earum, cumque nisi minus laudantium vel perspiciatis maxime consequuntur fugiat ex, deleniti ut, nihil quisquam debitis molestiae provident aliquam beatae sit laborum maiores. Tempore vel praesentium odio ducimus! Repellat ullam rerum quo voluptates minus, omnis temporibus minima provident, officiis voluptatum harum corrupti inventore blanditiis dignissimos enim dolorem!</h2>
+            <h2 id="product-modal-description" class="mt-3 lg:text-left lg:px-8 text-center text-white">Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, blanditiis. Minima repellat molestias eius iste magnam eligendi vitae id quis veniam, ex maiores earum quae facere. Voluptas quisquam hic ea facilis, ratione ipsam possimus doloribus ipsum corrupti, aliquid dolor beatae assumenda quia laborum temporibus, ut unde explicabo. Labore dolorum quisquam nisi tempore adipisci alias atque deleniti odit facilis temporibus sequi voluptate, fugiat obcaecati, tempora recusandae! Veritatis, ut? Id veniam eius iure reprehenderit sequi voluptates placeat, laboriosam sed ipsa porro aut repudiandae rerum molestiae repellendus earum unde. Vero quidem itaque fugit nisi distinctio excepturi, hic illo sed earum nemo consectetur ea libero nam, optio molestiae tempora iusto quaerat eos sapiente! Eius nemo voluptatem ea ut quasi iure itaque dolores, ex illum corrupti enim et nobis alias veritatis iusto. Ratione repellendus praesentium temporibus ducimus libero! Quasi excepturi veritatis earum aut ipsam quas iste ea praesentium atque expedita neque repellendus officiis, eligendi, suscipit amet corrupti illum. Nesciunt, repudiandae impedit! Itaque nobis illo minima architecto repellendus veniam ratione. Dicta nam, consequatur quidem dolores, maxime, earum aliquid quas vel doloribus id accusantium facilis fuga. Praesentium maxime ipsum veritatis repellat eligendi adipisci sit eveniet. Consequatur necessitatibus assumenda exercitationem harum soluta magnam itaque ut quidem non architecto possimus earum molestiae, doloribus cum minus eligendi debitis repudiandae reiciendis eius. Autem, corporis optio. Magni voluptates quam et quis amet cumque quo! Voluptates, nihil quaerat minima voluptas doloribus tempora deserunt?ipsum dolor sit amet, consectetur adipisicing elit. Animi placeat sint iste necessitatibus earum, cumque nisi minus laudantium vel perspiciatis maxime consequuntur fugiat ex, deleniti ut, nihil quisquam debitis molestiae provident aliquam beatae sit laborum maiores. Tempore vel praesentium odio ducimus! Repellat ullam rerum quo voluptates minus, omnis temporibus minima provident, officiis voluptatum harum corrupti inventore blanditiis dignissimos enim dolorem!</h2>
           </div>
           <div class="mt-10 w-full flex justify-center">
             <a href="#DICK">
@@ -589,7 +592,7 @@
       <div id="product-modal-image" class="w-full lg:w-3/4">
         <div class="container mx-auto px-4 p-20">
           <div class="swiper itemsSwiper">
-            <div class="swiper-wrapper">
+            <div class="swiper-wrapper" id="product-modal-images">
               <!-- Slide 1 -->
               <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
                 <img src="https://dynamic.zacdn.com/eS-k2B2aZu6To-1Ynuk729SR_kc=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/mango-9272-0063174-2.jpg" alt="">
@@ -608,9 +611,11 @@
               </div>
               
             </div>
+            <div class="swiper-button-next text-white"></div>
+            <div class="swiper-button-prev text-white"></div>
             <!-- Navigation buttons -->
-            <!-- <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div> -->
+
+            <!-- <div class="swiper-button-prev"></div> -->
             <!-- Pagination -->
             <!-- <div class="swiper-pagination"></div> -->
           </div>
@@ -619,7 +624,9 @@
     </div>
   </div>
   <!-- End Product Modal -->
-  
+  <script>
+    
+  </script>
  
   <!-- Js Import -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -652,6 +659,142 @@
     AOS.init();
 // ... (event listener untuk modal seperti di atas)
   </script>
+
+<!-- Consume API -->
+ <script>
+    async function fetchBand(){
+      try{
+        const response = await fetch('/api/get/all-band/')
+        const raw_band = await response.json()
+        const bands = JSON.parse(raw_band)
+        const container = document.getElementById('band-container')
+        container.innerHTML = ''
+
+        bands.forEach(band => {
+          const slide = document.createElement('div')
+          slide.classList.add('swiper-slide', 'flex', 'justify-center', 'cursor-pointer')
+
+          slide.innerHTML = `
+            <div class="w-72 pt-4">
+              <img src="${band.fields.logo}" alt="${band.fields.name}">
+              <img src="${band.fields.cover}" alt="${band.fields.name}">
+              <h2 class="text-white text-2xl text-center">${band.fields.name}</h2>
+            </div>
+          `;
+          slide.addEventListener('click', () => {
+            openBandCard(band.pk)
+          })
+          container.appendChild(slide)
+        })
+
+      }catch (errors){
+        console.log(errors)
+      }
+    }
+
+    async function clothes_form(){
+      const Cresponse = await fetch('/api/get/all-clothe/')
+      const Craw_datas = await Cresponse.json()
+      const Cdatas = Craw_datas
+      const Ccontainer = document.getElementById('clothes-form')
+      Ccontainer.innerHTML = ''
+      console.log(Cdatas[0])
+      Cdatas.forEach(Cdata => {
+        let Cclothe = JSON.parse(Cdata['clothe'])
+        let Cimage = JSON.parse(Cdata['images'])
+        let Csize = JSON.parse(Cdata['sizes'])
+        let sizeButtons = ""
+
+        Csize.forEach(size => {
+          sizeButtons += `
+          <label>
+              <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" 
+                  data-size="${size.fields.size}" 
+                  onclick="toggleSize(this, '${Cclothe[0].fields.name}')">
+                  ${size.fields.size}
+              </button>
+          </label>
+      `;
+    });
+
+
+        const slide = document.createElement('div')
+        slide.setAttribute("id", `${Cclothe[0].fields.name}`)
+        slide.classList.add('flex', 'flex-col', 'border-b', 'pb-4')
+        slide.innerHTML = `
+            <div class="lg:flex block items-center justify-between">
+              <div class="flex items-center">
+                <img id="form-image" src="${Cimage[0].fields.image}" alt="${Cclothe[0].fields.name}" class="w-16 h-16 object-cover">
+                <div class="flex-1 ml-4">
+                  <h2 id="form-clothe-name" class="text-lg font-bold">${Cclothe[0].fields.name}</h2>
+                  <input id="price-${Cclothe[0].fields.name}" value="${Csize[0].fields.price}" type="hidden" name="price" readonly>
+                  <div id="clothes-form" class="flex space-x-2 mt-2">
+                    ${sizeButtons}
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2 mt-5">
+                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('${Cclothe[0].fields.name}', -1)">-</button>
+                  <input type="text" value="0" readonly class="w-10 py-1 text-center bg-black border text-white" id="quantity-${Cclothe[0].fields.name}">
+                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('${Cclothe[0].fields.name}', 1)">+</button>
+                </div>
+              </div>
+              <button type="button" class="mt-4 bg-black text-white border border-white px-4 py-2 rounded self-end hover:bg-white hover:text-black" onclick="addToOrder('${Cclothe[0].fields.name}')">Add</button>
+        `
+        Ccontainer.append(slide)
+        
+      })
+    }
+
+    window.onload = (e) => {
+      fetchBand();
+      clothes_form()
+      fetchClothes();
+
+    }
+ </script>
+<script>
+  async function fetchClothes(){
+    try{
+      const Cresponse = await fetch('/api/get/all-clothe/')
+      const Craw_datas = await Cresponse.json()
+      const Cdatas = Craw_datas
+      const Ccontainer = document.getElementById('items-container')
+      Ccontainer.innerHTML = ''
+
+      Cdatas.forEach(Cdata => {
+        let Cclothe = JSON.parse(Cdata['clothe'])
+        let Cimage = JSON.parse(Cdata['images'])
+        let Csize = JSON.parse(Cdata['sizes'])
+        const Cslide = document.createElement('div')
+        Cslide.classList.add('w-72', 'pt-4', 'item', 'cursor-pointer')
+
+        Cslide.innerHTML = `
+          <h2 class="text-white text-2xl text-center">${Cclothe[0].fields.name}</h2>
+          <img src="${Cimage[0].fields.image}" alt="">
+          <div class="text-white text-1xl text-center">Rp. ${Csize[0].fields.price}</div>
+        `
+        Cslide.addEventListener('click', () => {
+          openProductModal(Cclothe[0].pk)
+        })
+        Ccontainer.appendChild(Cslide)
+      })
+
+    }catch (Cerrors) {
+      console.log(Cerrors)
+    }
+  }
+  // window.onload = (e) => {
+
+  //   }
+
+  // <div onclick="openProductModal()" class="w-72 pt-4 item cursor-pointer">
+  //              <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+  //              <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+  //              <div class="text-white text-1xl text-center">Rp. 180.000</div>
+  //            </div>
+</script>
+
+
   <script>
     function handlePaymentChange() {
       const paymentMethod = document.getElementById("payment-method").value;
@@ -665,11 +808,57 @@
     }
   </script>
    <script>
-    function openBandCard() {
+    async function openBandCard(id) {
+      const response = await fetch(`/api/get/band/${id}/clothes/`)
+      const raw_data = await response.json()
+      const data = raw_data
+      const band = JSON.parse(data.band)[0]
+      const clothes = data['clothes']
       const bandModal = document.getElementById('band-modal');
       const productModal = document.getElementById('product-modal');
       productModal.classList.add("hidden");
       bandModal.classList.remove("hidden");
+
+      // Get Container
+      Ccover = document.getElementById('band-modal-cover')
+      Clogo = document.getElementById('band-modal-logo')
+      Cdesc = document.getElementById('band-modal-description')
+      Cclothes = document.getElementById('band-modal-clothes')
+
+      Ccover.src = `${band.fields.cover}`
+      Clogo.src = `${band.fields.logo}`
+      Cdesc.innerHTML = `${band.fields.description}`
+      
+      clothes.forEach(data => {
+        let clothe = JSON.parse(data['clothe'])
+        let sizes = JSON.parse(data['sizes'])
+        let images = JSON.parse(data['images'])
+        const divSwiper = document.createElement('div')
+        divSwiper.classList.add('swiper-slide', 'flex', 'justify-center')
+
+        const divWrapper = document.createElement('div')
+        divWrapper.classList.add('w-48', 'pt-4', 'cursor-pointer')
+
+        divWrapper.innerHTML = `
+          <h2 class="text-white text-2xl text-center">${clothe[0].fields.name}</h2>
+          <img src="${images[0].fields.image}" alt="">
+          <div class="text-white text-1xl text-center">Rp. ${sizes[0].fields.price}</div>
+        `
+        divSwiper.append(divWrapper)
+        divSwiper.addEventListener('click', () => {
+          openProductModal(clothe[0].pk)
+        })
+        Cclothes.append(divSwiper)
+      })
+
+      // <div class="swiper-slide flex justify-center">
+      //         <div onclick="openProductModal()" class="w-48 pt-4 cursor-pointer">
+      //           <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+      //           <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+      //           <div class="text-white text-1xl text-center">Rp. 180.000</div>
+      //         </div>
+      //       </div>
+
       
       AOS.refresh();
     }
@@ -678,15 +867,48 @@
       bandModal.classList.add("hidden")
       
     }
-    function openProductModal() {
+    async function openProductModal(id) {
+      const response = await fetch(`/api/get/clothes/${id}/`)
+      const raw_datas = await response.json()
+      console.log(raw_datas)
+      const clothe_datas = JSON.parse(raw_datas.clothe)
+      const size_datas = JSON.parse(raw_datas.sizes)
+      const image_datas = JSON.parse(raw_datas.images)
       const bandModal = document.getElementById('band-modal');
       const productModal = document.getElementById('product-modal');
       bandModal.classList.add("hidden");
       productModal.classList.remove("hidden");
-      
-     // Memastikan AOS akan menginisiasi animasi pada elemen baru
-      
+      // console.log(datas[0].fields.name)
+      // Get Container
+      const Cname = document.getElementById('product-modal-name')
+      const Cprice = document.getElementById('product-modal-price')
+      const Cdesc = document.getElementById('product-modal-description')
+      const Cimage = document.getElementById('product-modal-images')
+
+      Cname.innerHTML = `${clothe_datas[0].fields.name}`
+      Cprice.innerHTML = `${size_datas[0].fields.price}`
+      Cdesc.innerHTML = `${clothe_datas[0].fields.description}`
+
+      image_datas.forEach(data => {
+        Cimage.innerHTML = `
+          <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
+            <img src="${data.fields.image}" alt="">
+          </div>
+        `
+      })
+
+      Cimage.append(swiper)
+
+      // <div class="swiper-wrapper">
+      //         <!-- Slide 1 -->
+      //         <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
+      //           <img src="https://dynamic.zacdn.com/eS-k2B2aZu6To-1Ynuk729SR_kc=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/mango-9272-0063174-2.jpg" alt="">
+      //         </div>
     }
+
+
+
+
     function closeProductCard() {
       const bandModal = document.getElementById('product-modal');
       bandModal.classList.add("hidden")
