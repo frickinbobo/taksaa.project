@@ -4,7 +4,6 @@
 {% block title %}- Band{% endblock %} 
 
 {% block upcontainer %}
-
 <dialog id="modal-view-image" class="modal">
   <div class="modal-box">
     <form method="dialog">
@@ -242,7 +241,7 @@
     inputBandId.value = button.dataset.id;
     inputBandName.value = button.dataset.name;
     inputBandName.focus();
-    inputBandDescription.value = button.dataset.description;
+    inputBandDescription.value = button.dataset.description.split('<br>').join('\n');;
     inputBandSpotify.value = button.dataset.spotify;
     inputBandInstagram.value = button.dataset.instagram;
     inputBandShow.checked =
@@ -458,4 +457,5 @@
   src="{{ url_for('static', filename='js/admin/band.js') }}"
   defer
 ></script>
+
 {% endblock %}

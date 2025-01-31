@@ -40,7 +40,7 @@ buttonEdit.forEach((e) => {
     inputBandId.value = event.currentTarget.dataset.id;
     inputBandName.value = event.currentTarget.dataset.name;
     inputBandName.focus();
-    inputBandDescription.value = event.currentTarget.dataset.description;
+    inputBandDescription.value = event.currentTarget.dataset.description
     inputBandSpotify.value = event.currentTarget.dataset.spotify;
     inputBandInstagram.value = event.currentTarget.dataset.instagram;
     inputBandShow.checked =

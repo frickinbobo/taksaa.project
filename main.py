@@ -91,7 +91,7 @@ def band():
   if request.method == 'POST':
     if request.form['button-form'] == 'add':
       name = request.form['name']
-      description = request.form['description']
+      description = "<br>".join(request.form['description'].replace('\r', '').split('\n'))
       spotify = request.form['spotify']
       instagram = request.form['instagram']
       if 'show' in request.form.keys():
@@ -119,7 +119,7 @@ def band():
       band = Band.objects.filter(pk=request.form['id']).first()
       id = request.form['id']
       name = request.form['name']
-      description = request.form['description']
+      description = "<br>".join(request.form['description'].replace('\r', '').split('\n'))
       spotify = request.form['spotify']
       instagram = request.form['instagram']
       if 'show' in request.form.keys():
@@ -179,7 +179,7 @@ def item(id):
   if request.method == 'POST':
     if request.form['button-form'] == 'add':
       name = request.form['name']
-      description = request.form['description']
+      description = "<br>".join(request.form['description'].replace('\r', '').split('\n'))
       if 'use-stock' in request.form.keys():
         use_stock = request.form['use-stock']
       else:
@@ -228,7 +228,7 @@ def item(id):
       item = Item.objects.filter(pk=request.form['id'])
       if len(item) > 0:
         name = request.form['name']
-        description = request.form['description']
+        description = "<br>".join(request.form['description'].replace('\r', '').split('\n'))
         if 'use-stock' in request.form.keys():
           orders = Order.objects.all()
           for order in orders:
@@ -768,7 +768,10 @@ def convert_to_excel():
 @app.route('/test/', methods=['POST', 'GET'])
 def test():
   # user = User.objects.create(name='test', username='admin', password=generate_password_hash('admin'), role='test', status='test')
-  
+  import re
+  if request.method == 'POST':
+    data = "<br/>".join(request.form['texarea'].replace('\r', '').split('\n'))
+    print(data)
 
   return render_template('admin/test.html')
 

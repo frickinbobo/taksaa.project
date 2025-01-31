@@ -1,1834 +1,1271 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
-    <link rel="stylesheet" href="../static/css/style.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  </head>
-  <body id="body-container">
-    <script src="{{ url_for('static', filename='js/gsap/minified/gsap.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-    <style>
-      .custom-scrollbar {
-        scrollbar-width: thin;
-        scrollbar-color: white transparent;
-      }
-
-      /* Untuk browser selain Firefox */
-      .custom-scrollbar::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background-color: white;
-        border-radius: 9999px;
-      }
-
-      .custom-scrollbar::-webkit-scrollbar-track {
-        background-color: transparent;
-      }
-
-      .swiper-pagination-bullet {
-        background-color: grey !important; /* Ganti warna dot */
-        opacity: 1; /* Pastikan tidak transparan */
-      }
-
-      .swiper-pagination-bullet-active {
-        background-color: white !important; /* Warna dot yang aktif */
-      }
-    </style>
-    <!-- Navigation bar -->
-    <nav class="bg-black h-20 flex items-center justify-between px-4 md:px-10">
-      <img
-        width="60px"
-        src="../static/images/logo/taksaa logo putih.webp"
-        alt=""
-      />
-      <div class="hidden md:flex space-x-6 md:space-x-12">
-        <a href="#" class="text-white font-medium">HOME</a>
-        <a href="#" class="text-white font-medium">BAND</a>
-      </div>
-      <button id="menu-toggle" class="block md:hidden text-white">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16m-7 6h7"
-          />
-        </svg>
-      </button>
-      <div
-        id="mobile-menu"
-        class="hidden absolute top-20 right-0 w-full bg-black p-4 shadow-lg space-y-2 transform transition-all duration-300 ease-in-out"
-      >
-        <div class="w-full flex justify-end">
-          <div class="">
-            <a href="#" class="block text-white font-medium">HOME</a>
-            <a href="#" class="block text-white font-medium">BAND</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <!-- End Navigation bar -->
-    <!-- Hero Section -->
-    <section>
-      <!-- Top Hero Section -->
-      <div class="w-full bg-black flex justify-center">
-        <img
-          data-aos="fade-up"
-          src="../static/images/logo/taksaa font putih.webp"
-          width="220px"
-          alt=""
-        />
-      </div>
-      <!-- Middle Hero Section -> Using backgrond Image -->
-      <div class="w-full">
-        <img class="w-full" src="../static/images/logo/cover.webp" alt="" />
-      </div>
-      <!-- Bottom Hero Section -->
-      <div class="w-full bg-black pt-8">
-        <div data-aos="fade-down" class="flex justify-center">
-          <h2 class="text-white text-2xl mt-5">"In darkness, we find light"</h2>
-        </div>
-        <div data-aos="fade-down" class="flex justify-center">
-          <h2 class="text-white text-md mt-5 text-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, at!
-            Nihil, nemo nobis. Itaque natus eaque dolores. Iure, voluptates?
-            Modi reiciendis laborum totam inventore facilis. Hic vitae explicabo
-            molestias laborum?
-          </h2>
-        </div>
-      </div>
-    </section>
-    <!-- End Hero Section -->
-    <!-- Band Section -->
-    <section class="bg-black pt-20">
-      <div class="flex justify-center">
-        <div class="w-4/5">
-          <div class="swiper mySwiper">
-            <div class="swiper-wrapper" id="band-container">
-              <!-- Slide 1 -->
-              <div
-                onclick="openBandCard()"
-                class="swiper-slide flex justify-center cursor-pointer"
-              >
-                <div class="w-72 pt-4">
-                  <h2 class="text-white text-2xl text-center">AVENGED</h2>
-                  <img
-                    src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div
-                onclick="openBandCard()"
-                class="swiper-slide flex justify-center cursor-pointer"
-              >
-                <div class="w-72 pt-4">
-                  <h2 class="text-white text-2xl text-center">AVENGED</h2>
-                  <img
-                    src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div
-                onclick="openBandCard()"
-                class="swiper-slide flex justify-center cursor-pointer"
-              >
-                <div class="w-72 pt-4">
-                  <h2 class="text-white text-2xl text-center">AVENGED</h2>
-                  <img
-                    src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div
-                onclick="openBandCard()"
-                class="swiper-slide flex justify-center cursor-pointer"
-              >
-                <div class="w-72 pt-4">
-                  <h2 class="text-white text-2xl text-center">AVENGED</h2>
-                  <img
-                    src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div
-                onclick="openBandCard()"
-                class="swiper-slide flex justify-center cursor-pointer"
-              >
-                <div class="w-72 pt-4">
-                  <h2 class="text-white text-2xl text-center">AVENGED</h2>
-                  <img
-                    src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-            <!-- Pagination -->
-            <div style="bottom: -20" class="swiper-pagination"></div>
-            <!-- Navigation -->
-            <div class="swiper-button-next text-white"></div>
-            <div class="swiper-button-prev text-white"></div>
-            <!-- Pagination -->
-            <div class="swiper-pagination"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Band Section -->
-    <!-- Items Section -->
-    <section id="all-items">
-      <div class="w-full h-auto bg-black pt-24">
-        <h2 data-aos="fade-up" class="text-2xl text-center text-white">
-          ALL ITEMS
-        </h2>
-
-        <div class="w-full flex justify-center">
-          <div class="w-3/4">
-            <div
-              id="items-container"
-              class="mt-12 grid lg:grid-cols-4 md:grid-cols-2 place-items-center sm:grid-cols-2 gap-12"
-            >
-              <div
-                onclick="openProductModal()"
-                class="w-72 pt-4 item cursor-pointer"
-              >
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-              <div class="w-72 pt-4 item">
-                <h2 class="text-white text-2xl text-center">
-                  ROADDISH OVERSIZED
-                </h2>
-                <img
-                  src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                  alt=""
-                />
-                <div class="text-white text-1xl text-center">Rp. 180.000</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex justify-center mt-6">
-          <button
-            id="prevBtn"
-            class="bg-black text-white px-4 py-2 mx-2 disabled:opacity-50"
-          >
-            Prev
-          </button>
-          <button id="nextBtn" class="bg-black text-white px-4 py-2 mx-2">
-            Next
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- End Items Section -->
-    <!-- Form Section  -->
-    <section id="form" class="">
-      <form
-        id="orderForm"
-        action="#"
-        method="post"
-        enctype="multipart/form-data"
-      >
-        <div class="w-full h-auto bg-black pt-24">
-          <h2 data-aos="fade-down" class="text-2xl text-center text-white">
-            PAYMENT FORM
-          </h2>
-          <div class="mt-12 w-full flex justify-center">
-            <div data-aos="fade-right" class="">
-              <div class="w-full mb-3 flex gap-2">
-                <div class="w-2/4">
-                  <label class="text-sm mb-1 text-white" for="nama">NAMA</label>
-                </div>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  class="text-white w-full border-b-2 border-white bg-black outline-none focus:border-blue-400"
-                />
-              </div>
-              <div class="w-full mb-3 flex gap-2">
-                <div class="w-2/4">
-                  <label class="text-sm mb-1 text-white" for="nama"
-                    >ALAMAT</label
-                  >
-                </div>
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400"
-                />
-              </div>
-              <div class="w-full mb-3 flex gap-2">
-                <div class="w-2/4">
-                  <label class="text-sm mb-1 text-white" for="nama"
-                    >NO HP</label
-                  >
-                </div>
-                <input
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400"
-                />
-              </div>
-              <div class="w-full mb-3 flex gap-2">
-                <div class="w-2/4">
-                  <label class="text-sm mb-1 text-white" for="email"
-                    >EMAIL</label
-                  >
-                </div>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-center text-white">
-            <div class="w-full lg:w-2/5">
-              <div class="flex justify-center lg:justify-end pt-8 mb-2">
-                <input
-                  type="text"
-                  id="search-bar"
-                  class="p-2 border border-gray-700 rounded bg-black text-white"
-                  placeholder="Search items..."
-                  oninput="filterItems()"
-                />
-              </div>
-              <div
-                id="clothes-form"
-                class="space-y-6 max-h-64 overflow-y-auto border border-gray-700 p-4 rounded custom-scrollbar"
-              >
-                <!-- Item 1 -->
-                <div id="ROADDISH" class="flex flex-col border-b pb-4">
-                  <div class="lg:flex block items-center justify-between">
-                    <div class="flex items-center">
-                      <img
-                        id="form-image"
-                        src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                        alt="ROADDISH REGULAR"
-                        class="w-16 h-16 object-cover"
-                      />
-                      <div class="flex-1 ml-4">
-                        <h2 id="form-clothe-name" class="text-lg font-bold">
-                          ROADDISH REGULAR
-                        </h2>
-                        <input
-                          id="price-ROADDISH"
-                          value="180000"
-                          type="hidden"
-                          name="price"
-                          readonly
-                        />
-                        <div id="form-size" class="flex space-x-2 mt-2">
-                          <label>
-                            <button
-                              type="button"
-                              class="size-btn px-3 py-1 border rounded cursor-pointer"
-                              data-size="S"
-                              onclick="toggleSize(this, 'ROADDISH')"
-                            >
-                              S
-                            </button>
-                          </label>
-                          <label>
-                            <button
-                              type="button"
-                              class="size-btn px-3 py-1 border rounded cursor-pointer"
-                              data-size="M"
-                              onclick="toggleSize(this, 'ROADDISH')"
-                            >
-                              M
-                            </button>
-                          </label>
-                          <label>
-                            <button
-                              type="button"
-                              class="size-btn px-3 py-1 border rounded cursor-pointer"
-                              data-size="L"
-                              onclick="toggleSize(this, 'ROADDISH')"
-                            >
-                              L
-                            </button>
-                          </label>
-                          <label>
-                            <button
-                              type="button"
-                              class="size-btn px-3 py-1 border rounded cursor-pointer"
-                              data-size="XL"
-                              onclick="toggleSize(this, 'ROADDISH')"
-                            >
-                              XL
-                            </button>
-                          </label>
-                          <label>
-                            <button
-                              type="button"
-                              class="size-btn px-3 py-1 border rounded cursor-pointer"
-                              data-size="XXL"
-                              onclick="toggleSize(this, 'ROADDISH')"
-                            >
-                              XXL
-                            </button>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="flex items-center space-x-2 mt-5">
-                      <button
-                        type="button"
-                        class="text-white border px-3 py-1"
-                        onclick="updateQuantity('ROADDISH', -1)"
-                      >
-                        -
-                      </button>
-                      <input
-                        type="text"
-                        value="0"
-                        readonly
-                        class="w-10 py-1 text-center bg-black border text-white"
-                        id="quantity-ROADDISH"
-                      />
-                      <button
-                        type="button"
-                        class="text-white border px-3 py-1"
-                        onclick="updateQuantity('ROADDISH', 1)"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    class="mt-4 bg-black text-white border border-white px-4 py-2 rounded self-end hover:bg-white hover:text-black"
-                    onclick="addToOrder('ROADDISH')"
-                  >
-                    Add
-                  </button>
-                </div>
-                <div id="DICK" class="flex flex-col border-b pb-4">
-                  <div class="lg:flex block items-center justify-between">
-                    <div class="flex items-center">
-                      <img
-                        src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                        alt="DICK ALTERNATIF"
-                        class="w-16 h-16 object-cover"
-                      />
-                      <div class="flex-1 ml-4">
-                        <h2 class="text-lg font-bold">DICK ALTERNATIF</h2>
-                        <input
-                          id="price-DICK"
-                          value="280000"
-                          type="hidden"
-                          name="price"
-                          readonly
-                        />
-                        <div class="flex space-x-2 mt-2">
-                          <label>
-                            <button
-                              type="button"
-                              class="size-btn px-3 py-1 border rounded cursor-pointer"
-                              data-size="S"
-                              onclick="toggleSize(this, 'DICK')"
-                            >
-                              S
-                            </button>
-                          </label>
-                          <label>
-                            <button
-                              type="button"
-                              class="size-btn px-3 py-1 border rounded cursor-pointer"
-                              data-size="M"
-                              onclick="toggleSize(this, 'DICK')"
-                            >
-                              M
-                            </button>
-                          </label>
-                          <label>
-                            <button
-                              type="button"
-                              class="size-btn px-3 py-1 border rounded cursor-pointer"
-                              data-size="L"
-                              onclick="toggleSize(this, 'DICK')"
-                            >
-                              L
-                            </button>
-                          </label>
-                          <label>
-                            <button
-                              type="button"
-                              class="size-btn px-3 py-1 border rounded cursor-pointer"
-                              data-size="XL"
-                              onclick="toggleSize(this, 'DICK')"
-                            >
-                              XL
-                            </button>
-                          </label>
-                          <label>
-                            <button
-                              type="button"
-                              class="size-btn px-3 py-1 border rounded cursor-pointer"
-                              data-size="XXL"
-                              onclick="toggleSize(this, 'DICK')"
-                            >
-                              XXL
-                            </button>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="flex items-center space-x-2 mt-5">
-                      <button
-                        type="button"
-                        class="text-white border px-3 py-1"
-                        onclick="updateQuantity('DICK', -1)"
-                      >
-                        -
-                      </button>
-                      <input
-                        type="text"
-                        value="0"
-                        readonly
-                        class="w-10 py-1 text-center bg-black border text-white"
-                        id="quantity-DICK"
-                      />
-                      <button
-                        type="button"
-                        class="text-white border px-3 py-1"
-                        onclick="updateQuantity('DICK', 1)"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    class="mt-4 bg-black text-white border border-white px-4 py-2 rounded self-end hover:bg-white hover:text-black"
-                    onclick="addToOrder('DICK')"
-                  >
-                    Add
-                  </button>
-                </div>
-                <!-- Tambahkan item lainnya dengan struktur serupa -->
-              </div>
-
-              <div class="mt-10">
-                <h2 class="text-lg font-bold text-white">Your Order:</h2>
-                <div
-                  id="order-summary"
-                  class="mt-4 border border-gray-700 p-4 rounded max-h-52 overflow-y-auto"
-                >
-                  <!-- Order details will appear here -->
-                </div>
-              </div>
-              <div class="flex gap-12 mt-5">
-                <label for="type" class="text-sm mb-1 text-white"
-                  >Metode Pembayaran</label
-                >
-                <select
-                  id="type"
-                  name="type"
-                  onchange="handlePaymentChange()"
-                  class="mt-1 block w-full bg-black text-white p-2 border-b-2 border-gray-300 shadow-sm sm:text-sm cursor-pointer"
-                >
-                  <option value="">Pilih metode pembayaran</option>
-                  <option value="COD">Bayar Ditempat (COD)</option>
-                  <option value="Transfer">Transfer</option>
-                </select>
-              </div>
-              <div id="account-info" class="hidden mt-2">
-                <label
-                  for="account-number"
-                  class="block text-sm font-medium text-white"
-                  >Nomor Rekening</label
-                >
-                <p id="account-number" class="mt-1 text-white">
-                  1234-5678-9012-3456 (Bank ABC)
-                </p>
-                <p class="text-red-600">
-                  Note : Ongkir ditanggung pembeli dan dibayarkan pada saat
-                  barang diterima!
-                </p>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400"
-                />
-                <input
-                  type="file"
-                  name="receipt"
-                  id="receipt"
-                  accept="image/*"
-                />
-              </div>
-              <input type="hidden" name="orderData" id="orderData" />
-              <button
-                type="submit"
-                class="mt-6 bg-green-500 text-white px-4 py-2 rounded"
-                id="buttonSubmit"
-              >
-                Submit Order
-              </button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </section>
-    <h2 class="text-2xl">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, dignissimos
-      exercitationem nulla quas quae architecto. Saepe id hic obcaecati a,
-      possimus molestias nostrum expedita voluptatibus, et dolorem non. Omnis,
-      perspiciatis cupiditate earum commodi tempora odit libero, sapiente a
-      saepe iusto unde molestiae? Blanditiis omnis aliquid rerum animi repellat
-      nisi suscipit tenetur quam temporibus possimus voluptates id voluptatum
-      esse reiciendis mollitia iste accusamus tempora quaerat, corrupti officia
-      cum ullam dolore consequuntur! Voluptatem, deserunt? Eius quam, sequi
-      dignissimos fugit suscipit quaerat eaque perspiciatis unde esse, animi
-      eveniet? Veniam dicta quam aliquid eveniet earum rerum corrupti quos culpa
-      beatae dolores magni provident molestias soluta, voluptatem rem eius quo.
-      Nemo blanditiis rerum odit quasi perferendis esse sequi aperiam corporis
-      aspernatur ad dolorem, culpa voluptas explicabo aut! Aliquam perspiciatis
-      sed, ab commodi consectetur architecto at vel quas quo exercitationem
-      repudiandae nostrum, ut delectus eaque sunt labore cumque, esse sint?
-      Sapiente sunt doloribus inventore libero. Similique pariatur itaque
-      officia, ad voluptatibus inventore optio a recusandae. Atque veritatis
-      minima praesentium. Voluptatum, obcaecati veritatis. Eos, provident cumque
-      consequuntur ipsam maiores at ex sed error neque natus voluptates quod
-      beatae hic fugit laborum earum quasi voluptas quos magni. Quis non
-      adipisci asperiores, illum laudantium quasi fuga perferendis doloremque
-      totam.
-    </h2>
-    <!-- End Form Section  -->
-    <!-- Button Order -->
-    <button
-      id="fixedButton"
-      class="hidden fixed border border-white bottom-12 left-1/2 -translate-x-1/2 bg-black hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded z-30"
-    >
-      BUY NOW
-    </button>
-    <!-- End Button Order -->
-
-    <!-- Band Modal -->
-    <div
-      id="band-modal"
-      class="hidden fixed top-0 left-0 z-50 bg-black w-full h-full overflow-x-auto custom-scrollbar"
-    >
-      <div class="flex justify-between">
-        <div class="relative">
-          <a class="top-4" href="">
-            <img
-              width="60px"
-              src="../static/images/logo/taksaa logo putih.webp"
-              alt=""
-            />
-          </a>
-        </div>
-        <div class="relative">
-          <button
-            onclick="closeBandCard()"
-            class="w-12 absolute top-4 right-4 text-white bg-transparent border-2 border-white rounded-full p-2 hover:bg-gray-700"
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div class="lg:flex block lg:pt-2 pt-12">
-        <div class="lg:w-1/2 w-full">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link
+         rel="stylesheet"
+         href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+         />
+      <link rel="stylesheet" href="../static/css/style.css" />
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+      <link rel="stylesheet" href="@sweetalert2/theme-dark/dark.css">
+   </head>
+   <body id="body-container">
+      <script src="{{ url_for('static', filename='js/gsap/minified/gsap.min.js') }}"></script>
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <style>
+         .custom-scrollbar {
+         scrollbar-width: thin;
+         scrollbar-color: white transparent;
+         }
+         /* Untuk browser selain Firefox */
+         .custom-scrollbar::-webkit-scrollbar {
+         width: 8px;
+         }
+         .custom-scrollbar::-webkit-scrollbar-thumb {
+         background-color: white;
+         border-radius: 9999px;
+         }
+         .custom-scrollbar::-webkit-scrollbar-track {
+         background-color: transparent;
+         }
+         .swiper-pagination-bullet {
+         background-color: grey !important; /* Ganti warna dot */
+         opacity: 1; /* Pastikan tidak transparan */
+         }
+         .swiper-pagination-bullet-active {
+         background-color: white !important; /* Warna dot yang aktif */
+         }
+      </style>
+      <!-- Navigation bar -->
+      <nav class="bg-black h-20 flex items-center justify-between px-4 md:px-10">
+        <a href="#hero">
           <img
-            id="band-modal-cover"
-            class="w-full"
-            src="https://i.pinimg.com/736x/27/ca/78/27ca78589c387bdc552e46281ba71bd2.jpg"
-            alt=""
-          />
-        </div>
-        <div class="lg:w-1/2 w-full">
-          <div class="lg:pr-24 flex lg:justify-end justify-center">
+             width="60px"
+             src="../static/images/logo/taksaa logo putih.webp"
+             alt=""
+             />
+        </a>
+         <div class="hidden md:flex space-x-6 md:space-x-12">
+            <a href="#hero" class="text-white font-medium">HOME</a>
+            <a href="#band" class="text-white font-medium">BAND</a>
+         </div>
+         <button id="menu-toggle" class="block md:hidden text-white">
+            <svg
+               xmlns="http://www.w3.org/2000/svg"
+               class="h-6 w-6"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke="currentColor"
+               >
+               <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                  />
+            </svg>
+         </button>
+         <div
+            id="mobile-menu"
+            class="hidden absolute top-20 right-0 w-full bg-black p-4 shadow-lg space-y-2 transform transition-all duration-300 ease-in-out"
+            >
+            <div class="w-full flex justify-end">
+               <div class="">
+                  <a href="#hero" class="block text-white font-medium">HOME</a>
+                  <a href="#band" class="block text-white font-medium">BAND</a>
+               </div>
+            </div>
+         </div>
+      </nav>
+      <!-- End Navigation bar -->
+      <!-- Hero Section -->
+      <section id="hero">
+         <!-- Top Hero Section -->
+         <div class="w-full bg-black flex justify-center">
+            <!-- data-aos="fade-down" -->
             <img
-              id="band-modal-logo"
-              class="w-1/2"
-              src="https://i.pinimg.com/736x/13/7a/77/137a771c846bcb2ec81c83a799da8433.jpg"
-              alt=""
-            />
-          </div>
-          <div
-            class="flex lg:pr-24 w-full lg:justify-start justify-center max-h-72 overflow-y-auto"
-          >
-            <div class="lg:w-full w-3/4">
-              <h2
-                id="band-modal-description"
-                class="text-white lg:text-end text-center text-lg"
-              >
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos,
-                eum? Earum sed, similique tempora reiciendis ex eaque error vel
-                tenetur exercitationem est nam distinctio accusantium sit fuga,
-                eius sunt, cum labore deleniti ad neque!
-              </h2>
+               src="../static/images/logo/taksaa font putih.webp"
+               width="220px"
+               alt=""
+               />
+         </div>
+         <!-- Middle Hero Section -> Using backgrond Image -->
+         <div class="w-full">
+            <img class="w-full" src="../static/images/logo/cover.webp" alt="" />
+         </div>
+         <!-- Bottom Hero Section -->
+         <div class="w-full bg-black pt-8">
+            <div data-aos="fade-down" class="flex justify-center">
+               <h2 class="text-white text-2xl mt-5">"In darkness, we find light"</h2>
             </div>
-          </div>
-          <div class="swiper mySwiperModal mt-8">
-            <div class="swiper-wrapper" id="band-modal-clothes">
-              <!-- Slide 1 -->
-              <div class="swiper-slide flex justify-center">
-                <div
-                  onclick="openProductModal()"
-                  class="w-48 pt-4 cursor-pointer"
-                >
-                  <h2 class="text-white text-2xl text-center">
-                    ROADDISH OVERSIZED
-                  </h2>
-                  <img
-                    src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                    alt=""
-                  />
-                  <div class="text-white text-1xl text-center">Rp. 180.000</div>
-                </div>
-              </div>
-              <!-- Tambahkan slide lainnya -->
-              <div class="swiper-slide flex justify-center">
-                <div class="w-48 pt-4">
-                  <h2 class="text-white text-2xl text-center">
-                    ROADDISH OVERSIZED
-                  </h2>
-                  <img
-                    src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                    alt=""
-                  />
-                  <div class="text-white text-1xl text-center">Rp. 180.000</div>
-                </div>
-              </div>
-              <!-- Slide 3 -->
-              <div class="swiper-slide flex justify-center">
-                <div class="w-48 pt-4">
-                  <h2 class="text-white text-2xl text-center">
-                    ROADDISH OVERSIZED
-                  </h2>
-                  <img
-                    src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                    alt=""
-                  />
-                  <div class="text-white text-1xl text-center">Rp. 180.000</div>
-                </div>
-              </div>
-              <div class="swiper-slide flex justify-center">
-                <div class="w-48 pt-4">
-                  <h2 class="text-white text-2xl text-center">
-                    ROADDISH OVERSIZED
-                  </h2>
-                  <img
-                    src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5"
-                    alt=""
-                  />
-                  <div class="text-white text-1xl text-center">Rp. 180.000</div>
-                </div>
-              </div>
+            <div data-aos="fade-down" class="flex justify-center">
+               <h2 class="text-white text-md mt-5 text-center">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, at!
+                  Nihil, nemo nobis. Itaque natus eaque dolores. Iure, voluptates?
+                  Modi reiciendis laborum totam inventore facilis. Hic vitae explicabo
+                  molestias laborum?
+               </h2>
             </div>
-            <!-- Scrollbar -->
-            <div class="swiper-scrollbar"></div>
-
-            <!-- Navigation -->
-            <div class="swiper-button-next text-white"></div>
-            <div class="swiper-button-prev text-white"></div>
-            <!-- Pagination -->
-            <div class="swiper-pagination"></div>
-          </div>
-          <div class="mt-12 ml-28 flex justify-center">
-            <button
-              class="border border-white bottom-12 left-1/2 -translate-x-1/2 bg-black hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded z-30"
-            >
-              BUY NOW
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Band Modal -->
-    <!-- Product Modal -->
-    <div
-      data-aos="fade-right"
-      data-aos-duration="1500"
-      id="product-modal"
-      class="hidden fixed top-0 left-0 z-50 bg-black w-full h-full overflow-x-auto"
-    >
-      <div class="flex justify-between">
-        <div class="relative">
-          <a class="pt-4 pl-12" href="">
-            <img
-              width="60px"
-              src="../static/images/logo/taksaa logo putih.webp"
-              alt=""
-            />
-          </a>
-        </div>
-        <div class="relative">
-          <button
-            onclick="closeProductCard()"
-            class="w-12 absolute top-4 right-4 text-white bg-transparent border-2 border-white rounded-full p-2 hover:bg-gray-700"
-          >
-            X
-          </button>
-        </div>
-      </div>
-      <div class="w-full h-full block lg:flex justify-center items-center">
-        <div class="w-full lg:w-1/4 p-20">
-          <div class="pt-10">
-            <h2
-              id="product-modal-name"
-              class="font-bold text-white text-2xl text-center"
-            >
-              ROADDISH OVERSIZED
-            </h2>
-            <h2
-              id="product-modal-price"
-              class="text-white text-2xl text-center"
-            >
-              Rp. 180.000
-            </h2>
-            <hr class="mt-8" />
-            <h2 class="mt-8 font-bold text-white text-2xl text-center">
-              Product Description
-            </h2>
-            <div class="max-h-64 overflow-y-auto custom-scrollbar mt-5">
-              <h2
-                id="product-modal-description"
-                class="mt-3 lg:text-left lg:px-8 text-center text-white"
-              >
-                Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Distinctio, blanditiis. Minima repellat molestias eius iste
-                magnam eligendi vitae id quis veniam, ex maiores earum quae
-                facere. Voluptas quisquam hic ea facilis, ratione ipsam possimus
-                doloribus ipsum corrupti, aliquid dolor beatae assumenda quia
-                laborum temporibus, ut unde explicabo. Labore dolorum quisquam
-                nisi tempore adipisci alias atque deleniti odit facilis
-                temporibus sequi voluptate, fugiat obcaecati, tempora
-                recusandae! Veritatis, ut? Id veniam eius iure reprehenderit
-                sequi voluptates placeat, laboriosam sed ipsa porro aut
-                repudiandae rerum molestiae repellendus earum unde. Vero quidem
-                itaque fugit nisi distinctio excepturi, hic illo sed earum nemo
-                consectetur ea libero nam, optio molestiae tempora iusto quaerat
-                eos sapiente! Eius nemo voluptatem ea ut quasi iure itaque
-                dolores, ex illum corrupti enim et nobis alias veritatis iusto.
-                Ratione repellendus praesentium temporibus ducimus libero! Quasi
-                excepturi veritatis earum aut ipsam quas iste ea praesentium
-                atque expedita neque repellendus officiis, eligendi, suscipit
-                amet corrupti illum. Nesciunt, repudiandae impedit! Itaque nobis
-                illo minima architecto repellendus veniam ratione. Dicta nam,
-                consequatur quidem dolores, maxime, earum aliquid quas vel
-                doloribus id accusantium facilis fuga. Praesentium maxime ipsum
-                veritatis repellat eligendi adipisci sit eveniet. Consequatur
-                necessitatibus assumenda exercitationem harum soluta magnam
-                itaque ut quidem non architecto possimus earum molestiae,
-                doloribus cum minus eligendi debitis repudiandae reiciendis
-                eius. Autem, corporis optio. Magni voluptates quam et quis amet
-                cumque quo! Voluptates, nihil quaerat minima voluptas doloribus
-                tempora deserunt?ipsum dolor sit amet, consectetur adipisicing
-                elit. Animi placeat sint iste necessitatibus earum, cumque nisi
-                minus laudantium vel perspiciatis maxime consequuntur fugiat ex,
-                deleniti ut, nihil quisquam debitis molestiae provident aliquam
-                beatae sit laborum maiores. Tempore vel praesentium odio
-                ducimus! Repellat ullam rerum quo voluptates minus, omnis
-                temporibus minima provident, officiis voluptatum harum corrupti
-                inventore blanditiis dignissimos enim dolorem!
-              </h2>
-            </div>
-            <div class="mt-10 w-full flex justify-center">
-              <a href="#DICK">
-                <button
-                  onclick="closeProductCard()"
-                  class="border border-white bg-black hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded z-30"
-                >
-                  BUY NOW
-                </button>
-              </a>
-            </div>
-            <div class="pt-12 flex justify-center md:hidden">
-              <a href="#product-modal-image">
-                <img
-                  class="w-8"
-                  src="../static/images/SVGs/down-chevron.svg"
-                  alt=""
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div id="product-modal-image" class="w-full lg:w-3/4">
-          <div class="container mx-auto px-4 p-20">
-            <div class="swiper itemsSwiper">
-              <div class="swiper-wrapper" id="product-modal-images">
-                <!-- Slide 1 -->
-                <div
-                  class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold"
-                >
-                  <img
-                    src="https://dynamic.zacdn.com/eS-k2B2aZu6To-1Ynuk729SR_kc=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/mango-9272-0063174-2.jpg"
-                    alt=""
-                  />
-                </div>
-                <div
-                  class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold"
-                >
-                  <img
-                    src="https://dynamic.zacdn.com/1jA6SBRe_IgmkWXepqMXTwDo1_E=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/trendyol-8839-7700654-2.jpg"
-                    alt=""
-                  />
-                </div>
-                <div
-                  class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold"
-                >
-                  <img
-                    src="https://dynamic.zacdn.com/Hy02ju_dPGKSyQ7nmoO9ebHb4Ik=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/trendyol-5427-0186344-2.jpg"
-                    alt=""
-                  />
-                </div>
-                <div
-                  class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold"
-                >
-                  <img
-                    src="https://dynamic.zacdn.com/Hy02ju_dPGKSyQ7nmoO9ebHb4Ik=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/trendyol-5427-0186344-2.jpg"
-                    alt=""
-                  />
-                </div>
-                <div
-                  class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold"
-                >
-                  <img
-                    src="https://dynamic.zacdn.com/Hy02ju_dPGKSyQ7nmoO9ebHb4Ik=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/trendyol-5427-0186344-2.jpg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div class="swiper-button-next text-white"></div>
-              <div class="swiper-button-prev text-white"></div>
-              <!-- Navigation buttons -->
-
-              <!-- <div class="swiper-button-prev"></div> -->
-              <!-- Pagination -->
-              <!-- <div class="swiper-pagination"></div> -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Product Modal -->
-    <script></script>
-
-    <!-- Js Import -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="../static/js/Fontend/toggle-buttons.js"></script>
-    <script src="../static/js/Fontend/slider.js"></script>
-    <script src="../static/js/Fontend/animated.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      const menuToggle = document.getElementById("menu-toggle");
-      const mobileMenu = document.getElementById("mobile-menu");
-
-      menuToggle.addEventListener("click", () => {
-        if (mobileMenu.classList.contains("hidden")) {
-          mobileMenu.classList.remove("hidden");
-          mobileMenu.classList.add("translate-y-0", "opacity-100");
-        } else {
-          mobileMenu.classList.add("hidden");
-          mobileMenu.classList.remove("translate-y-0", "opacity-100");
-        }
-      });
-    </script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-      AOS.init();
-      // ... (event listener untuk modal seperti di atas)
-    </script>
-
-    <!-- Consume API -->
-    <script>
-      async function fetchBand() {
-        try {
-          const response = await fetch("/api/get/all-band/");
-          const raw_band = await response.json();
-          const bands = JSON.parse(raw_band);
-          const container = document.getElementById("band-container");
-          container.innerHTML = "";
-
-          bands.forEach((band) => {
-            const slide = document.createElement("div");
-            slide.classList.add(
-              "swiper-slide",
-              "flex",
-              "justify-center",
-              "cursor-pointer"
-            );
-
-            slide.innerHTML = `
-            <div class="w-72 pt-4">
-              <img src="${band.fields.logo}" alt="${band.fields.name}">
-              <img src="${band.fields.cover}" alt="${band.fields.name}">
-              <h2 class="text-white text-2xl text-center">${band.fields.name}</h2>
-            </div>
-          `;
-            slide.addEventListener("click", () => {
-              openBandCard(band.pk);
-            });
-            container.appendChild(slide);
-          });
-        } catch (errors) {
-          console.log(errors);
-        }
-      }
-
-      async function clothes_form() {
-        const Cresponse = await fetch("/api/get/all-clothe/");
-        const Craw_datas = await Cresponse.json();
-        const Cdatas = Craw_datas;
-        const Ccontainer = document.getElementById("clothes-form");
-        Ccontainer.innerHTML = "";
-        console.log(Cdatas[0]);
-        Cdatas.forEach((Cdata) => {
-          let Cclothe = JSON.parse(Cdata["clothe"]);
-          let Cimage = JSON.parse(Cdata["images"]);
-          let Csize = JSON.parse(Cdata["sizes"]);
-          let sizeButtons = "";
-
-          Csize.forEach((size) => {
-            sizeButtons += `
-          <label>
-              <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" 
-                  data-size="${size.pk}"
-                  data-size-name="${size.fields.size}" 
-                  data-clothe-name="${Cclothe[0].fields.name}"
-                  onclick="toggleSize(this, '${Cclothe[0].pk}')">
-                  ${size.fields.size}
-              </button>
-          </label>
-      `;
-          });
-
-          const slide = document.createElement("div");
-          slide.setAttribute("id", `${Cclothe[0].fields.name}`);
-          slide.classList.add("flex", "flex-col", "border-b", "pb-4");
-          slide.innerHTML = `
-            <div class="lg:flex block items-center justify-between">
-              <div class="flex items-center">
-                <img id="form-image" src="${Cimage[0].fields.image}" alt="${Cclothe[0].fields.name}" class="w-16 h-16 object-cover">
-                <div class="flex-1 ml-4">
-                  <h2 id="form-clothe-name" class="text-lg font-bold">${Cclothe[0].fields.name}</h2>
-                  <input id="price-${Cclothe[0].pk}" value="${Csize[0].fields.price}" type="hidden" name="price" readonly>
-                  <div id="clothes-form" class="flex space-x-2 mt-2">
-                    ${sizeButtons}
+         </div>
+      </section>
+      <!-- End Hero Section -->
+      <!-- Band Section -->
+      <section id="band" class="bg-black pt-20">
+         <div class="flex justify-center">
+            <div class="w-4/5">
+               <div style="padding-bottom: 20px;" class="swiper mySwiper">
+                  <div class="swiper-wrapper" id="band-container">
+                     <!-- Slide 1 -->
+                     <div
+                        onclick="openBandCard()"
+                        class="swiper-slide flex justify-center cursor-pointer"
+                        >
+                     </div>
+                     <div
+                        onclick="openBandCard()"
+                        class="swiper-slide flex justify-center cursor-pointer"
+                        >
+                        <div class="w-72 pt-4">
+                           <h2 class="text-white text-2xl text-center">AVENGED</h2>
+                           <img
+                              src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg"
+                              alt=""
+                              />
+                        </div>
+                     </div>
+                     <div
+                        onclick="openBandCard()"
+                        class="swiper-slide flex justify-center cursor-pointer"
+                        >
+                        <div class="w-72 pt-4">
+                           <h2 class="text-white text-2xl text-center">AVENGED</h2>
+                           <img
+                              src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg"
+                              alt=""
+                              />
+                        </div>
+                     </div>
+                     <div
+                        onclick="openBandCard()"
+                        class="swiper-slide flex justify-center cursor-pointer"
+                        >
+                        <div class="w-72 pt-4">
+                           <h2 class="text-white text-2xl text-center">AVENGED</h2>
+                           <img
+                              src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg"
+                              alt=""
+                              />
+                        </div>
+                     </div>
+                     <div
+                        onclick="openBandCard()"
+                        class="swiper-slide flex justify-center cursor-pointer"
+                        >
+                        <div class="w-72 pt-4">
+                           <h2 class="text-white text-2xl text-center">AVENGED</h2>
+                           <img
+                              src="https://i.pinimg.com/736x/32/8f/b7/328fb7a28858dea1107dd325c6954264.jpg"
+                              alt=""
+                              />
+                        </div>
+                     </div>
                   </div>
-                </div>
-                <div class="flex items-center space-x-2 mt-5">
-                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('${Cclothe[0].pk}', -1)">-</button>
-                  <input type="text" value="0" readonly class="w-10 py-1 text-center bg-black border text-white" id="quantity-${Cclothe[0].pk}">
-                  <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('${Cclothe[0].pk}', 1)">+</button>
-                </div>
-              </div>
-              <button type="button" class="mt-4 bg-black text-white border border-white px-4 py-2 rounded self-end hover:bg-white hover:text-black" onclick="addToOrder('${Cclothe[0].pk}')">Add</button>
-        `;
-          Ccontainer.append(slide);
-        });
-      }
+                  <!-- Pagination -->
+                  <!-- Pagination -->
+                  <div style="bottom: -5px" class="swiper-pagination"></div>
+                  <!-- Navigation -->
+                  <div class="swiper-button-next text-white"></div>
+                  <div class="swiper-button-prev text-white"></div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- End Band Section -->
+      <!-- Items Section -->
+      <section id="all-items">
+         <div class="w-full h-auto bg-black pt-24">
+            <h2 data-aos="fade-up" class="text-2xl text-center text-white">
+               ALL CLOTHES
+            </h2>
+            <div class="w-full flex justify-center">
+               <div class="w-3/4">
+                  <div
+                     id="items-container"
+                     class="mt-12 grid lg:grid-cols-4 md:grid-cols-2 place-items-center sm:grid-cols-2 gap-20"
+                     >
+                  </div>
+               </div>
+            </div>
+            <div class="flex justify-center mt-6">
+               <button
+                  id="prevBtn"
+                  class="bg-black text-white px-4 py-2 mx-2 disabled:opacity-50"
+                  >
+               Prev
+               </button>
+               <button id="nextBtn" class="bg-black text-white px-4 py-2 mx-2">
+               Next
+               </button>
+            </div>
+         </div>
+      </section>
+      <!-- End Items Section -->
+      <!-- Form Section  -->
+      <section id="form" class="bg-black lg:px-0 px-8">
+         <form
+            id="orderForm"
+            action="#"
+            method="post"
+            enctype="multipart/form-data"
+            class=""
+            >
+            <div class="w-full h-auto bg-black pt-24">
+               <h2 data-aos="fade-down" class="text-2xl text-center text-white">
+                  PAYMENT FORM
+               </h2>
+               <div class="mt-12 w-full flex justify-center">
+                  <div data-aos="fade-right" class="">
+                     <div class="w-full mb-3 flex gap-2">
+                        <div class="w-2/4">
+                           <label class="text-sm mb-1 text-white" for="nama">NAMA</label>
+                        </div>
+                        <input
+                           type="text"
+                           id="name"
+                           name="name"
+                           class="text-white w-full border-b-2 border-white bg-black outline-none focus:border-blue-400"
+                           required
+                           />
+                     </div>
+                     <div class="w-full mb-3 flex gap-2">
+                        <div class="w-2/4">
+                           <label class="text-sm mb-1 text-white" for="nama"
+                              >ALAMAT</label
+                              >
+                        </div>
+                        <input
+                           type="text"
+                           id="address"
+                           name="address"
+                           class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400"
+                           required
+                           />
+                     </div>
+                     <div class="w-full mb-3 flex gap-2">
+                        <div class="w-2/4">
+                           <label class="text-sm mb-1 text-white" for="nama" 
+                              >NO HP</label
+                              >
+                        </div>
+                        <input
+                           type="text"
+                           id="phone"
+                           name="phone"
+                           class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400"
+                           required
+                           />
+                     </div>
+                     <div class="w-full mb-3 flex gap-2">
+                        <div class="w-2/4">
+                           <label class="text-sm mb-1 text-white" for="email" 
+                              >EMAIL</label
+                              >
+                        </div>
+                        <input
+                           type="email"
+                           id="email"
+                           name="email"
+                           class="text-white w-full border-b-2 border-white bg-transparent outline-none focus:border-blue-400"
+                           required
+                           />
+                     </div>
+                  </div>
+               </div>
+               <div class="flex justify-center text-white">
+                  <div class="w-full lg:w-2/5">
+                     <div class="flex justify-center lg:justify-end pt-8 mb-2">
+                        <input
+                           type="text"
+                           id="search-bar"
+                           class="p-2 border border-gray-700 rounded bg-black text-white"
+                           placeholder="Search items..."
+                           oninput="filterItems()"
+                           />
+                     </div>
+                     <div
+                        id="clothes-form"
+                        class="space-y-6 max-h-72 overflow-y-auto border border-gray-700 p-4 rounded custom-scrollbar"
+                        >
+                        <!-- Tambahkan item lainnya dengan struktur serupa -->
+                     </div>
+                     <div class="mt-10">
+                        <h2 class="text-lg font-bold text-white">Your Order:</h2>
+                        <div
+                           id="order-summary"
+                           class="mt-4 border border-gray-700 p-4 rounded max-h-52 overflow-y-auto"
+                           >
+                           <!-- Order details will appear here -->
+                        </div>
+                     </div>
+                     <p id="show-price"></p>
+                     <div class="flex w-full gap-12 mt-5">
+                        <label for="type" class="text-sm mb-1 text-white"
+                           >Metode Pembayaran</label
+                           >
+                        <select
+                           id="type"
+                           name="type"
+                           onchange="handlePaymentChange()"
+                           class=" mt-1 block w-full bg-black text-white p-2 border-b-2 border-gray-300 shadow-sm sm:text-sm cursor-pointer"
+                           required
+                           >
+                           <option value="" disabled selected>Pilih metode pembayaran</option>
+                           <option value="COD">Bayar Ditempat (COD)</option>
+                           <option value="Ekspedisi">Ekspedisi</option>
+                        </select>
+                     </div>
+                     <div id="account-info" class="mt-2 lg:px-0">
+                        <div class="flex justify-start">
+                           <div class="">
+                              <label
+                                 for="account-number"
+                                 class="block text-sm font-medium text-white"
+                                 >Nomor Rekening</label
+                                 >
+                              <p id="account-number" class="mt-1 text-white">
+                                 1234-5678-9012-3456 (Bank ABC)
+                              </p>
+                              <p class="hidden text-red-600 mb-2" id="ongkir-info">
+                                 Note : Ongkir ditanggung pembeli dan dibayarkan pada saat
+                                 barang diterima!
+                              </p>
+                              <div class="mt-4">
+                                 <label
+                                    for="receipt"
+                                    class="text-sm mb-1 text-white"
+                                    >
+                                 Screenshot Bukti Transfer</label>
+                                 <input
+                                    type="file"
+                                    name="receipt"
+                                    id="receipt"
+                                    accept="image/*"
+                                    class="lg:w-1/2 w-full border-b-2"
+                                    required
+                                    />
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <input type="hidden" name="orderData" id="orderData" />
+                     <button
+                        type="submit"
+                        class="mt-6 bg-black-500 hover:bg-white hover:text-black text-white border-2 px-4 py-2 rounded mb-20"
+                        id="buttonSubmit"
+                        >
+                     Submit Order
+                     </button>
+                      <a class="fixed right-2 bottom-2 z-40" href="https://wa.me/082144508578"><img width="45px" src="../static/images/SVGs/whatsapp.svg" alt=""></a>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </section>
+      <!-- End Form Section  -->
+      <!-- Button Order -->
+      <a href="#form">
+      <button
+         id="fixedButton"
+         class="hidden fixed border border-white bottom-12 left-1/2 -translate-x-1/2 bg-black hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded z-30"
+         >
+      BUY NOW
+      </button>
+      </a>
+      <!-- End Button Order -->
+      <!-- Band Modal -->
+      <div
+         id="band-modal"
+         class="hidden fixed top-0 left-0 z-50 bg-black w-screen lg:h-screen lg:overflow-hidden overflow-y-auto h-auto "
+         >
+         <div id="modal-content">
+            <div class="flex justify-between">
+               <div class="relative">
+                  <a onclick="closeBandCard()" class="top-4" href="#hero">
+                  <img
+                     width="60px"
+                     src="../static/images/logo/taksaa logo putih.webp"
+                     alt=""
+                     />
+                  </a>
+               </div>
+               <div class="relative">
+                  <button
+                     onclick="closeBandCard()"
+                     class="w-12 absolute top-4 right-4 text-white bg-transparent border-2 border-white rounded-full p-2 hover:bg-gray-700"
+                     >
+                  X
+                  </button>
+               </div>
+            </div>
+            <div class="lg:flex h-screen h-auto block lg:pt-2 pt-12">
+               <div class="lg:w-1/2 w-full">
+                  <img
+                     id="band-modal-cover"
+                     style="width: 100%;"
+                     class="lg:h-[680px] h-auto"
+                     src="https://i.pinimg.com/736x/27/ca/78/27ca78589c387bdc552e46281ba71bd2.jpg"
+                     alt=""
+                     />
+               </div>
+               <div class="lg:w-1/2 w-full lg:overflow-y-auto overflow-hidden custom-scrollbar">
+                  <div class="lg:pr-24 flex lg:justify-end justify-center">
+                     <img
+                        id="band-modal-logo"
+                        class="w-1/2"
+                        src="https://i.pinimg.com/736x/13/7a/77/137a771c846bcb2ec81c83a799da8433.jpg"
+                        alt=""
+                        />
+                  </div>
+                  <div
+                     class="flex lg:pr-8 w-full lg:justify-start justify-center max-h-72 overflow-y-auto"
+                     >
+                     <div class="lg:w-full w-3/4 flex lg:justify-end justify-center">
+                        <h2
+                           id="band-modal-description"
+                           class="text-white lg:text-xl text-sm lg:text-end max-w-96 text-center"
+                           >
+                           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos,
+                           eum? Earum sed, similique tempora reiciendis ex eaque error vel
+                           tenetur exercitationem est nam distinctio accusantium sit fuga,
+                           eius sunt, cum labore deleniti ad neque!
+                        </h2>
+                     </div>
+                  </div>
+                  <div class="w-full flex lg:justify-end lg:pr-8 justify-center pt-5">
+                     <div id="link-logos" class="flex gap-4">
+                        <a href=""><img src="../static/images/instagram.png" alt=""></a>
+                        <a href=""><img src="../static/images/SVGs/spotify.svg" alt=""></a>
+                     </div>
+                  </div>
+                  <div class="swiper mySwiperModal mt-8">
+                     <div class="swiper-wrapper" id="band-modal-clothes">
+                        <!-- Slide 1 -->
+                     </div>
+                     <!-- Scrollbar -->
+                     <div class="swiper-scrollbar"></div>
+                     <!-- Navigation -->
+                     <div class="swiper-button-next text-white"></div>
+                     <div class="swiper-button-prev text-white"></div>
+                     <!-- Pagination -->
+                     <div class="swiper-pagination"></div>
+                  </div>
+                  <div class="mt-12 mb-24 ml-28 flex justify-center">
+                     <a href="#clothes-form">
+                     <button
+                        onclick="closeBandCard()"
+                        class="border border-white bottom-12 left-1/2 -translate-x-1/2 bg-black hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded z-30"
+                        >
+                     BUY NOW
+                     </button>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- End Band Modal -->
+      <!-- Product Modal -->
+      <div
+         data-aos="fade-right"
+         data-aos-duration="1500"
+         id="product-modal"
+         class="hidden fixed top-0 left-0 z-50 bg-black w-full h-full overflow-x-auto"
+         >
+         <div class="flex justify-between">
+            <div class="relative">
+               <a onclick="closeProductCard()" class="pt-4 pl-12" href="#hero">
+               <img
+                  width="60px"
+                  src="../static/images/logo/taksaa logo putih.webp"
+                  alt=""
+                  />
+               </a>
+            </div>
+            <div class="relative">
+               <button
+                  onclick="closeProductCard()"
+                  class="w-12 absolute top-4 right-4 text-white bg-transparent border-2 border-white rounded-full p-2 hover:bg-gray-700"
+                  >
+               X
+               </button>
+            </div>
+         </div>
+         <div class="w-full h-full block lg:flex justify-center items-center">
+            <div class="w-full lg:w-1/4 p-20">
+               <div class="pt-10">
+                  <h2
+                     id="product-modal-name"
+                     class="font-bold text-white text-2xl text-center"
+                     >
+                  </h2>
+                  <h2
+                     id="product-modal-price"
+                     class="text-white text-2xl text-center"
+                     >
+                  </h2>
+                  <hr class="mt-8" />
+                  <h2 class="mt-8 font-bold text-white text-2xl text-center">
+                  </h2>
+                  <div class="max-h-64 overflow-y-auto custom-scrollbar mt-5">
+                     <h2
+                        id="product-modal-description"
+                        class="mt-3 lg:text-left lg:px-8 text-center text-white"
+                        >
+                     </h2>
+                  </div>
+                  <div id="buy-now-clothe" class="mt-10 w-full flex justify-center">
+                     <a href="#DICK">
+                     <button
+                        onclick="closeProductCard()"
+                        class="border border-white bg-black hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded z-30"
+                        >
+                     BUY NOW
+                     </button>
+                     </a>
+                  </div>
+                  <div class="pt-12 flex justify-center md:hidden">
+                     <a href="#product-modal-image">
+                     <img
+                        class="w-8"
+                        src="../static/images/SVGs/down-chevron.svg"
+                        alt=""
+                        />
+                     </a>
+                  </div>
+               </div>
+            </div>
+            <div id="product-modal-image" class="w-full lg:w-3/4">
+               <div class="container mx-auto px-4 p-20">
+                  <div class="swiper itemsSwiper">
+                     <div class="swiper-wrapper" id="product-modal-images">
+                        <!-- Slide 1 -->
+                     </div>
+                     <div class="swiper-button-next text-white"></div>
+                     <div class="swiper-button-prev text-white"></div>
+                     <!-- Navigation buttons -->
+                     <!-- <div class="swiper-button-prev"></div> -->
+                     <!-- Pagination -->
+                     <!-- <div class="swiper-pagination"></div> -->
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- End Product Modal -->
+      <script></script>
+      <!-- Js Import -->
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+      <script src="../static/js/Fontend/toggle-buttons.js"></script>
+      <script src="../static/js/Fontend/slider.js"></script>
+      <script src="../static/js/Fontend/animated.js"></script>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script>
+         const menuToggle = document.getElementById("menu-toggle");
+         const mobileMenu = document.getElementById("mobile-menu");
+         
+         menuToggle.addEventListener("click", () => {
+           if (mobileMenu.classList.contains("hidden")) {
+             mobileMenu.classList.remove("hidden");
+             mobileMenu.classList.add("translate-y-0", "opacity-100");
+           } else {
+             mobileMenu.classList.add("hidden");
+             mobileMenu.classList.remove("translate-y-0", "opacity-100");
+           }
+         });
+      </script>
+      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+      <script>
+         AOS.init();
+         // ... (event listener untuk modal seperti di atas)
+      </script>
+      <!-- Consume API -->
+      <script>
+         async function fetchBand() {
+           try {
+             const response = await fetch("/api/get/all-band/");
+             const raw_band = await response.json();
+             const bands = JSON.parse(raw_band);
+             const container = document.getElementById("band-container");
+             container.innerHTML = "";
+             
+             bands.forEach((band) => {
+               const slide = document.createElement("div");
+               slide.classList.add(
+                 "swiper-slide",
+                 "flex",
+                 "justify-center",
+                 "cursor-pointer"
+               );
+         
+               slide.innerHTML = `
+               <div class="w-72 pt-4">
+                 <img style="width: 100%; height: 200px;" src="${band.fields.logo}" alt="${band.fields.name}">
+                 <img style="width: 100%; height: 270px;" src="${band.fields.cover}" alt="${band.fields.name}">
+                 <h2 class="text-white text-2xl text-center">${band.fields.name}</h2>
+               </div>
+             `;
+               slide.addEventListener("click", () => {
+                 openBandCard(band.pk);
+               });
+               container.appendChild(slide);
+             });
+           } catch (errors) {
+             console.log(errors);
+           }
+         }
+         
+         async function clothes_form() {
+           const Cresponse = await fetch("/api/get/all-clothe/");
+           const Craw_datas = await Cresponse.json();
+           const Cdatas = Craw_datas;
+           const Ccontainer = document.getElementById("clothes-form");
+           Ccontainer.innerHTML = "";
+           console.log(Cdatas[0]);
+           Cdatas.forEach((Cdata) => {
+             let Cclothe = JSON.parse(Cdata["clothe"]);
+             let Cimage = JSON.parse(Cdata["images"]);
+             let Csize = JSON.parse(Cdata["sizes"]);
+             let sizeButtons = "";
+         
+             Csize.forEach((size) => {
+               sizeButtons += `
+             <label>
+                 <button type="button" class="size-btn px-3 py-1 border rounded cursor-pointer" 
+                     data-size="${size.pk}"
+                     data-size-name="${size.fields.size}" 
+                     data-clothe-name="${Cclothe[0].fields.name}"
+                     onclick="toggleSize(this, '${Cclothe[0].pk}')">
+                     ${size.fields.size}
+                 </button>
+             </label>
+         `;
+             });
+         
+             const slide = document.createElement("div");
+             slide.setAttribute("id", `${Cclothe[0].fields.name}`);
+             slide.classList.add("flex", "flex-col", "border-b", "pb-4");
+             slide.innerHTML = `
+               <div id="${Cclothe[0].pk}" class="lg:flex block items-start justify-between space-y-4 lg:space-y-0 p-4 border-b">
+                 <div class="flex items-center space-x-4">
+                   <img id="form-image" src="${Cimage[0].fields.image}" alt="${Cclothe[0].fields.name}" onclick="openProductModal(${Cclothe[0].pk})" class="w-16 h-16 object-cover">
+                   <div class="flex-1">
+                     <h2 id="form-clothe-name" class="text-lg font-bold">${Cclothe[0].fields.name}</h2>
+                     <input id="price-${Cclothe[0].pk}" value="${Csize[0].fields.price}" type="hidden" name="price" readonly>
+         
+                     <!-- Pastikan ukuran tetap rapi -->
+                     <div id="clothes-form" class="flex flex-wrap gap-2 overflow-x-auto mt-2">
+                       ${sizeButtons}
+                     </div>
+                   </div>
+                 </div>
+         
+                 <!-- Bagian Qty + Button Add disusun vertikal -->
+                 <div class="flex flex-col space-y-2">
+                   <!-- Tombol quantity -->
+                   <div class="flex items-center space-x-2">
+                     <button type="button" class="text-white border px-3 py-1 min-w-[40px]" onclick="updateQuantity('${Cclothe[0].pk}', -1)">-</button>
+                     <input type="text" value="0" readonly class="w-12 py-1 text-center bg-black border text-white" id="quantity-${Cclothe[0].pk}">
+                     <button type="button" class="text-white border px-3 py-1 min-w-[40px]" onclick="updateQuantity('${Cclothe[0].pk}', 1)">+</button>
+                   </div>
+         
+                   <!-- Tombol "Add" ada di bawah qty -->
+                   <button type="button" class="bg-black text-white border border-white px-4 py-2 rounded hover:bg-white hover:text-black transition"
+                     onclick="addToOrder('${Cclothe[0].pk}')">Add</button>
+                 </div>
+               </div>
+         
+           `;
+           //   slide.innerHTML = `
+           //     <div id="${Cclothe[0].pk}" class="lg:flex block items-center justify-between">
+           //       <div class="flex items-center">
+           //         <img id="form-image" src="${Cimage[0].fields.image}" alt="${Cclothe[0].fields.name}" class="w-16 h-16 object-cover">
+           //         <div class="flex-1 ml-4">
+           //           <h2 id="form-clothe-name" class="text-lg font-bold">${Cclothe[0].fields.name}</h2>
+           //           <input id="price-${Cclothe[0].pk}" value="${Csize[0].fields.price}" type="hidden" name="price" readonly>
+           //           <div id="clothes-form" class="flex space-x-2 mt-2">
+           //             ${sizeButtons}
+           //           </div>
+           //         </div>
+           //         <div class="flex items-center space-x-2 mt-5">
+           //           <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('${Cclothe[0].pk}', -1)">-</button>
+           //           <input type="text" value="0" readonly class="w-10 py-1 text-center bg-black border text-white" id="quantity-${Cclothe[0].pk}">
+           //           <button type="button" class="text-white border px-3 py-1" onclick="updateQuantity('${Cclothe[0].pk}', 1)">+</button>
+           //         </div>
+           //       </div>
+           //       <button type="button" class="mt-4 bg-black text-white border border-white px-4 py-2 rounded self-end hover:bg-white hover:text-black" onclick="addToOrder('${Cclothe[0].pk}')">Add</button>
+           //     </div>
+           // `;
+             Ccontainer.append(slide);
+           });
+         }
+         
+         window.onload = (e) => {
+           fetchBand();
+           clothes_form();
+           fetchClothes();
+           allowNumbersOnly(document.getElementById('phone'))
+         };
 
-      window.onload = (e) => {
-        fetchBand();
-        clothes_form();
-        fetchClothes();
-      };
-    </script>
-    <script>
-      async function fetchClothes() {
-        try {
-          const Cresponse = await fetch("/api/get/all-clothe/");
-          const Craw_datas = await Cresponse.json();
-          const Cdatas = Craw_datas;
-          const Ccontainer = document.getElementById("items-container");
-          Ccontainer.innerHTML = "";
-
-          Cdatas.forEach((Cdata) => {
-            let Cclothe = JSON.parse(Cdata["clothe"]);
-            let Cimage = JSON.parse(Cdata["images"]);
-            let Csize = JSON.parse(Cdata["sizes"]);
-            const Cslide = document.createElement("div");
-            Cslide.classList.add("w-72", "pt-4", "item", "cursor-pointer");
-
-            Cslide.innerHTML = `
-          <h2 class="text-white text-2xl text-center">${Cclothe[0].fields.name}</h2>
-          <img src="${Cimage[0].fields.image}" alt="">
-          <div class="text-white text-1xl text-center">Rp. ${Csize[0].fields.price}</div>
-        `;
-            Cslide.addEventListener("click", () => {
-              openProductModal(Cclothe[0].pk);
+         function allowNumbersOnly(inputElement) {
+            inputElement.addEventListener("input", function () {
+              this.value = this.value.replace(/[^0-9]/g, "");
             });
-            Ccontainer.appendChild(Cslide);
-          });
-        } catch (Cerrors) {
-          console.log(Cerrors);
-        }
-      }
-      // window.onload = (e) => {
-
-      //   }
-
-      // <div onclick="openProductModal()" class="w-72 pt-4 item cursor-pointer">
-      //              <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
-      //              <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
-      //              <div class="text-white text-1xl text-center">Rp. 180.000</div>
-      //            </div>
-    </script>
-
-    <script>
-      function handlePaymentChange() {
-        const paymentMethod = document.getElementById("type").value;
-        const accountInfo = document.getElementById("account-info");
-
-        if (paymentMethod === "Transfer") {
-          accountInfo.classList.remove("hidden");
-        } else {
-          accountInfo.classList.add("hidden");
-        }
-      }
-    </script>
-    <script>
-      async function openBandCard(id) {
-        const response = await fetch(`/api/get/band/${id}/clothes/`);
-        const raw_data = await response.json();
-        const data = raw_data;
-        const band = JSON.parse(data.band)[0];
-        const clothes = data["clothes"];
-        const bandModal = document.getElementById("band-modal");
-        const productModal = document.getElementById("product-modal");
-        productModal.classList.add("hidden");
-        bandModal.classList.remove("hidden");
-
-        // Get Container
-        Ccover = document.getElementById("band-modal-cover");
-        Clogo = document.getElementById("band-modal-logo");
-        Cdesc = document.getElementById("band-modal-description");
-        Cclothes = document.getElementById("band-modal-clothes");
-
-        Ccover.src = `${band.fields.cover}`;
-        Clogo.src = `${band.fields.logo}`;
-        Cdesc.innerHTML = `${band.fields.description}`;
-
-        clothes.forEach((data) => {
-          let clothe = JSON.parse(data["clothe"]);
-          let sizes = JSON.parse(data["sizes"]);
-          let images = JSON.parse(data["images"]);
-          const divSwiper = document.createElement("div");
-          divSwiper.classList.add("swiper-slide", "flex", "justify-center");
-
-          const divWrapper = document.createElement("div");
-          divWrapper.classList.add("w-48", "pt-4", "cursor-pointer");
-
-          divWrapper.innerHTML = `
-          <h2 class="text-white text-2xl text-center">${clothe[0].fields.name}</h2>
-          <img src="${images[0].fields.image}" alt="">
-          <div class="text-white text-1xl text-center">Rp. ${sizes[0].fields.price}</div>
-        `;
-          divSwiper.append(divWrapper);
-          divSwiper.addEventListener("click", () => {
-            openProductModal(clothe[0].pk);
-          });
-          Cclothes.append(divSwiper);
-        });
-
-        // <div class="swiper-slide flex justify-center">
-        //         <div onclick="openProductModal()" class="w-48 pt-4 cursor-pointer">
-        //           <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
-        //           <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
-        //           <div class="text-white text-1xl text-center">Rp. 180.000</div>
-        //         </div>
-        //       </div>
-
-        AOS.refresh();
-      }
-      function closeBandCard() {
-        const bandModal = document.getElementById("band-modal");
-        bandModal.classList.add("hidden");
-      }
-      async function openProductModal(id) {
-        const response = await fetch(`/api/get/clothes/${id}/`);
-        const raw_datas = await response.json();
-        console.log(raw_datas);
-        const clothe_datas = JSON.parse(raw_datas.clothe);
-        const size_datas = JSON.parse(raw_datas.sizes);
-        const image_datas = JSON.parse(raw_datas.images);
-        const bandModal = document.getElementById("band-modal");
-        const productModal = document.getElementById("product-modal");
-        bandModal.classList.add("hidden");
-        productModal.classList.remove("hidden");
-        // console.log(datas[0].fields.name)
-        // Get Container
-        const Cname = document.getElementById("product-modal-name");
-        const Cprice = document.getElementById("product-modal-price");
-        const Cdesc = document.getElementById("product-modal-description");
-        const Cimage = document.getElementById("product-modal-images");
-
-        Cname.innerHTML = `${clothe_datas[0].fields.name}`;
-        Cprice.innerHTML = `${size_datas[0].fields.price}`;
-        Cdesc.innerHTML = `${clothe_datas[0].fields.description}`;
-
-        image_datas.forEach((data) => {
-          Cimage.innerHTML = `
-          <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
-            <img src="${data.fields.image}" alt="">
-          </div>
-        `;
-        });
-
-        Cimage.append(swiper);
-
-        // <div class="swiper-wrapper">
-        //         <!-- Slide 1 -->
-        //         <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
-        //           <img src="https://dynamic.zacdn.com/eS-k2B2aZu6To-1Ynuk729SR_kc=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/mango-9272-0063174-2.jpg" alt="">
-        //         </div>
-      }
-
-      function closeProductCard() {
-        const bandModal = document.getElementById("product-modal");
-        bandModal.classList.add("hidden");
-      }
-    </script>
-    <script>
-      const itemsPerPage = 8; // Number of items per page
-      let currentPage = 1;
-
-      // Function to render the items based on the page
-      function renderItems() {
-        const items = document.querySelectorAll(".item"); // Get all items
-        const totalItems = items.length;
-        const totalPages = Math.ceil(totalItems / itemsPerPage); // Calculate total pages
-
-        // Show the relevant items based on current page
-        items.forEach((item, index) => {
-          if (
-            index >= (currentPage - 1) * itemsPerPage &&
-            index < currentPage * itemsPerPage
-          ) {
-            item.style.display = "block";
-          } else {
-            item.style.display = "none";
           }
-        });
-
-        // Handle pagination buttons
-        document.getElementById("prevBtn").disabled = currentPage === 1;
-        document.getElementById("nextBtn").disabled =
-          currentPage === totalPages;
-      }
-
-      // Event listeners for pagination buttons
-      document.getElementById("prevBtn").addEventListener("click", () => {
-        if (currentPage > 1) {
-          currentPage--;
-          renderItems();
-        }
-      });
-
-      document.getElementById("nextBtn").addEventListener("click", () => {
-        const totalItems = document.querySelectorAll(".item").length;
-        const totalPages = Math.ceil(totalItems / itemsPerPage);
-        if (currentPage < totalPages) {
-          currentPage++;
-          renderItems();
-        }
-      });
-
-      // Initialize items
-      renderItems();
-    </script>
-    <script>
-      const swiperModal = new Swiper(".mySwiperModal", {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        mousewheel: {
-          invert: false, // Aktifkan scroll dengan mouse
-        },
-        scrollbar: {
-          el: ".swiper-scrollbar",
-          draggable: true, // Scrollbar bisa digeser manual
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-          640: {
-            slidesPerView: 2, // Untuk layar medium
-          },
-          1024: {
-            slidesPerView: 3, // Untuk layar besar
-          },
-        },
-        preventClicks: false, // Aktifkan klik
-        preventClicksPropagation: false, // Hindari menimpa klik dengan event lainnya
-      });
-    </script>
-    <script>
-      const swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        mousewheel: {
-          invert: false, // Aktifkan scroll dengan mouse
-        },
-        scrollbar: {
-          el: ".swiper-scrollbar",
-          draggable: true, // Scrollbar bisa digeser manual
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true, // Membuat dot bisa di-klik
-          type: "bullets", // Menentukan tipe pagination sebagai bullets
-        },
-        breakpoints: {
-          640: {
-            slidesPerView: 2, // Untuk layar medium
-          },
-          1024: {
-            slidesPerView: 3, // Untuk layar besar
-          },
-        },
-        preventClicks: false, // Aktifkan klik
-        preventClicksPropagation: false, // Hindari menimpa klik dengan event lainnya
-      });
-    </script>
-
-    <script>
-      const swiper3 = new Swiper(".itemsSwiper", {
-        slidesPerView: "auto", // Adjust based on how many slides you want visible
-        spaceBetween: 6, // Gap between slides
-        freeMode: true, // Enable free mode for smooth scroll
-        grabCursor: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          640: {
-            slidesPerView: 2,
-          },
-          1024: {
-            slidesPerView: 3,
-          },
-        },
-      });
-    </script>
-    <script>
-      const orders = {};
-      const buttonSubmit = document.getElementById("buttonSubmit");
-      buttonSubmit.addEventListener("click", (e) => {
-        e.preventDefault();
-        const name = document.getElementById("name");
-        const address = document.getElementById("address");
-        const phone = document.getElementById("phone");
-        const email = document.getElementById("email");
-        const type = document.getElementById("type");
-        const receipt = document.getElementById("receipt");
-        let formData = new FormData();
-        formData.append("name", name.value);
-        formData.append("address", address.value);
-        formData.append("phone", phone.value);
-        formData.append("email", email.value);
-        formData.append("type", type.value);
-        formData.append("receipt", receipt.files[0]);
-        formData.append("orders", JSON.stringify(orders));
-        fetch("/api/post/order/", {
-          method: "POST",
-          mode: "cors",
-          // headers: {
-          //   "Content-Type": "multipart/form-data",
-          // },
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-          });
-      });
-
-      function toggleSize(button, productId) {
-        const sizeButtons = document.querySelectorAll(
-          `.size-btn[data-size][onclick*="${productId}"]`
-        );
-        const isActive = button.classList.contains("bg-white");
-
-        // Reset semua tombol
-        sizeButtons.forEach((btn) => {
-          btn.classList.remove("bg-white", "text-black");
-          btn.classList.add("bg-transparent", "text-white");
-        });
-
-        if (!isActive) {
-          // Aktifkan tombol baru
-          button.classList.add("bg-white", "text-black");
-          button.classList.remove("bg-transparent", "text-white");
-
-          console.log(`Selected size for ${productId}:`, button.dataset.size);
-        } else {
-          console.log(`Unselected size for ${productId}`);
-        }
-      }
-
-      function updateQuantity(productId, change) {
-        const quantityInput = document.getElementById(`quantity-${productId}`);
-        let currentQuantity = parseInt(quantityInput.value);
-        currentQuantity = Math.max(0, currentQuantity + change); // Jangan biarkan jumlah di bawah 0
-        quantityInput.value = currentQuantity;
-      }
-
-      function addToOrder(productId) {
-        const sizeButton = document.querySelector(
-          `.size-btn.bg-white[onclick*="${productId}"]`
-        );
-        const quantityInput = document.getElementById(`quantity-${productId}`);
-        const priceInput = document.getElementById(`price-${productId}`);
-        const size = sizeButton ? sizeButton.dataset.size : null;
-        const quantity = parseInt(quantityInput.value);
-        const price = parseInt(priceInput.value);
-        console.log(size);
-        if (!size) {
-          alert("Please select a size before adding to order.");
-          return;
-        }
-
-        if (quantity <= 0) {
-          alert("Please select a quantity greater than zero.");
-          return;
-        }
-        const sizeName = sizeButton.dataset.sizeName;
-        const clotheName = sizeButton.dataset.clotheName;
-
-        const orderKey = `${size}`;
-        if (orders[orderKey]) {
-          orders[orderKey].quantity += quantity; // Tambahkan jumlah jika item sama sudah ada
-        } else {
-          orders[orderKey] = {
-            productId,
-            size,
-            quantity,
-            price,
-            sizeName,
-            clotheName,
-          };
-        }
-
-        // Reset input setelah menambahkan
-        sizeButton.classList.remove("bg-white", "text-black");
-        sizeButton.classList.add("bg-transparent", "text-white");
-        quantityInput.value = 0;
-
-        console.log("Order added:", orders);
-        updateOrderSummary();
-      }
-
-      function updateOrderSummary() {
-        const orderSummary = document.getElementById("order-summary");
-        orderSummary.innerHTML = ""; // Kosongkan daftar
-
-        Object.keys(orders).forEach((orderKey) => {
-          const order = orders[orderKey];
-          const price = order.price * order.quantity;
-          const orderItem = document.createElement("div");
-          orderItem.className = "flex justify-between border-b pb-2 mb-2";
-
-          orderItem.innerHTML = `
-        <div>
-          <p>${order.clotheName}</p>
-          <p>Size: ${order.sizeName}</p>
-          <p>Quantity: ${order.quantity}</p>
-          <p>Price : Rp. ${price}</p>
-        </div>
-        <button class="text-white" onclick="removeFromOrder('${orderKey}')">Remove</button>
-      `;
-          orderSummary.appendChild(orderItem);
-        });
-
-        // Update hidden input for form submission
-        document.getElementById("orderData").value = JSON.stringify(orders);
-      }
-
-      function removeFromOrder(orderKey) {
-        delete orders[orderKey];
-        updateOrderSummary();
-      }
-
-      function filterItems() {
-        const searchInput = document
-          .getElementById("search-bar")
-          .value.toLowerCase();
-        const items = document.querySelectorAll(".space-y-6 > div");
-
-        items.forEach((item) => {
-          const itemName = item.querySelector("h2").innerText.toLowerCase();
-          if (itemName.includes(searchInput)) {
-            item.style.display = ""; // Tampilkan item jika cocok
-          } else {
-            item.style.display = "none"; // Sembunyikan item jika tidak cocok
-          }
-        });
-      }
-    </script>
-
-    <!-- End Js Import -->
-  </body>
+      </script>
+      <script>
+         async function fetchClothes() {
+           try {
+             const Cresponse = await fetch("/api/get/all-clothe/");
+             const Craw_datas = await Cresponse.json();
+             const Cdatas = Craw_datas;
+             const Ccontainer = document.getElementById("items-container");
+             Ccontainer.innerHTML = "";
+         
+             Cdatas.forEach((Cdata) => {
+               let Cclothe = JSON.parse(Cdata["clothe"]);
+               let Cimage = JSON.parse(Cdata["images"]);
+               let Csize = JSON.parse(Cdata["sizes"]);
+               const Cslide = document.createElement("div");
+               Cslide.classList.add("w-72", "pt-4", "item", "cursor-pointer");
+         
+               Cslide.innerHTML = `
+             <h2 class="text-white text-2xl text-center">${Cclothe[0].fields.name}</h2>
+             <img style="width: 100%; height: 220px;" src="${Cimage[0].fields.image}" alt="">
+             <div class="text-white text-1xl text-center">Rp. ${Csize[0].fields.price}</div>
+           `;
+               Cslide.addEventListener("click", () => {
+                 openProductModal(Cclothe[0].pk);
+               });
+               Ccontainer.appendChild(Cslide);
+             });
+           } catch (Cerrors) {
+             console.log(Cerrors);
+           }
+         }
+         // window.onload = (e) => {
+         
+         //   }
+         
+         // <div onclick="openProductModal()" class="w-72 pt-4 item cursor-pointer">
+         //              <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+         //              <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+         //              <div class="text-white text-1xl text-center">Rp. 180.000</div>
+         //            </div>
+      </script>
+      <script>
+         function handlePaymentChange() {
+           const paymentMethod = document.getElementById("type").value;
+           const ongkirInfo = document.getElementById("ongkir-info")
+         
+           if (paymentMethod === "Ekspedisi") {
+             ongkirInfo.classList.remove("hidden")
+           } else if(paymentMethod === "COD"){
+             ongkirInfo.classList.add("hidden")
+           }
+         }
+      </script>
+      <script>
+         async function openBandCard(id) {
+           const bodyContainer = document.getElementById('body-container')
+           bodyContainer.classList.add('overflow-hidden')
+           const response = await fetch(`/api/get/band/${id}/clothes/`);
+           const raw_data = await response.json();
+           const data = raw_data;
+           const band = JSON.parse(data.band)[0];
+           const clothes = data["clothes"];
+           const bandModal = document.getElementById("band-modal");
+           const modalContent = document.getElementById("modal-content");
+           const productModal = document.getElementById("product-modal");
+         
+           productModal.classList.add("hidden");
+           bandModal.classList.remove("hidden");
+         
+         
+         
+           // Get Container
+           Ccover = document.getElementById("band-modal-cover");
+           Clogo = document.getElementById("band-modal-logo");
+           Cdesc = document.getElementById("band-modal-description");
+           Cclothes = document.getElementById("band-modal-clothes");
+         
+           Ccover.src = `${band.fields.cover}`;
+           Clogo.src = `${band.fields.logo}`;
+           Cdesc.innerHTML = `${band.fields.description}`;
+         
+           const logoContainer = document.getElementById('link-logos')
+           logoContainer.innerHTML = `
+             <a href="${band.fields.instagram}" target="_blank"><img width="40px" src="../static/images/instagram.png" alt=""></a>
+             <a href="${band.fields.spotify}" target="_blank"><img width="40px" src="../static/images/spotify.png" alt=""></a>
+           `
+           clothes.forEach((data) => {
+             let clothe = JSON.parse(data["clothe"]);
+             let sizes = JSON.parse(data["sizes"]);
+             let images = JSON.parse(data["images"]);
+             const divSwiper = document.createElement("div");
+             divSwiper.classList.add("swiper-slide", "flex", "justify-center");
+         
+             const divWrapper = document.createElement("div");
+             divWrapper.classList.add("w-48", "pt-4", "cursor-pointer");
+         
+             divWrapper.innerHTML = `
+             <h2 class="text-white text-2xl text-center">${clothe[0].fields.name}</h2>
+             <img style="width: 100%; height: 200px;" src="${images[0].fields.image}" alt="">
+             <div class="text-white text-1xl text-center">Rp. ${sizes[0].fields.price}</div>
+           `;
+             divSwiper.append(divWrapper);
+             divSwiper.addEventListener("click", () => {
+               openProductModal(clothe[0].pk);
+             });
+             Cclothes.append(divSwiper);
+           });
+         
+           // <div class="swiper-slide flex justify-center">
+           //         <div onclick="openProductModal()" class="w-48 pt-4 cursor-pointer">
+           //           <h2 class="text-white text-2xl text-center">ROADDISH OVERSIZED</h2>
+           //           <img src="https://down-id.img.susercontent.com/file/1f1de1311e23852e6368580a4cccd8a5" alt="">
+           //           <div class="text-white text-1xl text-center">Rp. 180.000</div>
+           //         </div>
+           //       </div>
+         
+           AOS.refresh();
+         }
+         function closeBandCard() {
+           const bodyContainer = document.getElementById('body-container')
+           bodyContainer.classList.remove('overflow-hidden')
+           const bandModal = document.getElementById("band-modal");
+           bandModal.classList.add("hidden");
+         }
+         async function openProductModal(id) {
+           const bodyContainer = document.getElementById('body-container')
+           bodyContainer.classList.add('overflow-hidden')
+           const response = await fetch(`/api/get/clothes/${id}/`);
+           const raw_datas = await response.json();
+           console.log(raw_datas);
+           const clothe_datas = JSON.parse(raw_datas.clothe);
+           const size_datas = JSON.parse(raw_datas.sizes);
+           const image_datas = JSON.parse(raw_datas.images);
+           const bandModal = document.getElementById("band-modal");
+           const productModal = document.getElementById("product-modal");
+           bandModal.classList.add("hidden");
+           productModal.classList.remove("hidden");
+           // console.log(datas[0].fields.name)
+           // Get Container
+           const Cname = document.getElementById("product-modal-name");
+           const Cprice = document.getElementById("product-modal-price");
+           const Cdesc = document.getElementById("product-modal-description");
+           const Cimage = document.getElementById("product-modal-images");
+           const CbuyNow = document.getElementById('buy-now-clothe');
+         
+           Cname.innerHTML = `${clothe_datas[0].fields.name}`;
+           Cprice.innerHTML = `${size_datas[0].fields.price}`;
+           Cdesc.innerHTML = `${clothe_datas[0].fields.description}`;
+         
+           CbuyNow.innerHTML = `
+             <a href="#${clothe_datas[0].pk}">
+               <button
+                 onclick="closeProductCard()"
+                 class="border border-white bg-black hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded z-30"
+               >
+                 BUY NOW
+               </button>
+             </a>
+           `
+           console.log(image_datas)
+           Cimage.innerHTML = ''
+           image_datas.forEach((data) => {
+             console.log(data)
+           //   Cimage.innerHTML = `
+           //   <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
+           //     <img src="${data.fields.image}" alt="">
+           //   </div>
+           // `;
+           let divSwipper = document.createElement('div')
+           divSwipper.classList.add('swiper-slide', 'flex', 'justify-center', 'items-center', 'bg-blue-500', 'text-white', 'text-lg', 'font-bold')
+           divSwipper.innerHTML = `
+             <img src="${data.fields.image}" alt="">
+           `
+           Cimage.append(divSwipper)
+         });
+         
+         
+           // <div class="swiper-wrapper">
+           //         <!-- Slide 1 -->
+           //         <div class="swiper-slide flex justify-center items-center bg-blue-500 text-white text-lg font-bold">
+           //           <img src="https://dynamic.zacdn.com/eS-k2B2aZu6To-1Ynuk729SR_kc=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/mango-9272-0063174-2.jpg" alt="">
+           //         </div>
+         }
+         
+         function closeProductCard() {
+           const bodyContainer = document.getElementById('body-container')
+           bodyContainer.classList.remove('overflow-hidden')
+           const bandModal = document.getElementById("product-modal");
+           bandModal.classList.add("hidden");
+         }
+      </script>
+      <script>
+         const itemsPerPage = 8; // Number of items per page
+         let currentPage = 1;
+         
+         // Function to render the items based on the page
+         function renderItems() {
+           const items = document.querySelectorAll(".item"); // Get all items
+           const totalItems = items.length;
+           const totalPages = Math.ceil(totalItems / itemsPerPage); // Calculate total pages
+         
+           // Show the relevant items based on current page
+           items.forEach((item, index) => {
+             if (
+               index >= (currentPage - 1) * itemsPerPage &&
+               index < currentPage * itemsPerPage
+             ) {
+               item.style.display = "block";
+             } else {
+               item.style.display = "none";
+             }
+           });
+         
+           // Handle pagination buttons
+           document.getElementById("prevBtn").disabled = currentPage === 1;
+           document.getElementById("nextBtn").disabled =
+             currentPage === totalPages;
+         }
+         
+         // Event listeners for pagination buttons
+         document.getElementById("prevBtn").addEventListener("click", () => {
+           if (currentPage > 1) {
+             currentPage--;
+             renderItems();
+           }
+         });
+         
+         document.getElementById("nextBtn").addEventListener("click", () => {
+           const totalItems = document.querySelectorAll(".item").length;
+           const totalPages = Math.ceil(totalItems / itemsPerPage);
+           if (currentPage < totalPages) {
+             currentPage++;
+             renderItems();
+           }
+         });
+         
+         // Initialize items
+         renderItems();
+      </script>
+      <script>
+         const swiperModal = new Swiper(".mySwiperModal", {
+           slidesPerView: 1,
+           spaceBetween: 20,
+           loop: true,
+           mousewheel: {
+             invert: false, // Aktifkan scroll dengan mouse
+           },
+           scrollbar: {
+             el: ".swiper-scrollbar",
+             draggable: true, // Scrollbar bisa digeser manual
+           },
+           navigation: {
+             nextEl: ".swiper-button-next",
+             prevEl: ".swiper-button-prev",
+           },
+           breakpoints: {
+             640: {
+               slidesPerView: 2, // Untuk layar medium
+             },
+             1024: {
+               slidesPerView: 3, // Untuk layar besar
+             },
+           },
+           preventClicks: false, // Aktifkan klik
+           preventClicksPropagation: false, // Hindari menimpa klik dengan event lainnya
+         });
+      </script>
+      <script>
+         const swiper = new Swiper(".mySwiper", {
+           slidesPerView: 1,
+           spaceBetween: 20,
+           loop: true,
+           mousewheel: {
+             invert: false, // Aktifkan scroll dengan mouse
+           },
+           scrollbar: {
+             el: ".swiper-scrollbar",
+             draggable: true, // Scrollbar bisa digeser manual
+           },
+           navigation: {
+             nextEl: ".swiper-button-next",
+             prevEl: ".swiper-button-prev",
+           },
+           pagination: {
+             el: ".swiper-pagination",
+             clickable: true, // Membuat dot bisa di-klik
+             type: "bullets", // Menentukan tipe pagination sebagai bullets
+           },
+           breakpoints: {
+             640: {
+               slidesPerView: 2, // Untuk layar medium
+             },
+             1024: {
+               slidesPerView: 3, // Untuk layar besar
+             },
+           },
+           preventClicks: false, // Aktifkan klik
+           preventClicksPropagation: false, // Hindari menimpa klik dengan event lainnya
+         });
+      </script>
+      <script>
+         const swiper3 = new Swiper(".itemsSwiper", {
+           slidesPerView: "auto", // Adjust based on how many slides you want visible
+           spaceBetween: 6, // Gap between slides
+           freeMode: true, // Enable free mode for smooth scroll
+           grabCursor: true,
+           pagination: {
+             el: ".swiper-pagination",
+             clickable: true,
+           },
+           breakpoints: {
+             640: {
+               slidesPerView: 2,
+             },
+             1024: {
+               slidesPerView: 3,
+             },
+           },
+         });
+      </script>
+      <script>
+         const orders = {};
+         const buttonSubmit = document.getElementById("buttonSubmit");
+         const orderForm = document.getElementById('orderForm')
+         buttonSubmit.addEventListener("click", (e) => {
+           let isValid = orderForm.checkValidity()
+           if (!isValid) {
+             
+             orderForm.reportValidity()
+           } 
+           else if (!Object.keys(orders).length > 0) {
+              e.preventDefault()
+              Swal.fire({
+                title: "Pesanan tidak boleh kosong!",
+                icon: "error",
+              }).then((result) => {
+                  console.log("");              
+              });
+             }
+           else {
+             e.preventDefault();
+             Swal.fire({
+               title: "Mohon ditunggu, sedang mengirim pesanan anda!",
+               didOpen: () => {
+                 Swal.showLoading();
+               },
+             }).then((result) => {
+               console.log('')         
+             });
+             const name = document.getElementById("name");
+             const address = document.getElementById("address");
+             const phone = document.getElementById("phone");
+             const email = document.getElementById("email");
+             const type = document.getElementById("type");
+             const receipt = document.getElementById("receipt");
+             let formData = new FormData();
+             formData.append("name", name.value);
+             formData.append("address", address.value);
+             formData.append("phone", phone.value);
+             formData.append("email", email.value);
+             formData.append("type", type.value);
+             formData.append("receipt", receipt.files[0]);
+             formData.append("orders", JSON.stringify(orders));
+             fetch("/api/post/order/", {
+               method: "POST",
+               mode: "cors",
+               // headers: {
+               //   "Content-Type": "multipart/form-data",
+               // },
+               body: formData,
+             })
+               .then((response) => response.json())
+               .then((data) => {
+                 if (data['status'] == 200) {
+                   Swal.fire({
+                     title: "Pesanan anda berhasil dikirim!",
+                     icon: "success",
+                   }).then((result) => {
+                       console.log("");              
+                   });
+                 } else {
+                   Swal.fire({
+                     title: "Maaf, terjadi kesalahan pada server, segera hubungi admin!",
+                     icon: "error",
+                   }).then((result) => {
+                       console.log("");              
+                   });
+         
+                 }
+               });
+           }
+         });
+         
+         function toggleSize(button, productId) {
+           const sizeButtons = document.querySelectorAll(
+             `.size-btn[data-size][onclick*="${productId}"]`
+           );
+           const isActive = button.classList.contains("bg-white");
+         
+           // Reset semua tombol
+           sizeButtons.forEach((btn) => {
+             btn.classList.remove("bg-white", "text-black");
+             btn.classList.add("bg-transparent", "text-white");
+           });
+         
+           if (!isActive) {
+             // Aktifkan tombol baru
+             button.classList.add("bg-white", "text-black");
+             button.classList.remove("bg-transparent", "text-white");
+         
+             console.log(`Selected size for ${productId}:`, button.dataset.size);
+           } else {
+             console.log(`Unselected size for ${productId}`);
+           }
+         }
+         
+         function updateQuantity(productId, change) {
+           const quantityInput = document.getElementById(`quantity-${productId}`);
+           let currentQuantity = parseInt(quantityInput.value);
+           currentQuantity = Math.max(0, currentQuantity + change); // Jangan biarkan jumlah di bawah 0
+           quantityInput.value = currentQuantity;
+         }
+         
+         function addToOrder(productId) {
+           const sizeButton = document.querySelector(
+             `.size-btn.bg-white[onclick*="${productId}"]`
+           );
+           const quantityInput = document.getElementById(`quantity-${productId}`);
+           const priceInput = document.getElementById(`price-${productId}`);
+           const size = sizeButton ? sizeButton.dataset.size : null;
+           const quantity = parseInt(quantityInput.value);
+           const price = parseInt(priceInput.value);
+           console.log(size);
+           if (!size) {
+             alert("Please select a size before adding to order.");
+             return;
+           }
+         
+           if (quantity <= 0) {
+             alert("Please select a quantity greater than zero.");
+             return;
+           }
+           const sizeName = sizeButton.dataset.sizeName;
+           const clotheName = sizeButton.dataset.clotheName;
+         
+           const orderKey = `${size}`;
+           if (orders[orderKey]) {
+             orders[orderKey].quantity += quantity; // Tambahkan jumlah jika item sama sudah ada
+           } else {
+             orders[orderKey] = {
+               productId,
+               size,
+               quantity,
+               price,
+               sizeName,
+               clotheName,
+             };
+           }
+         
+           // Reset input setelah menambahkan
+           sizeButton.classList.remove("bg-white", "text-black");
+           sizeButton.classList.add("bg-transparent", "text-white");
+           quantityInput.value = 0;
+         
+           console.log("Order added:", orders);
+           updateOrderSummary();
+         }
+         
+         function updateOrderSummary() {
+           const orderSummary = document.getElementById("order-summary");
+           orderSummary.innerHTML = ""; // Kosongkan daftar
+           Object.keys(orders).forEach((orderKey) => {
+             const order = orders[orderKey];
+             const price = order.price ;
+             const orderItem = document.createElement("div");
+             orderItem.className = "flex justify-between border-b pb-2 mb-2";
+         
+             orderItem.innerHTML = `
+               <div>
+                 <p>${order.clotheName}</p>
+                 <p>Size: ${order.sizeName}</p>
+                 <p>Quantity: ${order.quantity}</p>
+                 <p>Price : Rp. ${price} /pcs</p>
+               </div>
+               <button class="text-white" onclick="removeFromOrder('${orderKey}')">Remove</button>
+               `;
+             orderSummary.appendChild(orderItem);
+           });
+           calculateOrderPrice() 
+         
+           // Update hidden input for form submission
+           document.getElementById("orderData").value = JSON.stringify(orders);
+         }
+         
+         function removeFromOrder(orderKey) {
+           const showPrice = document.getElementById('show-price')
+           delete orders[orderKey];
+           updateOrderSummary();
+         }
+         
+         function calculateOrderPrice() {
+           const showPrice = document.getElementById('show-price')
+           let totalPrice = 0
+           Object.keys(orders).forEach(key => {
+             let order = orders[key]
+             totalPrice = totalPrice + (order.price * order.quantity)
+           });
+           if (totalPrice > 0) {
+             showPrice.innerHTML = '<strong>*Mohon transfer ke nomor rekening dibawah sebesar : Rp.'+totalPrice+'</strong>'
+           } else {
+             showPrice.innerHTML = ''
+           }
+         }
+         
+         function filterItems() {
+           const searchInput = document
+             .getElementById("search-bar")
+             .value.toLowerCase();
+           const items = document.querySelectorAll(".space-y-6 > div");
+         
+           items.forEach((item) => {
+             const itemName = item.querySelector("h2").innerText.toLowerCase();
+             if (itemName.includes(searchInput)) {
+               item.style.display = ""; // Tampilkan item jika cocok
+             } else {
+               item.style.display = "none"; // Sembunyikan item jika tidak cocok
+             }
+           });
+         }
+      </script>
+      <!-- End Js Import -->
+   </body>
 </html>
-
 <!-- <div class="">
-    <img src="https://www.nme.com/wp-content/uploads/2016/09/2012BlckMetal1.borknagar181012.jpg" alt="">
-    <h2 class="text-lg text-black">In darkness, we find light</h2>
-    <h2 class="text-lg text-black">In darkness, we find light</h2>
-  </div> -->
+   <img src="https://www.nme.com/wp-content/uploads/2016/09/2012BlckMetal1.borknagar181012.jpg" alt="">
+   <h2 class="text-lg text-black">In darkness, we find light</h2>
+   <h2 class="text-lg text-black">In darkness, we find light</h2>
+   </div> -->
