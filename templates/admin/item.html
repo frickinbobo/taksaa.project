@@ -494,7 +494,7 @@
   <span>{{message['message']}}</span>
 </div>
 {% endif %}
-<div class="card my-4 lg:card-side bg-base-100 shadow-xl">
+<!-- <div class="card my-4 lg:card-side bg-base-100 shadow-xl">
   <figure class="max-h-75 max-w-[25rem] w-full h-full mx-auto">
     <img src="{{ response['band'].cover }}" alt="Album" />
   </figure>
@@ -505,7 +505,7 @@
     </p>
     <div class="card-actions justify-end"></div>
   </div>
-</div>
+</div> -->
 <div class="card bg-base-100 w-full shadow-xl">
   <div class="card-body">
     <h2 class="card-title capitalize">{{ response['band'].name }}'s Clothes</h2>
@@ -694,6 +694,14 @@
   src="{{ url_for('static', filename='js/admin/item.js') }}"
 ></script>
 <script>
+  function formatToIDR(amount) {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  }
   let inputClothesSizeEdit = document.getElementById("input-clothes-size-edit");
   let inputClothesPriceEdit = document.getElementById(
     "input-clothes-price-edit"
@@ -743,7 +751,7 @@
           let tdSize = document.createElement("td");
           tdSize.innerHTML = size.fields.size;
           let tdPrice = document.createElement("td");
-          tdPrice.innerHTML = size.fields.price;
+          tdPrice.innerHTML = formatToIDR(size.fields.price);
           let tdStock = document.createElement("td");
           tdStock.innerHTML = size.fields.stock;
           let tdAction = document.createElement("td");
@@ -824,7 +832,7 @@
           buttonViewImage.addEventListener("click", (event) => {
             const modalViewImage = document.getElementById("modal-view-image");
             const imageView = document.getElementById("image-view");
-            imageView.src = image.fields.image;
+            imageView.src = image.fields.image.replace("/www", "/dl");
             modalViewImage.showModal();
           });
           tdImage.appendChild(buttonViewImage);
@@ -850,7 +858,7 @@
               const modalViewImage =
                 document.getElementById("modal-view-image");
               const imageView = document.getElementById("image-view");
-              imageView.src = image.fields.image;
+              imageView.src = image.fields.image.replace("/www", "/dl");
               modalViewImage.showModal();
             });
 
@@ -895,7 +903,9 @@
   function fbuttonEdit(button) {
     inputClothesIdEdit.value = button.dataset.id;
     inputClothesNameEdit.value = button.dataset.name;
-    inputClothesDescriptionEdit.value = button.dataset.description.split('<br>').join('\n');;
+    inputClothesDescriptionEdit.value = button.dataset.description
+      .split("<br>")
+      .join("\n");
     inputClothesUseStockEdit.checked =
       button.dataset.useStock == "on" ? "checked" : "";
     inputClothesShowEdit.checked = button.dataset.show == "on" ? "checked" : "";

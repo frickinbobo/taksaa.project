@@ -420,6 +420,14 @@
   src="{{ url_for('static', filename='js/admin/order.js') }}"
 ></script>
 <script>
+  function formatToIDR(amount) {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  }
   function updateOrdersListEdit(orders) {
     let total = 0;
     let yourOrder = document.getElementById("your-order");
@@ -476,7 +484,7 @@
       );
 
       let img = document.createElement("img");
-      img.src = order.image;
+      img.src = order.image.replace("/www", "/dl");
       img.classList.add(
         "join-item",
         "min-w-24",
@@ -528,7 +536,7 @@
       td2.classList.add("min-w-2");
       td2.innerHTML = ":";
       td3 = document.createElement("td");
-      td3.innerHTML = "Rp. " + order.price;
+      td3.innerHTML = formatToIDR(order.price);
       tr4.append(td1, td2, td3);
 
       table.append(tr1, tr2, tr3, tr4);
@@ -555,13 +563,13 @@
     });
 
     eTotal = document.getElementById("total");
-    eTotal.innerHTML = "Total : Rp." + total;
+    eTotal.innerHTML = "Total : " + formatToIDR(total);
   }
 
   function viewEditImage(src) {
     const modalViewImage = document.getElementById("modal-view-image");
     const imageView = document.getElementById("image-view");
-    imageView.src = src;
+    imageView.src = src.replace("/www", "/dl");
     modalViewImage.showModal();
   }
 
@@ -632,7 +640,10 @@
     inputCustomerAddress.value = event.currentTarget.dataset.address;
     inputPaymentType.value = event.currentTarget.dataset.paymentType;
     inputOrderStatus.value = event.currentTarget.dataset.orderStatus;
-    buttonViewImage.dataset.src = event.currentTarget.dataset.receipt;
+    buttonViewImage.dataset.src = event.currentTarget.dataset.receipt.replace(
+      "/www",
+      "/dl"
+    );
     buttonViewImage.addEventListener("click", (e) => {
       viewEditImage(buttonViewImage.dataset.src);
     });
@@ -914,7 +925,7 @@
       );
 
       let img = document.createElement("img");
-      img.src = order.image;
+      img.src = order.image.replace("/www", "/dl");
       img.classList.add(
         "join-item",
         "min-w-24",
@@ -966,7 +977,7 @@
       td2.classList.add("min-w-2");
       td2.innerHTML = ":";
       td3 = document.createElement("td");
-      td3.innerHTML = order.price;
+      td3.innerHTML = formatToIDR(order.price);
       tr4.append(td1, td2, td3);
 
       table.append(tr1, tr2, tr3, tr4);
@@ -992,7 +1003,7 @@
       orderView.append(card);
     });
     eTotal = document.getElementById("total");
-    eTotal.innerHTML = "Total : Rp." + total;
+    eTotal.innerHTML = "Total : " + formatToIDR(total);
   }
 
   // const buttonShowClothes = document.querySelectorAll("#button-show-clothes");

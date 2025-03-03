@@ -684,27 +684,33 @@ def convert_to_excel():
   for i, order in enumerate(orders):
     order_items = order.orderitem_set.all()
     merged_by = len(order_items)
-    sheet.merge_cells('A'+str(start)+':A'+str(start+merged_by-1))
+    if merged_by > 2:
+      sheet.merge_cells('A'+str(start)+':A'+str(start+merged_by-1))
     sheet['A'+str(start)].alignment = Alignment(horizontal='center', vertical='center')
     sheet['A'+str(start)] = i + 1
 
-    sheet.merge_cells('B'+str(start)+':B'+str(start+merged_by-1))
+    if merged_by > 2:
+      sheet.merge_cells('B'+str(start)+':B'+str(start+merged_by-1))
     sheet['B'+str(start)].alignment = Alignment(horizontal='left', vertical='center')
     sheet['B'+str(start)] = order.customer_name
 
-    sheet.merge_cells('C'+str(start)+':C'+str(start+merged_by-1))
+    if merged_by > 2:
+      sheet.merge_cells('C'+str(start)+':C'+str(start+merged_by-1))
     sheet['C'+str(start)].alignment = Alignment(horizontal='left', vertical='center')
     sheet['C'+str(start)] = order.customer_phone
     
-    sheet.merge_cells('D'+str(start)+':D'+str(start+merged_by-1))
+    if merged_by > 2:
+      sheet.merge_cells('D'+str(start)+':D'+str(start+merged_by-1))
     sheet['D'+str(start)].alignment = Alignment(horizontal='left', vertical='center')
     sheet['D'+str(start)] = order.customer_email
 
-    sheet.merge_cells('E'+str(start)+':E'+str(start+merged_by-1))
+    if merged_by > 2:
+      sheet.merge_cells('E'+str(start)+':E'+str(start+merged_by-1))
     sheet['E'+str(start)].alignment = Alignment(horizontal='left', vertical='center')
     sheet['E'+str(start)] = order.customer_address
     
-    sheet.merge_cells('F'+str(start)+':F'+str(start+merged_by-1))
+    if merged_by > 2:
+      sheet.merge_cells('F'+str(start)+':F'+str(start+merged_by-1))
     sheet['F'+str(start)].alignment = Alignment(horizontal='left', vertical='center')
     sheet['F'+str(start)] = order.type
     sum = 0
@@ -724,16 +730,19 @@ def convert_to_excel():
       sheet['L'+str(start + j)] = item.item_size.price
       sheet['L'+str(start + j)].alignment = Alignment(horizontal='right', vertical='center')
       sum += (item.item_size.price * item.quantity)
-    
-    sheet.merge_cells('M'+str(start)+':M'+str(start+merged_by-1))
+
+    if merged_by > 2:
+      sheet.merge_cells('M'+str(start)+':M'+str(start+merged_by-1))
     sheet['M'+str(start)].alignment = Alignment(horizontal='right', vertical='center')
     sheet['M'+str(start)] = sum
-    
-    sheet.merge_cells('N'+str(start)+':N'+str(start+merged_by-1))
+
+    if merged_by > 2:
+      sheet.merge_cells('N'+str(start)+':N'+str(start+merged_by-1))
     sheet['N'+str(start)].alignment = Alignment(horizontal='center', vertical='center')
     sheet['N'+str(start)] = order.status
-
-    sheet.merge_cells('O'+str(start)+':O'+str(start+merged_by-1))
+    
+    if merged_by > 2:
+      sheet.merge_cells('O'+str(start)+':O'+str(start+merged_by-1))
     sheet['O'+str(start)].alignment = Alignment(horizontal='left', vertical='center')
     sheet['O'+str(start)] = order.customer_receipt
 

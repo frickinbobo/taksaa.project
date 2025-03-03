@@ -233,7 +233,7 @@
   let modalViewImage = document.getElementById("modal-view-image");
 
   function fshowImage(button) {
-    imageView.src = button.dataset.src;
+    imageView.src = button.dataset.src.replace("/www", "/dl");
     modalViewImage.showModal();
   }
 
@@ -241,7 +241,9 @@
     inputBandId.value = button.dataset.id;
     inputBandName.value = button.dataset.name;
     inputBandName.focus();
-    inputBandDescription.value = button.dataset.description.split('<br>').join('\n');;
+    inputBandDescription.value = button.dataset.description
+      .split("<br>")
+      .join("\n");
     inputBandSpotify.value = button.dataset.spotify;
     inputBandInstagram.value = button.dataset.instagram;
     inputBandShow.checked =
@@ -249,13 +251,13 @@
 
     formControlViewCover.classList.remove("hidden");
     viewImageCover.addEventListener("click", (a) => {
-      imageView.src = button.dataset.cover;
+      imageView.src = button.dataset.cover.replace("/www", "/dl");
       modalViewImage.showModal();
     });
 
     formControlViewLogo.classList.remove("hidden");
     viewImageLogo.addEventListener("click", (a) => {
-      imageView.src = button.dataset.logo;
+      imageView.src = button.dataset.logo.replace("/www", "/dl");
       modalViewImage.showModal();
     });
 
@@ -279,7 +281,8 @@
           Action: null,
         };
         band = band.fields;
-        console.log(band);
+        band.cover = band.cover.replace("/www", "/dl");
+        band.logo = band.logo.replace("/www", "/dl");
         temp["#"] = i;
         temp["Cover"] = `<button
                 class="btn btn-primary"
@@ -445,6 +448,9 @@
         searchable: true,
         fixedHeight: false,
         perPageSelect: [5, 10, 25, 50, 100],
+        rowRender: (row, tr, _index) => {
+          row.attributes.class = "h-14 max-h-14 overflow-auto";
+        },
         data: {
           headings: Object.keys(data[0]),
           data: data.map((item) => Object.values(item)),
